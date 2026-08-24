@@ -1,7 +1,9 @@
-# Selamat Datang di Proyek Analisis Kualitas Udara
+# Selamat Datang
 
-Website ini merupakan repositori dokumentasi tugas analisis kadar polutan (kualitas udara) menggunakan data penginderaan jauh dari satelit Copernicus.
+Web Statis Ini adalah web yang berisikan materi dan tugas beserta penjelasan dan langkah langkah pengerjaannya.
 
-Fokus wilayah yang dianalisis pada proyek ini adalah daerah Bangkalan, Madura.
+Perkenalkan saya 
+NAMA: FAHDIMAS AKMAL
+NIM : 240411100228
 
-Silakan gunakan menu navigasi di sebelah kiri untuk melihat detail *Business Understanding*, *Data Understanding*, dan proses visualisasi data (*Time Series*).
+Harapan Saya adalah Web Statis ini dapat bermanfaat dan dapat menyalurkan pengetahuan bagi yang memerlukan.
