@@ -1,4 +1,4 @@
-# 👨‍💻 Profil Mahasiswa
+#  Profil Mahasiswa
 
 | Informasi Akademik | Keterangan |
 | :--- | :--- |
