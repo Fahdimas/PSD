@@ -1,9 +1,12 @@
-# Perkenalan
+# 👨‍💻 Profil Mahasiswa
 
-Web Statis Ini adalah web yang berisikan materi dan tugas beserta penjelasan dan langkah langkah pengerjaannya.
+| Informasi Akademik | Keterangan |
+| :--- | :--- |
+| **Nama** | Fahdimas Akmal |
+| **NIM** | 240411100228 |
+| **Kelas** | A |
+| **Program Studi** | Teknik Informatika |
+| **Instansi** | Universitas Trunojoyo Madura |
+| **Mata Kuliah** | Pembelajaran Sains Data |
 
-NAMA: FAHDIMAS AKMAL
-
-NIM : 240411100228
-
-Harapan Saya adalah Web Statis ini dapat bermanfaat dan dapat menyalurkan pengetahuan bagi yang memerlukan.
+---
