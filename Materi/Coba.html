@@ -65,6 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Materi/Coba';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Analisis Runtun Waktu Kualitas Udara (Sentinel-5P)" href="Polusi.html" />
     <link rel="prev" title="&lt;no title&gt;" href="Polutan.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -174,6 +175,7 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisis Runtun Waktu Kualitas Udara (Sentinel-5P)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Polusi.html">Analisis Runtun Waktu Kualitas Udara (Sentinel-5P)</a></li>
 </ul>
 
     </div>
@@ -370,6 +372,8 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#business-understanding">1. Business Understanding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">2. Data Understanding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#persiapan-lingkungan-koneksi-server">3. Persiapan Lingkungan &amp; Koneksi Server</a></li>
 </ul>
             </nav>
         </div>
@@ -394,6 +398,117 @@ Memetakan dan memantau secara proaktif fluktuasi kualitas udara di wilayah Kabup
 <li><p><strong>Evaluasi Tata Ruang &amp; Kebijakan:</strong> Menjadi landasan objektif bagi instansi terkait maupun pengelola kawasan (seperti Universitas Trunojoyo Madura) untuk mengevaluasi kepadatan lalu lintas dan efektivitas ruang terbuka hijau.</p></li>
 <li><p><strong>Transparansi Informasi Publik:</strong> Menerjemahkan matriks data satelit yang rumit menjadi grafik <em>time series</em> visual di portal web statis agar ancaman “polusi tak kasatmata” mudah dipahami oleh warga sipil.</p></li>
 </ol>
+</section>
+<hr class="docutils" />
+<section id="data-understanding">
+<h2>2. Data Understanding<a class="headerlink" href="#data-understanding" title="Permalink to this heading">#</a></h2>
+<p>Dataset ini berisi rekaman harian konsentrasi gas polutan yang diekstrak menggunakan agregasi spasial (<em>Polygon GeoJSON</em>) wilayah Bangkalan.</p>
+<p><strong>Deskripsi Fitur Polutan:</strong></p>
+<ul class="simple">
+<li><p><strong>CO (Karbon Monoksida):</strong> <em>Silent killer</em> tak berbau dari pembakaran tidak sempurna, utamanya disumbang oleh asap knalpot kendaraan atau pembakaran sampah terbuka.</p></li>
+<li><p><strong>NO₂ (Nitrogen Dioksida):</strong> Gas reaktif pemicu radang pernapasan, berasal dari emisi mesin bahan bakar fosil (terutama diesel) dan aktivitas industri.</p></li>
+<li><p><strong>O₃ (Ozon Permukaan):</strong> Polutan sekunder berbahaya yang terbentuk dari reaksi kimia gas buang kendaraan di bawah terik matahari.</p></li>
+<li><p><strong>SO₂ (Sulfur Dioksida):</strong> Gas berbau menyengat penyebab hujan asam, umumnya dari pembakaran batu bara atau emisi bahan bakar kapal laut di area pesisir.</p></li>
+</ul>
+<p><strong>Catatan Eksplorasi Data (Anomali):</strong>
+Dalam data satelit optik, terdapat kondisi wajar yang perlu diperhatikan:</p>
+<ol class="arabic simple">
+<li><p><strong>Missing Values (NaN):</strong> Terjadi ketika wilayah tertutup awan mendung/hujan, sehingga sensor satelit tidak dapat menembus permukaan bumi.</p></li>
+<li><p><strong>Outliers (Pencilan):</strong> Lonjakan nilai ekstrem pada hari tertentu yang bisa merekam insiden nyata (kebakaran lahan) atau sekadar <em>noise</em> instrumen.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="persiapan-lingkungan-koneksi-server">
+<h2>3. Persiapan Lingkungan &amp; Koneksi Server<a class="headerlink" href="#persiapan-lingkungan-koneksi-server" title="Permalink to this heading">#</a></h2>
+<p>Langkah teknis dimulai dengan memasang pustaka <code class="docutils literal notranslate"><span class="pre">openeo</span></code> dan mengautentikasi sistem lokal ke peladen Copernicus Data Space Ecosystem (CDSE). Koordinat Bangkalan didefinisikan menggunakan GeoJSON.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>openeo
+<span class="kn">import</span><span class="w"> </span><span class="nn">openeo</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Menghubungkan ke CDSE Copernicus...&quot;</span><span class="p">)</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">openeo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;openeo.dataspace.copernicus.eu&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">authenticate_oidc</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: openeo in c:\python39\lib\site-packages (0.50.0)
+Requirement already satisfied: requests&gt;=2.26.0 in c:\python39\lib\site-packages (from openeo) (2.32.5)
+Requirement already satisfied: urllib3&gt;=1.9.0 in c:\python39\lib\site-packages (from openeo) (2.6.3)
+Requirement already satisfied: shapely&gt;=1.6.4 in c:\python39\lib\site-packages (from openeo) (2.0.7)
+Requirement already satisfied: numpy&gt;=1.17.0 in c:\python39\lib\site-packages (from openeo) (1.26.4)
+Requirement already satisfied: xarray&lt;2025.01.2,&gt;=0.12.3 in c:\python39\lib\site-packages (from openeo) (2024.7.0)
+Requirement already satisfied: pandas&lt;3.0.0,&gt;0.20.0 in c:\python39\lib\site-packages (from openeo) (2.3.3)
+Requirement already satisfied: pystac&gt;=1.5.0 in c:\python39\lib\site-packages (from openeo) (1.10.1)
+Requirement already satisfied: deprecated&gt;=1.2.12 in c:\python39\lib\site-packages (from openeo) (1.3.1)
+Requirement already satisfied: oschmod&gt;=0.3.12 in c:\python39\lib\site-packages (from openeo) (0.3.12)
+Requirement already satisfied: geopandas&gt;=0.14 in c:\python39\lib\site-packages (from openeo) (1.0.1)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\python39\lib\site-packages (from pandas&lt;3.0.0,&gt;0.20.0-&gt;openeo) (2.9.0.post0)
+Requirement already satisfied: pytz&gt;=2020.1 in c:\python39\lib\site-packages (from pandas&lt;3.0.0,&gt;0.20.0-&gt;openeo) (2025.2)
+Requirement already satisfied: tzdata&gt;=2022.7 in c:\python39\lib\site-packages (from pandas&lt;3.0.0,&gt;0.20.0-&gt;openeo) (2025.3)
+Requirement already satisfied: packaging&gt;=23.1 in c:\python39\lib\site-packages (from xarray&lt;2025.01.2,&gt;=0.12.3-&gt;openeo) (25.0)
+Requirement already satisfied: wrapt&lt;3,&gt;=1.10 in c:\python39\lib\site-packages (from deprecated&gt;=1.2.12-&gt;openeo) (2.2.1)
+Requirement already satisfied: pyogrio&gt;=0.7.2 in c:\python39\lib\site-packages (from geopandas&gt;=0.14-&gt;openeo) (0.11.1)
+Requirement already satisfied: pyproj&gt;=3.3.0 in c:\python39\lib\site-packages (from geopandas&gt;=0.14-&gt;openeo) (3.6.1)
+Requirement already satisfied: pywin32 in c:\python39\lib\site-packages (from oschmod&gt;=0.3.12-&gt;openeo) (311)
+Requirement already satisfied: certifi in c:\python39\lib\site-packages (from pyogrio&gt;=0.7.2-&gt;geopandas&gt;=0.14-&gt;openeo) (2026.1.4)
+Requirement already satisfied: six&gt;=1.5 in c:\python39\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&lt;3.0.0,&gt;0.20.0-&gt;openeo) (1.17.0)
+Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in c:\python39\lib\site-packages (from requests&gt;=2.26.0-&gt;openeo) (3.4.4)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in c:\python39\lib\site-packages (from requests&gt;=2.26.0-&gt;openeo) (3.11)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Menghubungkan ke CDSE Copernicus...
+</pre></div>
+</div>
+<div class="output text_html">Visit <a href="https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=SIEF-USDA" title="Authenticate at https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=SIEF-USDA" target="_blank" rel="noopener noreferrer">https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=SIEF-USDA</a> <a href="#" onclick="navigator.clipboard.writeText('https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=SIEF-USDA');return false;" title="Copy authentication URL to clipboard">&#128203;</a> to authenticate.</div><div class="output text_html"><code>[###################################--]</code> ⌛ Authorization pending</div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">-------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Menghubungkan ke CDSE Copernicus...&quot;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">connection</span> <span class="o">=</span> <span class="n">openeo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;openeo.dataspace.copernicus.eu&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">authenticate_oidc</span><span class="p">()</span>
+
+<span class="nn">File c:\python39\lib\site-packages\openeo\rest\connection.py:689,</span> in <span class="ni">Connection.authenticate_oidc</span><span class="nt">(self, provider_id, client_id, client_secret, store_refresh_token, use_pkce, display, max_poll_time)</span>
+<span class="g g-Whitespace">    </span><span class="mi">685</span> <span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Trying device code flow.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">686</span> <span class="n">authenticator</span> <span class="o">=</span> <span class="n">OidcDeviceAuthenticator</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">687</span>     <span class="n">client_info</span><span class="o">=</span><span class="n">client_info</span><span class="p">,</span> <span class="n">use_pkce</span><span class="o">=</span><span class="n">use_pkce</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="n">display</span><span class="p">,</span> <span class="n">max_poll_time</span><span class="o">=</span><span class="n">max_poll_time</span>
+<span class="g g-Whitespace">    </span><span class="mi">688</span> <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">689</span> <span class="n">con</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_authenticate_oidc</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">690</span>     <span class="n">authenticator</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">691</span>     <span class="n">provider_id</span><span class="o">=</span><span class="n">provider_id</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">692</span>     <span class="n">store_refresh_token</span><span class="o">=</span><span class="n">store_refresh_token</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">693</span>     <span class="c1"># TODO: expose `auto_renew_from_refresh_token` directly as option instead of reusing `store_refresh_token` arg?</span>
+<span class="g g-Whitespace">    </span><span class="mi">694</span>     <span class="n">auto_renew_from_refresh_token</span><span class="o">=</span><span class="n">store_refresh_token</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">695</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">696</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Authenticated using device code flow.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">697</span> <span class="k">return</span> <span class="n">con</span>
+
+<span class="nn">File c:\python39\lib\site-packages\openeo\rest\connection.py:405,</span> in <span class="ni">Connection._authenticate_oidc</span><span class="nt">(self, authenticator, provider_id, store_refresh_token, auto_renew_from_refresh_token, fallback_refresh_token, oidc_auth_renewer)</span>
+<span class="g g-Whitespace">    </span><span class="mi">401</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">402</span><span class="sd"> Authenticate through OIDC and set up bearer token (based on OIDC access_token) for further requests.</span>
+<span class="g g-Whitespace">    </span><span class="mi">403</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">404</span> <span class="n">request_refresh_token</span> <span class="o">=</span> <span class="n">store_refresh_token</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">oidc_auth_renewer</span> <span class="ow">and</span> <span class="n">auto_renew_from_refresh_token</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">405</span> <span class="n">tokens</span> <span class="o">=</span> <span class="n">authenticator</span><span class="o">.</span><span class="n">get_tokens</span><span class="p">(</span><span class="n">request_refresh_token</span><span class="o">=</span><span class="n">request_refresh_token</span><span class="p">)</span>
+<span class="nn">    406 _log.info(&quot;Obtained tokens: {t}&quot;.format(t=[k for k, v</span> in <span class="ni">tokens._asdict().items</span><span class="nt">() if v]))</span>
+<span class="g g-Whitespace">    </span><span class="mi">408</span> <span class="n">refresh_token</span> <span class="o">=</span> <span class="n">tokens</span><span class="o">.</span><span class="n">refresh_token</span> <span class="ow">or</span> <span class="n">fallback_refresh_token</span>
+
+<span class="nn">File c:\python39\lib\site-packages\openeo\rest\auth\oidc.py:928,</span> in <span class="ni">OidcDeviceAuthenticator.get_tokens</span><span class="nt">(self, request_refresh_token)</span>
+<span class="g g-Whitespace">    </span><span class="mi">926</span> <span class="k">while</span> <span class="n">elapsed</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_poll_time</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">927</span>     <span class="n">poll_ui</span><span class="o">.</span><span class="n">show_progress</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">928</span>     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">930</span>     <span class="k">if</span> <span class="n">elapsed</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">next_poll</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">931</span>         <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">932</span>             <span class="sa">f</span><span class="s2">&quot;Doing </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">grant_type</span><span class="si">!r}</span><span class="s2"> token request </span><span class="si">{</span><span class="n">token_endpoint</span><span class="si">!r}</span><span class="s2"> with post data fields </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">post_data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">!r}</span><span class="s2"> (client_id </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">client_id</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">933</span>         <span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -436,6 +551,15 @@ Memetakan dan memantau secara proaktif fluktuasi kualitas udara di wilayah Kabup
         <p class="prev-next-title">&lt;no title&gt;</p>
       </div>
     </a>
+    <a class="right-next"
+       href="Polusi.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Analisis Runtun Waktu Kualitas Udara (Sentinel-5P)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -453,6 +577,8 @@ Memetakan dan memantau secara proaktif fluktuasi kualitas udara di wilayah Kabup
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#business-understanding">1. Business Understanding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">2. Data Understanding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#persiapan-lingkungan-koneksi-server">3. Persiapan Lingkungan &amp; Koneksi Server</a></li>
 </ul>
   </nav></div>
 
