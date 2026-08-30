@@ -65,8 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Materi/Polusi';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Analisis Runtun Waktu Kualitas Udara (Sentinel-5P)" href="Polusi1.html" />
-    <link rel="prev" title="Analisis Runtun Waktu Kualitas Udara (Sentinel-5P)" href="Coba.html" />
+    <link rel="prev" title="Profil Mahasiswa" href="../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -174,9 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Coba.html">Analisis Runtun Waktu Kualitas Udara (Sentinel-5P)</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisis Runtun Waktu Kualitas Udara (Sentinel-5P)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Polusi1.html">Analisis Runtun Waktu Kualitas Udara (Sentinel-5P)</a></li>
 </ul>
 
     </div>
@@ -395,6 +392,13 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fluktuasi-sulfur-dioksida-so2">4.4 Fluktuasi Sulfur Dioksida (SO₂)</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-anomali-outlier-metode-iqr">5. Deteksi Anomali &amp; Outlier (Metode IQR)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-outlier-nitrogen-dioksida-no2">5.1 Analisis Outlier Nitrogen Dioksida (NO₂)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-outlier-karbon-monoksida-co">5.2 Analisis Outlier Karbon Monoksida (CO)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-outlier-ozon-permukaan-o3">5.3 Analisis Outlier Ozon Permukaan (O₃)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-outlier-sulfur-dioksida-so2">5.4 Analisis Outlier Sulfur Dioksida (SO₂)</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -457,45 +461,30 @@ Dalam data satelit optik, terdapat kondisi wajar yang perlu diperhatikan:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>^C
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting openeo
   Using cached openeo-0.51.0-py3-none-any.whl.metadata (8.9 kB)
-Collecting requests&gt;=2.26.0 (from openeo)
-  Using cached requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
-Collecting urllib3&gt;=1.9.0 (from openeo)
-  Using cached urllib3-2.7.0-py3-none-any.whl.metadata (6.9 kB)
-Collecting shapely&gt;=1.6.4 (from openeo)
-  Using cached shapely-2.1.2-cp311-cp311-win_amd64.whl.metadata (7.1 kB)
+Requirement already satisfied: requests&gt;=2.26.0 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from openeo) (2.34.2)
+Requirement already satisfied: urllib3&gt;=1.9.0 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from openeo) (2.7.0)
+Requirement already satisfied: shapely&gt;=1.6.4 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from openeo) (2.1.2)
 Requirement already satisfied: numpy&gt;=1.17.0 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from openeo) (2.4.6)
 Collecting xarray&lt;2025.01.2,&gt;=0.12.3 (from openeo)
   Using cached xarray-2025.1.1-py3-none-any.whl.metadata (11 kB)
-Collecting pandas&lt;3.0.0,&gt;0.20.0 (from openeo)
-  Using cached pandas-2.3.3-cp311-cp311-win_amd64.whl.metadata (19 kB)
+Requirement already satisfied: pandas&lt;3.0.0,&gt;0.20.0 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from openeo) (2.3.3)
 Collecting pystac&gt;=1.5.0 (from openeo)
   Using cached pystac-1.15.2-py3-none-any.whl.metadata (6.3 kB)
-Collecting deprecated&gt;=1.2.12 (from openeo)
-  Using cached deprecated-1.3.1-py2.py3-none-any.whl.metadata (5.9 kB)
-Collecting oschmod&gt;=0.3.12 (from openeo)
-  Using cached oschmod-0.3.12-py2.py3-none-any.whl.metadata (10.0 kB)
+Requirement already satisfied: deprecated&gt;=1.2.12 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from openeo) (1.3.1)
+Requirement already satisfied: oschmod&gt;=0.3.12 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from openeo) (0.3.12)
 Collecting geopandas&gt;=0.14 (from openeo)
   Using cached geopandas-1.1.4-py3-none-any.whl.metadata (2.3 kB)
-Collecting wrapt&lt;3,&gt;=1.10 (from deprecated&gt;=1.2.12-&gt;openeo)
-  Using cached wrapt-2.4.0-cp311-cp311-win_amd64.whl.metadata (7.6 kB)
-Collecting pyogrio&gt;=0.7.2 (from geopandas&gt;=0.14-&gt;openeo)
-  Using cached pyogrio-0.13.0-cp311-abi3-win_amd64.whl.metadata (6.0 kB)
+Requirement already satisfied: wrapt&lt;3,&gt;=1.10 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from deprecated&gt;=1.2.12-&gt;openeo) (2.4.0)
+Requirement already satisfied: pyogrio&gt;=0.7.2 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from geopandas&gt;=0.14-&gt;openeo) (0.13.0)
 Requirement already satisfied: packaging in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from geopandas&gt;=0.14-&gt;openeo) (26.3)
-Collecting pyproj&gt;=3.5.0 (from geopandas&gt;=0.14-&gt;openeo)
-  Using cached pyproj-3.7.2-cp311-cp311-win_amd64.whl.metadata (31 kB)
-Collecting pywin32 (from oschmod&gt;=0.3.12-&gt;openeo)
-  Using cached pywin32-312-cp311-cp311-win_amd64.whl.metadata (11 kB)
+Requirement already satisfied: pyproj&gt;=3.5.0 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from geopandas&gt;=0.14-&gt;openeo) (3.7.2)
+Requirement already satisfied: pywin32 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from oschmod&gt;=0.3.12-&gt;openeo) (312)
 Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from pandas&lt;3.0.0,&gt;0.20.0-&gt;openeo) (2.9.0.post0)
-Collecting pytz&gt;=2020.1 (from pandas&lt;3.0.0,&gt;0.20.0-&gt;openeo)
-  Using cached pytz-2026.3.post1-py2.py3-none-any.whl.metadata (22 kB)
+Requirement already satisfied: pytz&gt;=2020.1 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from pandas&lt;3.0.0,&gt;0.20.0-&gt;openeo) (2026.3.post1)
 Requirement already satisfied: tzdata&gt;=2022.7 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from pandas&lt;3.0.0,&gt;0.20.0-&gt;openeo) (2026.3)
-Collecting pystac-core&lt;2,&gt;=1.15.0 (from pystac&gt;=1.5.0-&gt;openeo)
-  Using cached pystac_core-1.15.2-py3-none-any.whl.metadata (1.3 kB)
+Requirement already satisfied: pystac-core&lt;2,&gt;=1.15.0 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from pystac&gt;=1.5.0-&gt;openeo) (1.15.2)
 Collecting pystac-ext-classification (from pystac&gt;=1.5.0-&gt;openeo)
   Using cached pystac_ext_classification-2.0.1-py3-none-any.whl.metadata (2.1 kB)
 Collecting pystac-ext-datacube (from pystac&gt;=1.5.0-&gt;openeo)
@@ -540,98 +529,48 @@ Collecting pystac-ext-view (from pystac&gt;=1.5.0-&gt;openeo)
   Using cached pystac_ext_view-1.0.1-py3-none-any.whl.metadata (1.8 kB)
 Collecting pystac-ext-xarray-assets (from pystac&gt;=1.5.0-&gt;openeo)
   Using cached pystac_ext_xarray_assets-1.0.1-py3-none-any.whl.metadata (1.9 kB)
-Collecting charset_normalizer&lt;4,&gt;=2 (from requests&gt;=2.26.0-&gt;openeo)
-  Using cached charset_normalizer-3.5.1-cp311-cp311-win_amd64.whl.metadata (46 kB)
+Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from requests&gt;=2.26.0-&gt;openeo) (3.5.1)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from requests&gt;=2.26.0-&gt;openeo) (3.19)
-Collecting certifi&gt;=2023.5.7 (from requests&gt;=2.26.0-&gt;openeo)
-  Using cached certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+Requirement already satisfied: certifi&gt;=2023.5.7 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from requests&gt;=2.26.0-&gt;openeo) (2026.7.22)
 Requirement already satisfied: six&gt;=1.5 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&lt;3.0.0,&gt;0.20.0-&gt;openeo) (1.17.0)
 Using cached openeo-0.51.0-py3-none-any.whl (349 kB)
-Using cached deprecated-1.3.1-py2.py3-none-any.whl (11 kB)
 Using cached geopandas-1.1.4-py3-none-any.whl (343 kB)
-Using cached oschmod-0.3.12-py2.py3-none-any.whl (14 kB)
-Using cached pandas-2.3.3-cp311-cp311-win_amd64.whl (11.3 MB)
 Using cached pystac-1.15.2-py3-none-any.whl (5.7 kB)
-Using cached requests-2.34.2-py3-none-any.whl (73 kB)
-Using cached shapely-2.1.2-cp311-cp311-win_amd64.whl (1.7 MB)
-Using cached urllib3-2.7.0-py3-none-any.whl (131 kB)
 Using cached xarray-2025.1.1-py3-none-any.whl (1.2 MB)
-Using cached certifi-2026.7.22-py3-none-any.whl (136 kB)
-Using cached charset_normalizer-3.5.1-cp311-cp311-win_amd64.whl (206 kB)
-Using cached pyogrio-0.13.0-cp311-abi3-win_amd64.whl (23.8 MB)
-Using cached pyproj-3.7.2-cp311-cp311-win_amd64.whl (6.3 MB)
-Using cached pystac_core-1.15.2-py3-none-any.whl (117 kB)
-Using cached pytz-2026.3.post1-py2.py3-none-any.whl (508 kB)
-Using cached wrapt-2.4.0-cp311-cp311-win_amd64.whl (96 kB)
 Using cached pystac_ext_classification-2.0.1-py3-none-any.whl (7.4 kB)
 Using cached pystac_ext_datacube-2.2.1-py3-none-any.whl (7.1 kB)
 Using cached pystac_ext_eo-1.1.1-py3-none-any.whl (7.7 kB)
 Using cached pystac_ext_file-2.1.1-py3-none-any.whl (5.8 kB)
 Using cached pystac_ext_grid-1.1.1-py3-none-any.whl (3.6 kB)
 Using cached pystac_ext_item_assets-1.0.1-py3-none-any.whl (3.7 kB)
-Downloading pystac_ext_label-1.0.2-py3-none-any.whl (8.2 kB)
-Downloading pystac_ext_mgrs-1.0.1-py3-none-any.whl (4.1 kB)
-Downloading pystac_ext_mlm-1.4.1-py3-none-any.whl (13 kB)
-Downloading pystac_ext_pointcloud-1.0.1-py3-none-any.whl (6.5 kB)
-Downloading pystac_ext_projection-2.0.1-py3-none-any.whl (7.4 kB)
-Downloading pystac_ext_raster-1.1.1-py3-none-any.whl (6.8 kB)
-Downloading pystac_ext_render-2.0.0-py3-none-any.whl (5.0 kB)
-Downloading pystac_ext_sar-1.0.1-py3-none-any.whl (6.5 kB)
-Downloading pystac_ext_sat-1.0.1-py3-none-any.whl (4.9 kB)
-Downloading pystac_ext_scientific-1.0.1-py3-none-any.whl (5.5 kB)
-Downloading pystac_ext_storage-2.0.1-py3-none-any.whl (7.6 kB)
-Downloading pystac_ext_table-1.2.1-py3-none-any.whl (4.7 kB)
-Downloading pystac_ext_timestamps-1.1.1-py3-none-any.whl (4.6 kB)
-Downloading pystac_ext_version-1.2.1-py3-none-any.whl (5.8 kB)
-Downloading pystac_ext_view-1.0.1-py3-none-any.whl (4.8 kB)
-Downloading pystac_ext_xarray_assets-1.0.1-py3-none-any.whl (3.9 kB)
-Downloading pywin32-312-cp311-cp311-win_amd64.whl (6.9 MB)
-   ---------------------------------------- 0.0/6.9 MB ? eta -:--:--
-   ---------------------------------------- 0.1/6.9 MB 2.3 MB/s eta 0:00:03
-   - -------------------------------------- 0.2/6.9 MB 2.5 MB/s eta 0:00:03
-   - -------------------------------------- 0.3/6.9 MB 2.5 MB/s eta 0:00:03
-   -- ------------------------------------- 0.5/6.9 MB 2.6 MB/s eta 0:00:03
-   --- ------------------------------------ 0.7/6.9 MB 3.0 MB/s eta 0:00:03
-   ---- ----------------------------------- 0.8/6.9 MB 3.0 MB/s eta 0:00:03
-   ----- ---------------------------------- 1.0/6.9 MB 3.1 MB/s eta 0:00:02
-   ------ --------------------------------- 1.1/6.9 MB 3.2 MB/s eta 0:00:02
-   ------- -------------------------------- 1.4/6.9 MB 3.4 MB/s eta 0:00:02
-   -------- ------------------------------- 1.5/6.9 MB 3.2 MB/s eta 0:00:02
-   --------- ------------------------------ 1.7/6.9 MB 3.5 MB/s eta 0:00:02
-   ---------- ----------------------------- 1.9/6.9 MB 3.5 MB/s eta 0:00:02
-   ------------ --------------------------- 2.1/6.9 MB 3.5 MB/s eta 0:00:02
-   ------------ --------------------------- 2.2/6.9 MB 3.5 MB/s eta 0:00:02
-   -------------- ------------------------- 2.4/6.9 MB 3.5 MB/s eta 0:00:02
-   --------------- ------------------------ 2.6/6.9 MB 3.6 MB/s eta 0:00:02
-   --------------- ------------------------ 2.7/6.9 MB 3.5 MB/s eta 0:00:02
-   ---------------- ----------------------- 2.9/6.9 MB 3.6 MB/s eta 0:00:02
-   ----------------- ---------------------- 3.1/6.9 MB 3.6 MB/s eta 0:00:02
-   ----------------- ---------------------- 3.1/6.9 MB 3.6 MB/s eta 0:00:02
-   ----------------- ---------------------- 3.1/6.9 MB 3.6 MB/s eta 0:00:02
-   ----------------- ---------------------- 3.1/6.9 MB 3.6 MB/s eta 0:00:02
-   -------------------- ------------------- 3.6/6.9 MB 3.5 MB/s eta 0:00:01
-   --------------------- ------------------ 3.7/6.9 MB 3.4 MB/s eta 0:00:01
-   ----------------------- ---------------- 4.0/6.9 MB 3.5 MB/s eta 0:00:01
-   ----------------------- ---------------- 4.1/6.9 MB 3.4 MB/s eta 0:00:01
-   ------------------------- -------------- 4.4/6.9 MB 3.5 MB/s eta 0:00:01
-   -------------------------- ------------- 4.5/6.9 MB 3.5 MB/s eta 0:00:01
-   --------------------------- ------------ 4.7/6.9 MB 3.6 MB/s eta 0:00:01
-   ---------------------------- ----------- 5.0/6.9 MB 3.6 MB/s eta 0:00:01
-   ----------------------------- ---------- 5.2/6.9 MB 3.6 MB/s eta 0:00:01
-   ------------------------------- -------- 5.4/6.9 MB 3.7 MB/s eta 0:00:01
-   -------------------------------- ------- 5.7/6.9 MB 3.8 MB/s eta 0:00:01
-   ---------------------------------- ----- 6.0/6.9 MB 3.8 MB/s eta 0:00:01
-   ----------------------------------- ---- 6.1/6.9 MB 3.8 MB/s eta 0:00:01
-   ------------------------------------ --- 6.4/6.9 MB 3.8 MB/s eta 0:00:01
-   ------------------------------------- -- 6.5/6.9 MB 3.8 MB/s eta 0:00:01
-   -------------------------------------- - 6.7/6.9 MB 3.8 MB/s eta 0:00:01
-   ---------------------------------------  6.9/6.9 MB 3.8 MB/s eta 0:00:01
-   ---------------------------------------  6.9/6.9 MB 3.8 MB/s eta 0:00:01
-   ---------------------------------------- 6.9/6.9 MB 3.8 MB/s eta 0:00:00
-Installing collected packages: pytz, wrapt, urllib3, shapely, pywin32, charset_normalizer, certifi, requests, pystac-core, pyproj, pyogrio, pandas, oschmod, deprecated, xarray, pystac-ext-xarray-assets, pystac-ext-view, pystac-ext-version, pystac-ext-timestamps, pystac-ext-table, pystac-ext-storage, pystac-ext-scientific, pystac-ext-sat, pystac-ext-sar, pystac-ext-render, pystac-ext-raster, pystac-ext-projection, pystac-ext-pointcloud, pystac-ext-mgrs, pystac-ext-label, pystac-ext-item-assets, pystac-ext-grid, pystac-ext-file, pystac-ext-datacube, geopandas, pystac-ext-eo, pystac-ext-classification, pystac-ext-mlm, pystac, openeo
+Using cached pystac_ext_label-1.0.2-py3-none-any.whl (8.2 kB)
+Using cached pystac_ext_mgrs-1.0.1-py3-none-any.whl (4.1 kB)
+Using cached pystac_ext_mlm-1.4.1-py3-none-any.whl (13 kB)
+Using cached pystac_ext_pointcloud-1.0.1-py3-none-any.whl (6.5 kB)
+Using cached pystac_ext_projection-2.0.1-py3-none-any.whl (7.4 kB)
+Using cached pystac_ext_raster-1.1.1-py3-none-any.whl (6.8 kB)
+Using cached pystac_ext_render-2.0.0-py3-none-any.whl (5.0 kB)
+Using cached pystac_ext_sar-1.0.1-py3-none-any.whl (6.5 kB)
+Using cached pystac_ext_sat-1.0.1-py3-none-any.whl (4.9 kB)
+Using cached pystac_ext_scientific-1.0.1-py3-none-any.whl (5.5 kB)
+Using cached pystac_ext_storage-2.0.1-py3-none-any.whl (7.6 kB)
+Using cached pystac_ext_table-1.2.1-py3-none-any.whl (4.7 kB)
+Using cached pystac_ext_timestamps-1.1.1-py3-none-any.whl (4.6 kB)
+Using cached pystac_ext_version-1.2.1-py3-none-any.whl (5.8 kB)
+Using cached pystac_ext_view-1.0.1-py3-none-any.whl (4.8 kB)
+Using cached pystac_ext_xarray_assets-1.0.1-py3-none-any.whl (3.9 kB)
+Installing collected packages: xarray, pystac-ext-xarray-assets, pystac-ext-view, pystac-ext-version, pystac-ext-timestamps, pystac-ext-table, pystac-ext-storage, pystac-ext-scientific, pystac-ext-sat, pystac-ext-sar, pystac-ext-render, pystac-ext-raster, pystac-ext-projection, pystac-ext-pointcloud, pystac-ext-mgrs, pystac-ext-label, pystac-ext-item-assets, pystac-ext-grid, pystac-ext-file, pystac-ext-datacube, geopandas, pystac-ext-eo, pystac-ext-classification, pystac-ext-mlm, pystac, openeo
+Successfully installed geopandas-1.1.4 openeo-0.51.0 pystac-1.15.2 pystac-ext-classification-2.0.1 pystac-ext-datacube-2.2.1 pystac-ext-eo-1.1.1 pystac-ext-file-2.1.1 pystac-ext-grid-1.1.1 pystac-ext-item-assets-1.0.1 pystac-ext-label-1.0.2 pystac-ext-mgrs-1.0.1 pystac-ext-mlm-1.4.1 pystac-ext-pointcloud-1.0.1 pystac-ext-projection-2.0.1 pystac-ext-raster-1.1.1 pystac-ext-render-2.0.0 pystac-ext-sar-1.0.1 pystac-ext-sat-1.0.1 pystac-ext-scientific-1.0.1 pystac-ext-storage-2.0.1 pystac-ext-table-1.2.1 pystac-ext-timestamps-1.1.1 pystac-ext-version-1.2.1 pystac-ext-view-1.0.1 pystac-ext-xarray-assets-1.0.1 xarray-2025.1.1
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[notice] A new release of pip is available: 24.0 -&gt; 26.2.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+</pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Menghubungkan ke CDSE Copernicus...
+</pre></div>
+</div>
+<div class="output text_html">Visit <a href="https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=LGUV-IQXC" title="Authenticate at https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=LGUV-IQXC" target="_blank" rel="noopener noreferrer">https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=LGUV-IQXC</a> <a href="#" onclick="navigator.clipboard.writeText('https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=LGUV-IQXC');return false;" title="Copy authentication URL to clipboard">&#128203;</a> to authenticate.</div><div class="output text_html"><code>[#####################################]</code> ⌛ Authorization pending</div></div>
 </div>
 <section id="langkah-pertama-kita-klik-link-yang-muncul-untuk-verifikasi">
 <h3>Langkah Pertama kita klik link yang muncul untuk verifikasi<a class="headerlink" href="#langkah-pertama-kita-klik-link-yang-muncul-untuk-verifikasi" title="Permalink to this heading">#</a></h3>
@@ -714,64 +653,63 @@ Installing collected packages: pytz, wrapt, urllib3, shapely, pywin32, charset_n
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Memproses ekstraksi gas NO2...
-0:00:00 Job &#39;j-260830050635428998ebd2424e38d6f8&#39;: send &#39;start&#39;
-0:00:03 Job &#39;j-260830050635428998ebd2424e38d6f8&#39;: queued (progress 0%)
-0:00:08 Job &#39;j-260830050635428998ebd2424e38d6f8&#39;: queued (progress 0%)
-0:00:14 Job &#39;j-260830050635428998ebd2424e38d6f8&#39;: queued (progress 0%)
-0:00:23 Job &#39;j-260830050635428998ebd2424e38d6f8&#39;: queued (progress 0%)
-0:00:32 Job &#39;j-260830050635428998ebd2424e38d6f8&#39;: queued (progress 0%)
-0:00:45 Job &#39;j-260830050635428998ebd2424e38d6f8&#39;: running (progress N/A)
-0:01:00 Job &#39;j-260830050635428998ebd2424e38d6f8&#39;: running (progress N/A)
-0:01:20 Job &#39;j-260830050635428998ebd2424e38d6f8&#39;: running (progress N/A)
-0:01:44 Job &#39;j-260830050635428998ebd2424e38d6f8&#39;: running (progress N/A)
-0:02:14 Job &#39;j-260830050635428998ebd2424e38d6f8&#39;: running (progress N/A)
-0:02:51 Job &#39;j-260830050635428998ebd2424e38d6f8&#39;: running (progress N/A)
-0:03:38 Job &#39;j-260830050635428998ebd2424e38d6f8&#39;: running (progress N/A)
-0:04:37 Job &#39;j-260830050635428998ebd2424e38d6f8&#39;: finished (progress 100%)
+0:00:00 Job &#39;j-26083010381846f98ee4bb947f407b07&#39;: send &#39;start&#39;
+0:00:02 Job &#39;j-26083010381846f98ee4bb947f407b07&#39;: created (progress 0%)
+0:00:08 Job &#39;j-26083010381846f98ee4bb947f407b07&#39;: queued (progress 0%)
+0:00:14 Job &#39;j-26083010381846f98ee4bb947f407b07&#39;: queued (progress 0%)
+0:00:22 Job &#39;j-26083010381846f98ee4bb947f407b07&#39;: queued (progress 0%)
+0:00:32 Job &#39;j-26083010381846f98ee4bb947f407b07&#39;: queued (progress 0%)
+0:00:45 Job &#39;j-26083010381846f98ee4bb947f407b07&#39;: queued (progress 0%)
+0:01:01 Job &#39;j-26083010381846f98ee4bb947f407b07&#39;: running (progress N/A)
+0:01:20 Job &#39;j-26083010381846f98ee4bb947f407b07&#39;: running (progress N/A)
+0:01:44 Job &#39;j-26083010381846f98ee4bb947f407b07&#39;: running (progress N/A)
+0:02:14 Job &#39;j-26083010381846f98ee4bb947f407b07&#39;: running (progress N/A)
+0:02:52 Job &#39;j-26083010381846f98ee4bb947f407b07&#39;: running (progress N/A)
+0:03:39 Job &#39;j-26083010381846f98ee4bb947f407b07&#39;: finished (progress 100%)
  Data NO2 diekspor menjadi NO2_Bangkalan.csv
  Memproses ekstraksi gas CO...
-0:00:00 Job &#39;j-26083005111848609f65fbc21c64802b&#39;: send &#39;start&#39;
-0:00:02 Job &#39;j-26083005111848609f65fbc21c64802b&#39;: created (progress 0%)
-0:00:07 Job &#39;j-26083005111848609f65fbc21c64802b&#39;: queued (progress 0%)
-0:00:13 Job &#39;j-26083005111848609f65fbc21c64802b&#39;: queued (progress 0%)
-0:00:21 Job &#39;j-26083005111848609f65fbc21c64802b&#39;: queued (progress 0%)
-0:00:31 Job &#39;j-26083005111848609f65fbc21c64802b&#39;: queued (progress 0%)
-0:00:44 Job &#39;j-26083005111848609f65fbc21c64802b&#39;: queued (progress 0%)
-0:00:59 Job &#39;j-26083005111848609f65fbc21c64802b&#39;: running (progress N/A)
-0:01:19 Job &#39;j-26083005111848609f65fbc21c64802b&#39;: running (progress N/A)
-0:01:43 Job &#39;j-26083005111848609f65fbc21c64802b&#39;: running (progress N/A)
-0:02:13 Job &#39;j-26083005111848609f65fbc21c64802b&#39;: running (progress N/A)
-0:02:51 Job &#39;j-26083005111848609f65fbc21c64802b&#39;: running (progress N/A)
-0:03:38 Job &#39;j-26083005111848609f65fbc21c64802b&#39;: finished (progress 100%)
+0:00:00 Job &#39;j-2608301042054ce798baaf9166ad2edd&#39;: send &#39;start&#39;
+0:00:02 Job &#39;j-2608301042054ce798baaf9166ad2edd&#39;: created (progress 0%)
+0:00:08 Job &#39;j-2608301042054ce798baaf9166ad2edd&#39;: queued (progress 0%)
+0:00:14 Job &#39;j-2608301042054ce798baaf9166ad2edd&#39;: queued (progress 0%)
+0:00:22 Job &#39;j-2608301042054ce798baaf9166ad2edd&#39;: queued (progress 0%)
+0:00:32 Job &#39;j-2608301042054ce798baaf9166ad2edd&#39;: queued (progress 0%)
+0:00:45 Job &#39;j-2608301042054ce798baaf9166ad2edd&#39;: queued (progress 0%)
+0:01:00 Job &#39;j-2608301042054ce798baaf9166ad2edd&#39;: queued (progress 0%)
+0:01:20 Job &#39;j-2608301042054ce798baaf9166ad2edd&#39;: running (progress N/A)
+0:01:44 Job &#39;j-2608301042054ce798baaf9166ad2edd&#39;: running (progress N/A)
+0:02:14 Job &#39;j-2608301042054ce798baaf9166ad2edd&#39;: running (progress N/A)
+0:02:51 Job &#39;j-2608301042054ce798baaf9166ad2edd&#39;: running (progress N/A)
+0:03:38 Job &#39;j-2608301042054ce798baaf9166ad2edd&#39;: finished (progress 100%)
  Data CO diekspor menjadi CO_Bangkalan.csv
  Memproses ekstraksi gas O3...
-0:00:00 Job &#39;j-2608300515024001bcf6d072417e5cbd&#39;: send &#39;start&#39;
-0:00:03 Job &#39;j-2608300515024001bcf6d072417e5cbd&#39;: queued (progress 0%)
-0:00:08 Job &#39;j-2608300515024001bcf6d072417e5cbd&#39;: queued (progress 0%)
-0:00:15 Job &#39;j-2608300515024001bcf6d072417e5cbd&#39;: queued (progress 0%)
-0:00:23 Job &#39;j-2608300515024001bcf6d072417e5cbd&#39;: queued (progress 0%)
-0:00:33 Job &#39;j-2608300515024001bcf6d072417e5cbd&#39;: queued (progress 0%)
-0:00:45 Job &#39;j-2608300515024001bcf6d072417e5cbd&#39;: queued (progress 0%)
-0:01:01 Job &#39;j-2608300515024001bcf6d072417e5cbd&#39;: queued (progress 0%)
-0:01:20 Job &#39;j-2608300515024001bcf6d072417e5cbd&#39;: running (progress N/A)
-0:01:44 Job &#39;j-2608300515024001bcf6d072417e5cbd&#39;: running (progress N/A)
-0:02:14 Job &#39;j-2608300515024001bcf6d072417e5cbd&#39;: running (progress N/A)
-0:02:52 Job &#39;j-2608300515024001bcf6d072417e5cbd&#39;: running (progress N/A)
-0:03:39 Job &#39;j-2608300515024001bcf6d072417e5cbd&#39;: finished (progress 100%)
+0:00:00 Job &#39;j-2608301045534fbead5470632813d14f&#39;: send &#39;start&#39;
+0:00:02 Job &#39;j-2608301045534fbead5470632813d14f&#39;: queued (progress 0%)
+0:00:07 Job &#39;j-2608301045534fbead5470632813d14f&#39;: queued (progress 0%)
+0:00:14 Job &#39;j-2608301045534fbead5470632813d14f&#39;: queued (progress 0%)
+0:00:22 Job &#39;j-2608301045534fbead5470632813d14f&#39;: queued (progress 0%)
+0:00:32 Job &#39;j-2608301045534fbead5470632813d14f&#39;: queued (progress 0%)
+0:00:44 Job &#39;j-2608301045534fbead5470632813d14f&#39;: running (progress N/A)
+0:01:00 Job &#39;j-2608301045534fbead5470632813d14f&#39;: running (progress N/A)
+0:01:19 Job &#39;j-2608301045534fbead5470632813d14f&#39;: running (progress N/A)
+0:01:43 Job &#39;j-2608301045534fbead5470632813d14f&#39;: running (progress N/A)
+0:02:14 Job &#39;j-2608301045534fbead5470632813d14f&#39;: running (progress N/A)
+0:02:52 Job &#39;j-2608301045534fbead5470632813d14f&#39;: finished (progress 100%)
  Data O3 diekspor menjadi O3_Bangkalan.csv
  Memproses ekstraksi gas SO2...
-0:00:00 Job &#39;j-26083005184649f78f5772e427cc1754&#39;: send &#39;start&#39;
-0:00:02 Job &#39;j-26083005184649f78f5772e427cc1754&#39;: queued (progress 0%)
-0:00:08 Job &#39;j-26083005184649f78f5772e427cc1754&#39;: queued (progress 0%)
-0:00:14 Job &#39;j-26083005184649f78f5772e427cc1754&#39;: queued (progress 0%)
-0:00:22 Job &#39;j-26083005184649f78f5772e427cc1754&#39;: queued (progress 0%)
-0:00:32 Job &#39;j-26083005184649f78f5772e427cc1754&#39;: running (progress N/A)
-0:00:45 Job &#39;j-26083005184649f78f5772e427cc1754&#39;: running (progress N/A)
-0:01:00 Job &#39;j-26083005184649f78f5772e427cc1754&#39;: running (progress N/A)
-0:01:20 Job &#39;j-26083005184649f78f5772e427cc1754&#39;: running (progress N/A)
-0:01:44 Job &#39;j-26083005184649f78f5772e427cc1754&#39;: running (progress N/A)
-0:02:14 Job &#39;j-26083005184649f78f5772e427cc1754&#39;: running (progress N/A)
-0:02:51 Job &#39;j-26083005184649f78f5772e427cc1754&#39;: finished (progress 100%)
+0:00:00 Job &#39;j-2608301048544f5caa435aec51965440&#39;: send &#39;start&#39;
+0:00:02 Job &#39;j-2608301048544f5caa435aec51965440&#39;: queued (progress 0%)
+0:00:07 Job &#39;j-2608301048544f5caa435aec51965440&#39;: queued (progress 0%)
+0:00:14 Job &#39;j-2608301048544f5caa435aec51965440&#39;: queued (progress 0%)
+0:00:22 Job &#39;j-2608301048544f5caa435aec51965440&#39;: queued (progress 0%)
+0:00:32 Job &#39;j-2608301048544f5caa435aec51965440&#39;: queued (progress 0%)
+0:00:45 Job &#39;j-2608301048544f5caa435aec51965440&#39;: queued (progress 0%)
+0:01:00 Job &#39;j-2608301048544f5caa435aec51965440&#39;: queued (progress 0%)
+0:01:20 Job &#39;j-2608301048544f5caa435aec51965440&#39;: queued (progress 0%)
+0:01:44 Job &#39;j-2608301048544f5caa435aec51965440&#39;: running (progress N/A)
+0:02:14 Job &#39;j-2608301048544f5caa435aec51965440&#39;: running (progress N/A)
+0:02:51 Job &#39;j-2608301048544f5caa435aec51965440&#39;: running (progress N/A)
+0:03:39 Job &#39;j-2608301048544f5caa435aec51965440&#39;: finished (progress 100%)
  Data SO2 diekspor menjadi SO2_Bangkalan.csv
 </pre></div>
 </div>
@@ -832,7 +770,7 @@ Installing collected packages: pytz, wrapt, urllib3, shapely, pywin32, charset_n
 </pre></div>
 </div>
 <div class="output text_html">
-  <div id="df-9d676db0-11ce-47b4-add4-0626b77dde10" class="colab-df-container">
+  <div id="df-39dcb186-035b-43a2-9186-3aa8bb0bad3f" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -905,7 +843,7 @@ Installing collected packages: pytz, wrapt, urllib3, shapely, pywin32, charset_n
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-9d676db0-11ce-47b4-add4-0626b77dde10')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-39dcb186-035b-43a2-9186-3aa8bb0bad3f')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -957,12 +895,12 @@ Installing collected packages: pytz, wrapt, urllib3, shapely, pywin32, charset_n
 
     <script>
       const buttonEl =
-        document.querySelector('#df-9d676db0-11ce-47b4-add4-0626b77dde10 button.colab-df-convert');
+        document.querySelector('#df-39dcb186-035b-43a2-9186-3aa8bb0bad3f button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-9d676db0-11ce-47b4-add4-0626b77dde10');
+        const element = document.querySelector('#df-39dcb186-035b-43a2-9186-3aa8bb0bad3f');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1107,6 +1045,270 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.13/dist-pac
 </div>
 </section>
 </section>
+<hr class="docutils" />
+<section id="deteksi-anomali-outlier-metode-iqr">
+<h2>5. Deteksi Anomali &amp; Outlier (Metode IQR)<a class="headerlink" href="#deteksi-anomali-outlier-metode-iqr" title="Permalink to this heading">#</a></h2>
+<p>Data penginderaan jauh satelit rentan terhadap <em>noise</em> atau anomali ekstrem yang diakibatkan oleh kejadian lokal di lapangan. Untuk mendeteksinya secara objektif, digunakan metode <strong>Interquartile Range (IQR)</strong>.</p>
+<p>Formula batas kewajaran data:</p>
+<ul class="simple">
+<li><p><strong>Lower Bound</strong> = Q1 − (1.5 × IQR)</p></li>
+<li><p><strong>Upper Bound</strong> = Q3 + (1.5 × IQR)</p></li>
+</ul>
+<section id="analisis-outlier-nitrogen-dioksida-no2">
+<h3>5.1 Analisis Outlier Nitrogen Dioksida (NO₂)<a class="headerlink" href="#analisis-outlier-nitrogen-dioksida-no2" title="Permalink to this heading">#</a></h3>
+<p>Titik-titik ekstrem (merah) yang melampaui batas atas IQR pada grafik NO₂ mengindikasikan anomali lonjakan polusi, yang umumnya berkorelasi dengan peningkatan drastis aktivitas mesin diesel/industri berat di sekitar Bangkalan pada tanggal-tanggal tersebut.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># 1. Baca Master Dataset</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Polusi_Bangkalan_Merged.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+
+<span class="n">gas_target</span> <span class="o">=</span> <span class="s1">&#39;NO2&#39;</span>
+
+<span class="c1"># 2. Hitung Batas IQR (Abaikan nilai kosong/NaN sementara)</span>
+<span class="n">data_bersih</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">gas_target</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">Q1</span> <span class="o">=</span> <span class="n">data_bersih</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">Q3</span> <span class="o">=</span> <span class="n">data_bersih</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
+
+<span class="n">lower_bound</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+<span class="n">upper_bound</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;--- Statistik Outlier </span><span class="si">{</span><span class="n">gas_target</span><span class="si">}</span><span class="s2"> Bangkalan ---&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Q1: </span><span class="si">{</span><span class="n">Q1</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2"> | Q3: </span><span class="si">{</span><span class="n">Q3</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2"> | IQR: </span><span class="si">{</span><span class="n">IQR</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Lower Bound: </span><span class="si">{</span><span class="n">lower_bound</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Upper Bound: </span><span class="si">{</span><span class="n">upper_bound</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 3. Ekstrak Data Outlier</span>
+<span class="n">outliers_iqr</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="n">gas_target</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lower_bound</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">gas_target</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">upper_bound</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Jumlah Outlier (IQR): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">outliers_iqr</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">outliers_iqr</span><span class="p">[[</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">gas_target</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># 4. Visualisasi Time Series dengan Sabuk IQR</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">gas_target</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Konsentrasi </span><span class="si">{</span><span class="n">gas_target</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">outliers_iqr</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">outliers_iqr</span><span class="p">[</span><span class="n">gas_target</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Outliers&quot;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">upper_bound</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Upper Bound (IQR)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">lower_bound</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Lower Bound (IQR)&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Deteksi Outlier Data </span><span class="si">{</span><span class="n">gas_target</span><span class="si">}</span><span class="s2"> Bangkalan (Metode IQR)&quot;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Tanggal&quot;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kadar </span><span class="si">{</span><span class="n">gas_target</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Statistik Outlier NO2 Bangkalan ---
+Q1: 1.763816e-05 | Q3: 2.998938e-05 | IQR: 1.235122e-05
+Lower Bound: -8.886717e-07
+Upper Bound: 4.851622e-05
+
+Jumlah Outlier (IQR): 6
+          date       NO2
+5   2025-08-05  0.000056
+21  2025-08-21  0.000049
+230 2026-03-18  0.000052
+255 2026-04-12 -0.000005
+299 2026-05-26  0.000056
+</pre></div>
+</div>
+<img alt="../_images/903194b269ad45db6653eb104fe7b39c706dd1d124827d2e9ec6257760c95adb.png" src="../_images/903194b269ad45db6653eb104fe7b39c706dd1d124827d2e9ec6257760c95adb.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="analisis-outlier-karbon-monoksida-co">
+<h3>5.2 Analisis Outlier Karbon Monoksida (CO)<a class="headerlink" href="#analisis-outlier-karbon-monoksida-co" title="Permalink to this heading">#</a></h3>
+<p>Pencilan pada gas CO sering kali menjadi indikator kuat adanya kejadian insidental berskala masif, seperti pembakaran lahan terbuka atau penumpukan polusi asap di area permukiman/jalan raya pada tanggal terjadinya <em>outlier</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas_target</span> <span class="o">=</span> <span class="s1">&#39;CO&#39;</span>
+
+<span class="n">data_bersih</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">gas_target</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">Q1</span> <span class="o">=</span> <span class="n">data_bersih</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">Q3</span> <span class="o">=</span> <span class="n">data_bersih</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
+
+<span class="n">lower_bound</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+<span class="n">upper_bound</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;--- Statistik Outlier </span><span class="si">{</span><span class="n">gas_target</span><span class="si">}</span><span class="s2"> Bangkalan ---&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Q1: </span><span class="si">{</span><span class="n">Q1</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2"> | Q3: </span><span class="si">{</span><span class="n">Q3</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2"> | IQR: </span><span class="si">{</span><span class="n">IQR</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Lower Bound: </span><span class="si">{</span><span class="n">lower_bound</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Upper Bound: </span><span class="si">{</span><span class="n">upper_bound</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">outliers_iqr</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="n">gas_target</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lower_bound</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">gas_target</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">upper_bound</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Jumlah Outlier (IQR): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">outliers_iqr</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">outliers_iqr</span><span class="p">[[</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">gas_target</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">gas_target</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Konsentrasi </span><span class="si">{</span><span class="n">gas_target</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">outliers_iqr</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">outliers_iqr</span><span class="p">[</span><span class="n">gas_target</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Outliers&quot;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">upper_bound</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Upper Bound (IQR)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">lower_bound</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Lower Bound (IQR)&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Deteksi Outlier Data </span><span class="si">{</span><span class="n">gas_target</span><span class="si">}</span><span class="s2"> Bangkalan (Metode IQR)&quot;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Tanggal&quot;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kadar </span><span class="si">{</span><span class="n">gas_target</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Statistik Outlier CO Bangkalan ---
+Q1: 2.666483e-02 | Q3: 3.012376e-02 | IQR: 3.458930e-03
+Lower Bound: 2.147644e-02
+Upper Bound: 3.531216e-02
+
+Jumlah Outlier (IQR): 8
+         date        CO
+55 2025-09-24  0.036479
+58 2025-09-27  0.035756
+68 2025-10-07  0.044806
+69 2025-10-08  0.037217
+71 2025-10-10  0.035408
+</pre></div>
+</div>
+<img alt="../_images/01e02246f763f6466c7c7fbbaee40bdd82da5a69f9b88f45088fefbfec1cb9c5.png" src="../_images/01e02246f763f6466c7c7fbbaee40bdd82da5a69f9b88f45088fefbfec1cb9c5.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="analisis-outlier-ozon-permukaan-o3">
+<h3>5.3 Analisis Outlier Ozon Permukaan (O₃)<a class="headerlink" href="#analisis-outlier-ozon-permukaan-o3" title="Permalink to this heading">#</a></h3>
+<p>Sebagai polutan sekunder, kemunculan <em>outlier</em> Ozon Permukaan (O₃) sangat bergantung pada intensitas sinar matahari. Titik-titik ekstrem yang menembus batas kewajaran IQR menunjukkan adanya cuaca panas ekstrem atau reaksi fotokimia masif di langit Madura.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas_target</span> <span class="o">=</span> <span class="s1">&#39;O3&#39;</span>
+
+<span class="n">data_bersih</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">gas_target</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">Q1</span> <span class="o">=</span> <span class="n">data_bersih</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">Q3</span> <span class="o">=</span> <span class="n">data_bersih</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
+
+<span class="n">lower_bound</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+<span class="n">upper_bound</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;--- Statistik Outlier </span><span class="si">{</span><span class="n">gas_target</span><span class="si">}</span><span class="s2"> Bangkalan ---&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Q1: </span><span class="si">{</span><span class="n">Q1</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2"> | Q3: </span><span class="si">{</span><span class="n">Q3</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2"> | IQR: </span><span class="si">{</span><span class="n">IQR</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Lower Bound: </span><span class="si">{</span><span class="n">lower_bound</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Upper Bound: </span><span class="si">{</span><span class="n">upper_bound</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">outliers_iqr</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="n">gas_target</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lower_bound</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">gas_target</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">upper_bound</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jumlah Outlier (IQR): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">outliers_iqr</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">outliers_iqr</span><span class="p">[[</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">gas_target</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">gas_target</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Konsentrasi </span><span class="si">{</span><span class="n">gas_target</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">outliers_iqr</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">outliers_iqr</span><span class="p">[</span><span class="n">gas_target</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Outliers&quot;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">upper_bound</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Upper Bound (IQR)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">lower_bound</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Lower Bound (IQR)&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Deteksi Outlier Data </span><span class="si">{</span><span class="n">gas_target</span><span class="si">}</span><span class="s2"> Bangkalan (Metode IQR)&quot;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Tanggal&quot;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kadar </span><span class="si">{</span><span class="n">gas_target</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Statistik Outlier O3 Bangkalan ---
+Q1: 1.140442e-01 | Q3: 1.171546e-01 | IQR: 3.110307e-03
+Lower Bound: 1.093788e-01
+Upper Bound: 1.218200e-01
+
+Jumlah Outlier (IQR): 2
+          date        O3
+374 2026-08-09  0.122673
+375 2026-08-10  0.122118
+</pre></div>
+</div>
+<img alt="../_images/ec71f4286815be8c819f54506cc9d31f97225c58361ed2a082d2aea635a4a8f9.png" src="../_images/ec71f4286815be8c819f54506cc9d31f97225c58361ed2a082d2aea635a4a8f9.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="analisis-outlier-sulfur-dioksida-so2">
+<h3>5.4 Analisis Outlier Sulfur Dioksida (SO₂)<a class="headerlink" href="#analisis-outlier-sulfur-dioksida-so2" title="Permalink to this heading">#</a></h3>
+<p>Deteksi <em>outlier</em> pada gas SO₂ di wilayah Bangkalan umumnya sangat dinamis. Pencilan nilai tinggi sering kali bersumber dari emisi perkapalan di Selat Madura, sementara nilai yang berada di bawah <em>Lower Bound</em> (bahkan mencapai area negatif) merepresentasikan keterbatasan alat baca sensor satelit terhadap gas dalam konsentrasi yang terlalu tipis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas_target</span> <span class="o">=</span> <span class="s1">&#39;SO2&#39;</span>
+
+<span class="n">data_bersih</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">gas_target</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">Q1</span> <span class="o">=</span> <span class="n">data_bersih</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">Q3</span> <span class="o">=</span> <span class="n">data_bersih</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
+
+<span class="n">lower_bound</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+<span class="n">upper_bound</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;--- Statistik Outlier </span><span class="si">{</span><span class="n">gas_target</span><span class="si">}</span><span class="s2"> Bangkalan ---&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Q1: </span><span class="si">{</span><span class="n">Q1</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2"> | Q3: </span><span class="si">{</span><span class="n">Q3</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2"> | IQR: </span><span class="si">{</span><span class="n">IQR</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Lower Bound: </span><span class="si">{</span><span class="n">lower_bound</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Upper Bound: </span><span class="si">{</span><span class="n">upper_bound</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">outliers_iqr</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="n">gas_target</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lower_bound</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">gas_target</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">upper_bound</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jumlah Outlier (IQR): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">outliers_iqr</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">outliers_iqr</span><span class="p">[[</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">gas_target</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">gas_target</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Konsentrasi </span><span class="si">{</span><span class="n">gas_target</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:green&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">outliers_iqr</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">outliers_iqr</span><span class="p">[</span><span class="n">gas_target</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Outliers&quot;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">upper_bound</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Upper Bound (IQR)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">lower_bound</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Lower Bound (IQR)&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Deteksi Outlier Data </span><span class="si">{</span><span class="n">gas_target</span><span class="si">}</span><span class="s2"> Bangkalan (Metode IQR)&quot;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Tanggal&quot;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kadar </span><span class="si">{</span><span class="n">gas_target</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Statistik Outlier SO2 Bangkalan ---
+Q1: -2.204821e-05 | Q3: 1.044044e-04 | IQR: 1.264526e-04
+Lower Bound: -2.117271e-04
+Upper Bound: 2.940832e-04
+
+Jumlah Outlier (IQR): 18
+         date       SO2
+6  2025-08-06  0.000427
+20 2025-08-20  0.000969
+25 2025-08-25  0.000298
+41 2025-09-10 -0.000268
+74 2025-10-13  0.000840
+</pre></div>
+</div>
+<img alt="../_images/500bf9f4c59de6df7de1c25ea3540120f11724c6bcd9df103d1cfc24023ce331.png" src="../_images/500bf9f4c59de6df7de1c25ea3540120f11724c6bcd9df103d1cfc24023ce331.png" />
+</div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1140,22 +1342,13 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.13/dist-pac
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Coba.html"
+       href="../intro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Analisis Runtun Waktu Kualitas Udara (Sentinel-5P)</p>
+        <p class="prev-next-title">Profil Mahasiswa</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="Polusi1.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Analisis Runtun Waktu Kualitas Udara (Sentinel-5P)</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -1194,6 +1387,13 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.13/dist-pac
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fluktuasi-karbon-monoksida-co">4.2 Fluktuasi Karbon Monoksida (CO)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fluktuasi-ozon-permukaan-o3">4.3 Fluktuasi Ozon Permukaan (O₃)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fluktuasi-sulfur-dioksida-so2">4.4 Fluktuasi Sulfur Dioksida (SO₂)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-anomali-outlier-metode-iqr">5. Deteksi Anomali &amp; Outlier (Metode IQR)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-outlier-nitrogen-dioksida-no2">5.1 Analisis Outlier Nitrogen Dioksida (NO₂)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-outlier-karbon-monoksida-co">5.2 Analisis Outlier Karbon Monoksida (CO)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-outlier-ozon-permukaan-o3">5.3 Analisis Outlier Ozon Permukaan (O₃)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-outlier-sulfur-dioksida-so2">5.4 Analisis Outlier Sulfur Dioksida (SO₂)</a></li>
 </ul>
 </li>
 </ul>
