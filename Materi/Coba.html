@@ -176,6 +176,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisis Runtun Waktu Kualitas Udara (Sentinel-5P)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Polusi.html">Analisis Runtun Waktu Kualitas Udara (Sentinel-5P)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Polusi1.html">Analisis Runtun Waktu Kualitas Udara (Sentinel-5P)</a></li>
 </ul>
 
     </div>
@@ -436,75 +437,466 @@ Dalam data satelit optik, terdapat kondisi wajar yang perlu diperhatikan:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: openeo in c:\python39\lib\site-packages (0.50.0)
-Requirement already satisfied: requests&gt;=2.26.0 in c:\python39\lib\site-packages (from openeo) (2.32.5)
-Requirement already satisfied: urllib3&gt;=1.9.0 in c:\python39\lib\site-packages (from openeo) (2.6.3)
-Requirement already satisfied: shapely&gt;=1.6.4 in c:\python39\lib\site-packages (from openeo) (2.0.7)
-Requirement already satisfied: numpy&gt;=1.17.0 in c:\python39\lib\site-packages (from openeo) (1.26.4)
-Requirement already satisfied: xarray&lt;2025.01.2,&gt;=0.12.3 in c:\python39\lib\site-packages (from openeo) (2024.7.0)
-Requirement already satisfied: pandas&lt;3.0.0,&gt;0.20.0 in c:\python39\lib\site-packages (from openeo) (2.3.3)
-Requirement already satisfied: pystac&gt;=1.5.0 in c:\python39\lib\site-packages (from openeo) (1.10.1)
-Requirement already satisfied: deprecated&gt;=1.2.12 in c:\python39\lib\site-packages (from openeo) (1.3.1)
-Requirement already satisfied: oschmod&gt;=0.3.12 in c:\python39\lib\site-packages (from openeo) (0.3.12)
-Requirement already satisfied: geopandas&gt;=0.14 in c:\python39\lib\site-packages (from openeo) (1.0.1)
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\python39\lib\site-packages (from pandas&lt;3.0.0,&gt;0.20.0-&gt;openeo) (2.9.0.post0)
-Requirement already satisfied: pytz&gt;=2020.1 in c:\python39\lib\site-packages (from pandas&lt;3.0.0,&gt;0.20.0-&gt;openeo) (2025.2)
-Requirement already satisfied: tzdata&gt;=2022.7 in c:\python39\lib\site-packages (from pandas&lt;3.0.0,&gt;0.20.0-&gt;openeo) (2025.3)
-Requirement already satisfied: packaging&gt;=23.1 in c:\python39\lib\site-packages (from xarray&lt;2025.01.2,&gt;=0.12.3-&gt;openeo) (25.0)
-Requirement already satisfied: wrapt&lt;3,&gt;=1.10 in c:\python39\lib\site-packages (from deprecated&gt;=1.2.12-&gt;openeo) (2.2.1)
-Requirement already satisfied: pyogrio&gt;=0.7.2 in c:\python39\lib\site-packages (from geopandas&gt;=0.14-&gt;openeo) (0.11.1)
-Requirement already satisfied: pyproj&gt;=3.3.0 in c:\python39\lib\site-packages (from geopandas&gt;=0.14-&gt;openeo) (3.6.1)
-Requirement already satisfied: pywin32 in c:\python39\lib\site-packages (from oschmod&gt;=0.3.12-&gt;openeo) (311)
-Requirement already satisfied: certifi in c:\python39\lib\site-packages (from pyogrio&gt;=0.7.2-&gt;geopandas&gt;=0.14-&gt;openeo) (2026.1.4)
-Requirement already satisfied: six&gt;=1.5 in c:\python39\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&lt;3.0.0,&gt;0.20.0-&gt;openeo) (1.17.0)
-Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in c:\python39\lib\site-packages (from requests&gt;=2.26.0-&gt;openeo) (3.4.4)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in c:\python39\lib\site-packages (from requests&gt;=2.26.0-&gt;openeo) (3.11)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>^C
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Menghubungkan ke CDSE Copernicus...
-</pre></div>
-</div>
-<div class="output text_html">Visit <a href="https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=SIEF-USDA" title="Authenticate at https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=SIEF-USDA" target="_blank" rel="noopener noreferrer">https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=SIEF-USDA</a> <a href="#" onclick="navigator.clipboard.writeText('https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=SIEF-USDA');return false;" title="Copy authentication URL to clipboard">&#128203;</a> to authenticate.</div><div class="output text_html"><code>[###################################--]</code> ⌛ Authorization pending</div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">-------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Menghubungkan ke CDSE Copernicus...&quot;</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">connection</span> <span class="o">=</span> <span class="n">openeo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;openeo.dataspace.copernicus.eu&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">authenticate_oidc</span><span class="p">()</span>
-
-<span class="nn">File c:\python39\lib\site-packages\openeo\rest\connection.py:689,</span> in <span class="ni">Connection.authenticate_oidc</span><span class="nt">(self, provider_id, client_id, client_secret, store_refresh_token, use_pkce, display, max_poll_time)</span>
-<span class="g g-Whitespace">    </span><span class="mi">685</span> <span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Trying device code flow.&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">686</span> <span class="n">authenticator</span> <span class="o">=</span> <span class="n">OidcDeviceAuthenticator</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">687</span>     <span class="n">client_info</span><span class="o">=</span><span class="n">client_info</span><span class="p">,</span> <span class="n">use_pkce</span><span class="o">=</span><span class="n">use_pkce</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="n">display</span><span class="p">,</span> <span class="n">max_poll_time</span><span class="o">=</span><span class="n">max_poll_time</span>
-<span class="g g-Whitespace">    </span><span class="mi">688</span> <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">689</span> <span class="n">con</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_authenticate_oidc</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">690</span>     <span class="n">authenticator</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">691</span>     <span class="n">provider_id</span><span class="o">=</span><span class="n">provider_id</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">692</span>     <span class="n">store_refresh_token</span><span class="o">=</span><span class="n">store_refresh_token</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">693</span>     <span class="c1"># TODO: expose `auto_renew_from_refresh_token` directly as option instead of reusing `store_refresh_token` arg?</span>
-<span class="g g-Whitespace">    </span><span class="mi">694</span>     <span class="n">auto_renew_from_refresh_token</span><span class="o">=</span><span class="n">store_refresh_token</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">695</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">696</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Authenticated using device code flow.&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">697</span> <span class="k">return</span> <span class="n">con</span>
-
-<span class="nn">File c:\python39\lib\site-packages\openeo\rest\connection.py:405,</span> in <span class="ni">Connection._authenticate_oidc</span><span class="nt">(self, authenticator, provider_id, store_refresh_token, auto_renew_from_refresh_token, fallback_refresh_token, oidc_auth_renewer)</span>
-<span class="g g-Whitespace">    </span><span class="mi">401</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">402</span><span class="sd"> Authenticate through OIDC and set up bearer token (based on OIDC access_token) for further requests.</span>
-<span class="g g-Whitespace">    </span><span class="mi">403</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">404</span> <span class="n">request_refresh_token</span> <span class="o">=</span> <span class="n">store_refresh_token</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">oidc_auth_renewer</span> <span class="ow">and</span> <span class="n">auto_renew_from_refresh_token</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">405</span> <span class="n">tokens</span> <span class="o">=</span> <span class="n">authenticator</span><span class="o">.</span><span class="n">get_tokens</span><span class="p">(</span><span class="n">request_refresh_token</span><span class="o">=</span><span class="n">request_refresh_token</span><span class="p">)</span>
-<span class="nn">    406 _log.info(&quot;Obtained tokens: {t}&quot;.format(t=[k for k, v</span> in <span class="ni">tokens._asdict().items</span><span class="nt">() if v]))</span>
-<span class="g g-Whitespace">    </span><span class="mi">408</span> <span class="n">refresh_token</span> <span class="o">=</span> <span class="n">tokens</span><span class="o">.</span><span class="n">refresh_token</span> <span class="ow">or</span> <span class="n">fallback_refresh_token</span>
-
-<span class="nn">File c:\python39\lib\site-packages\openeo\rest\auth\oidc.py:928,</span> in <span class="ni">OidcDeviceAuthenticator.get_tokens</span><span class="nt">(self, request_refresh_token)</span>
-<span class="g g-Whitespace">    </span><span class="mi">926</span> <span class="k">while</span> <span class="n">elapsed</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_poll_time</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">927</span>     <span class="n">poll_ui</span><span class="o">.</span><span class="n">show_progress</span><span class="p">()</span>
-<span class="ne">--&gt; </span><span class="mi">928</span>     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">930</span>     <span class="k">if</span> <span class="n">elapsed</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">next_poll</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">931</span>         <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">932</span>             <span class="sa">f</span><span class="s2">&quot;Doing </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">grant_type</span><span class="si">!r}</span><span class="s2"> token request </span><span class="si">{</span><span class="n">token_endpoint</span><span class="si">!r}</span><span class="s2"> with post data fields </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">post_data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">!r}</span><span class="s2"> (client_id </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">client_id</span><span class="si">!r}</span><span class="s2">)&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">933</span>         <span class="p">)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting openeo
+  Downloading openeo-0.51.0-py3-none-any.whl.metadata (8.9 kB)
+Collecting requests&gt;=2.26.0 (from openeo)
+  Using cached requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+Collecting urllib3&gt;=1.9.0 (from openeo)
+  Using cached urllib3-2.7.0-py3-none-any.whl.metadata (6.9 kB)
+Collecting shapely&gt;=1.6.4 (from openeo)
+  Downloading shapely-2.1.2-cp311-cp311-win_amd64.whl.metadata (7.1 kB)
+Requirement already satisfied: numpy&gt;=1.17.0 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from openeo) (2.4.6)
+Collecting xarray&lt;2025.01.2,&gt;=0.12.3 (from openeo)
+  Downloading xarray-2025.1.1-py3-none-any.whl.metadata (11 kB)
+Collecting pandas&lt;3.0.0,&gt;0.20.0 (from openeo)
+  Downloading pandas-2.3.3-cp311-cp311-win_amd64.whl.metadata (19 kB)
+Collecting pystac&gt;=1.5.0 (from openeo)
+  Downloading pystac-1.15.2-py3-none-any.whl.metadata (6.3 kB)
+Collecting deprecated&gt;=1.2.12 (from openeo)
+  Using cached deprecated-1.3.1-py2.py3-none-any.whl.metadata (5.9 kB)
+Collecting oschmod&gt;=0.3.12 (from openeo)
+  Using cached oschmod-0.3.12-py2.py3-none-any.whl.metadata (10.0 kB)
+Collecting geopandas&gt;=0.14 (from openeo)
+  Downloading geopandas-1.1.4-py3-none-any.whl.metadata (2.3 kB)
+Collecting wrapt&lt;3,&gt;=1.10 (from deprecated&gt;=1.2.12-&gt;openeo)
+  Downloading wrapt-2.4.0-cp311-cp311-win_amd64.whl.metadata (7.6 kB)
+Collecting pyogrio&gt;=0.7.2 (from geopandas&gt;=0.14-&gt;openeo)
+  Downloading pyogrio-0.13.0-cp311-abi3-win_amd64.whl.metadata (6.0 kB)
+Requirement already satisfied: packaging in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from geopandas&gt;=0.14-&gt;openeo) (26.3)
+Collecting pyproj&gt;=3.5.0 (from geopandas&gt;=0.14-&gt;openeo)
+  Downloading pyproj-3.7.2-cp311-cp311-win_amd64.whl.metadata (31 kB)
+Collecting pywin32 (from oschmod&gt;=0.3.12-&gt;openeo)
+  Downloading pywin32-312-cp311-cp311-win_amd64.whl.metadata (11 kB)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from pandas&lt;3.0.0,&gt;0.20.0-&gt;openeo) (2.9.0.post0)
+Collecting pytz&gt;=2020.1 (from pandas&lt;3.0.0,&gt;0.20.0-&gt;openeo)
+  Downloading pytz-2026.3.post1-py2.py3-none-any.whl.metadata (22 kB)
+Requirement already satisfied: tzdata&gt;=2022.7 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from pandas&lt;3.0.0,&gt;0.20.0-&gt;openeo) (2026.3)
+Collecting pystac-core&lt;2,&gt;=1.15.0 (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_core-1.15.2-py3-none-any.whl.metadata (1.3 kB)
+Collecting pystac-ext-classification (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_classification-2.0.1-py3-none-any.whl.metadata (2.1 kB)
+Collecting pystac-ext-datacube (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_datacube-2.2.1-py3-none-any.whl.metadata (1.8 kB)
+Collecting pystac-ext-eo (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_eo-1.1.1-py3-none-any.whl.metadata (1.9 kB)
+Collecting pystac-ext-file (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_file-2.1.1-py3-none-any.whl.metadata (1.8 kB)
+Collecting pystac-ext-grid (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_grid-1.1.1-py3-none-any.whl.metadata (1.9 kB)
+Collecting pystac-ext-item-assets (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_item_assets-1.0.1-py3-none-any.whl.metadata (1.9 kB)
+Collecting pystac-ext-label (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_label-1.0.2-py3-none-any.whl.metadata (1.9 kB)
+Collecting pystac-ext-mgrs (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_mgrs-1.0.1-py3-none-any.whl.metadata (1.8 kB)
+Collecting pystac-ext-mlm (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_mlm-1.4.1-py3-none-any.whl.metadata (2.2 kB)
+Collecting pystac-ext-pointcloud (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_pointcloud-1.0.1-py3-none-any.whl.metadata (1.8 kB)
+Collecting pystac-ext-projection (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_projection-2.0.1-py3-none-any.whl.metadata (2.1 kB)
+Collecting pystac-ext-raster (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_raster-1.1.1-py3-none-any.whl.metadata (1.9 kB)
+Collecting pystac-ext-render (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_render-2.0.0-py3-none-any.whl.metadata (1.8 kB)
+Collecting pystac-ext-sar (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_sar-1.0.1-py3-none-any.whl.metadata (1.8 kB)
+Collecting pystac-ext-sat (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_sat-1.0.1-py3-none-any.whl.metadata (1.8 kB)
+Collecting pystac-ext-scientific (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_scientific-1.0.1-py3-none-any.whl.metadata (1.8 kB)
+Collecting pystac-ext-storage (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_storage-2.0.1-py3-none-any.whl.metadata (1.9 kB)
+Collecting pystac-ext-table (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_table-1.2.1-py3-none-any.whl.metadata (1.8 kB)
+Collecting pystac-ext-timestamps (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_timestamps-1.1.1-py3-none-any.whl.metadata (1.8 kB)
+Collecting pystac-ext-version (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_version-1.2.1-py3-none-any.whl.metadata (1.9 kB)
+Collecting pystac-ext-view (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_view-1.0.1-py3-none-any.whl.metadata (1.8 kB)
+Collecting pystac-ext-xarray-assets (from pystac&gt;=1.5.0-&gt;openeo)
+  Downloading pystac_ext_xarray_assets-1.0.1-py3-none-any.whl.metadata (1.9 kB)
+Collecting charset_normalizer&lt;4,&gt;=2 (from requests&gt;=2.26.0-&gt;openeo)
+  Downloading charset_normalizer-3.5.1-cp311-cp311-win_amd64.whl.metadata (46 kB)
+     ---------------------------------------- 0.0/46.7 kB ? eta -:--:--
+     ---------------------------------------- 46.7/46.7 kB 2.3 MB/s eta 0:00:00
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from requests&gt;=2.26.0-&gt;openeo) (3.19)
+Collecting certifi&gt;=2023.5.7 (from requests&gt;=2.26.0-&gt;openeo)
+  Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+Requirement already satisfied: six&gt;=1.5 in c:\users\lenovo\onedrive\documents\psd\.venv\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&lt;3.0.0,&gt;0.20.0-&gt;openeo) (1.17.0)
+Downloading openeo-0.51.0-py3-none-any.whl (349 kB)
+   ---------------------------------------- 0.0/349.2 kB ? eta -:--:--
+   ---------------- ----------------------- 143.4/349.2 kB 4.3 MB/s eta 0:00:01
+   -------------------------------------- - 337.9/349.2 kB 4.2 MB/s eta 0:00:01
+   ---------------------------------------- 349.2/349.2 kB 2.4 MB/s eta 0:00:00
+Using cached deprecated-1.3.1-py2.py3-none-any.whl (11 kB)
+Downloading geopandas-1.1.4-py3-none-any.whl (343 kB)
+   ---------------------------------------- 0.0/343.3 kB ? eta -:--:--
+   --------------------------- ----------- 245.8/343.3 kB 15.7 MB/s eta 0:00:01
+   ---------------------------------------- 343.3/343.3 kB 3.6 MB/s eta 0:00:00
+Using cached oschmod-0.3.12-py2.py3-none-any.whl (14 kB)
+Downloading pandas-2.3.3-cp311-cp311-win_amd64.whl (11.3 MB)
+   ---------------------------------------- 0.0/11.3 MB ? eta -:--:--
+   - -------------------------------------- 0.3/11.3 MB 9.6 MB/s eta 0:00:02
+   - -------------------------------------- 0.5/11.3 MB 5.6 MB/s eta 0:00:02
+   -- ------------------------------------- 0.6/11.3 MB 5.8 MB/s eta 0:00:02
+   -- ------------------------------------- 0.6/11.3 MB 5.8 MB/s eta 0:00:02
+   -- ------------------------------------- 0.7/11.3 MB 2.8 MB/s eta 0:00:04
+   --- ------------------------------------ 1.0/11.3 MB 3.7 MB/s eta 0:00:03
+   --- ------------------------------------ 1.1/11.3 MB 3.2 MB/s eta 0:00:04
+   ---- ----------------------------------- 1.2/11.3 MB 3.3 MB/s eta 0:00:04
+   ----- ---------------------------------- 1.5/11.3 MB 3.5 MB/s eta 0:00:03
+   ----- ---------------------------------- 1.7/11.3 MB 3.7 MB/s eta 0:00:03
+   ------ --------------------------------- 1.9/11.3 MB 3.7 MB/s eta 0:00:03
+   ------ --------------------------------- 2.0/11.3 MB 3.7 MB/s eta 0:00:03
+   ------ --------------------------------- 2.0/11.3 MB 3.7 MB/s eta 0:00:03
+   ------ --------------------------------- 2.0/11.3 MB 3.7 MB/s eta 0:00:03
+   ------ --------------------------------- 2.0/11.3 MB 3.7 MB/s eta 0:00:03
+   -------- ------------------------------- 2.4/11.3 MB 3.2 MB/s eta 0:00:03
+   -------- ------------------------------- 2.5/11.3 MB 3.3 MB/s eta 0:00:03
+   --------- ------------------------------ 2.7/11.3 MB 3.3 MB/s eta 0:00:03
+   ---------- ----------------------------- 3.1/11.3 MB 3.5 MB/s eta 0:00:03
+   ----------- ---------------------------- 3.2/11.3 MB 3.5 MB/s eta 0:00:03
+   ------------ --------------------------- 3.5/11.3 MB 3.7 MB/s eta 0:00:03
+   ------------- -------------------------- 3.8/11.3 MB 3.7 MB/s eta 0:00:03
+   -------------- ------------------------- 4.0/11.3 MB 3.8 MB/s eta 0:00:02
+   -------------- ------------------------- 4.1/11.3 MB 3.7 MB/s eta 0:00:02
+   --------------- ------------------------ 4.4/11.3 MB 3.8 MB/s eta 0:00:02
+   ---------------- ----------------------- 4.8/11.3 MB 4.1 MB/s eta 0:00:02
+   ----------------- ---------------------- 4.9/11.3 MB 4.1 MB/s eta 0:00:02
+   ------------------ --------------------- 5.2/11.3 MB 4.1 MB/s eta 0:00:02
+   ------------------- -------------------- 5.4/11.3 MB 4.1 MB/s eta 0:00:02
+   ------------------- -------------------- 5.6/11.3 MB 4.0 MB/s eta 0:00:02
+   -------------------- ------------------- 5.9/11.3 MB 4.1 MB/s eta 0:00:02
+   --------------------- ------------------ 6.0/11.3 MB 4.2 MB/s eta 0:00:02
+   ---------------------- ----------------- 6.3/11.3 MB 4.1 MB/s eta 0:00:02
+   ---------------------- ----------------- 6.5/11.3 MB 4.2 MB/s eta 0:00:02
+   ----------------------- ---------------- 6.8/11.3 MB 4.2 MB/s eta 0:00:02
+   ------------------------ --------------- 7.0/11.3 MB 4.3 MB/s eta 0:00:02
+   ------------------------- -------------- 7.3/11.3 MB 4.3 MB/s eta 0:00:01
+   -------------------------- ------------- 7.5/11.3 MB 4.3 MB/s eta 0:00:01
+   --------------------------- ------------ 7.7/11.3 MB 4.3 MB/s eta 0:00:01
+   --------------------------- ------------ 7.9/11.3 MB 4.3 MB/s eta 0:00:01
+   ---------------------------- ----------- 8.0/11.3 MB 4.3 MB/s eta 0:00:01
+   ----------------------------- ---------- 8.3/11.3 MB 4.3 MB/s eta 0:00:01
+   ----------------------------- ---------- 8.4/11.3 MB 4.2 MB/s eta 0:00:01
+   ------------------------------ --------- 8.7/11.3 MB 4.3 MB/s eta 0:00:01
+   ------------------------------ --------- 8.8/11.3 MB 4.3 MB/s eta 0:00:01
+   ------------------------------- -------- 9.0/11.3 MB 4.2 MB/s eta 0:00:01
+   -------------------------------- ------- 9.2/11.3 MB 4.2 MB/s eta 0:00:01
+   -------------------------------- ------- 9.3/11.3 MB 4.2 MB/s eta 0:00:01
+   --------------------------------- ------ 9.6/11.3 MB 4.2 MB/s eta 0:00:01
+   ---------------------------------- ----- 9.8/11.3 MB 4.2 MB/s eta 0:00:01
+   ----------------------------------- ---- 10.0/11.3 MB 4.2 MB/s eta 0:00:01
+   ----------------------------------- ---- 10.1/11.3 MB 4.2 MB/s eta 0:00:01
+   ------------------------------------ --- 10.4/11.3 MB 4.2 MB/s eta 0:00:01
+   ------------------------------------ --- 10.5/11.3 MB 4.1 MB/s eta 0:00:01
+   -------------------------------------- - 10.8/11.3 MB 4.2 MB/s eta 0:00:01
+   -------------------------------------- - 10.9/11.3 MB 4.3 MB/s eta 0:00:01
+   ---------------------------------------  11.3/11.3 MB 4.4 MB/s eta 0:00:01
+   ---------------------------------------  11.3/11.3 MB 4.4 MB/s eta 0:00:01
+   ---------------------------------------- 11.3/11.3 MB 4.3 MB/s eta 0:00:00
+Downloading pystac-1.15.2-py3-none-any.whl (5.7 kB)
+Using cached requests-2.34.2-py3-none-any.whl (73 kB)
+Downloading shapely-2.1.2-cp311-cp311-win_amd64.whl (1.7 MB)
+   ---------------------------------------- 0.0/1.7 MB ? eta -:--:--
+   ----- ---------------------------------- 0.2/1.7 MB 4.8 MB/s eta 0:00:01
+   --------- ------------------------------ 0.4/1.7 MB 4.1 MB/s eta 0:00:01
+   ------------ --------------------------- 0.6/1.7 MB 4.3 MB/s eta 0:00:01
+   ---------------- ----------------------- 0.7/1.7 MB 3.8 MB/s eta 0:00:01
+   ------------------- -------------------- 0.9/1.7 MB 3.9 MB/s eta 0:00:01
+   ------------------------- -------------- 1.1/1.7 MB 3.9 MB/s eta 0:00:01
+   ---------------------------- ----------- 1.2/1.7 MB 3.9 MB/s eta 0:00:01
+   -------------------------------- ------- 1.4/1.7 MB 3.8 MB/s eta 0:00:01
+   ------------------------------------- -- 1.6/1.7 MB 4.1 MB/s eta 0:00:01
+   ---------------------------------------  1.7/1.7 MB 3.9 MB/s eta 0:00:01
+   ---------------------------------------- 1.7/1.7 MB 3.5 MB/s eta 0:00:00
+Using cached urllib3-2.7.0-py3-none-any.whl (131 kB)
+Downloading xarray-2025.1.1-py3-none-any.whl (1.2 MB)
+   ---------------------------------------- 0.0/1.2 MB ? eta -:--:--
+   -------- ------------------------------- 0.3/1.2 MB 8.3 MB/s eta 0:00:01
+   ------------- -------------------------- 0.4/1.2 MB 8.9 MB/s eta 0:00:01
+   ---------------------- ----------------- 0.7/1.2 MB 5.4 MB/s eta 0:00:01
+   --------------------------- ------------ 0.9/1.2 MB 4.9 MB/s eta 0:00:01
+   -------------------------------------- - 1.2/1.2 MB 5.4 MB/s eta 0:00:01
+   ---------------------------------------  1.2/1.2 MB 5.3 MB/s eta 0:00:01
+   ---------------------------------------- 1.2/1.2 MB 4.4 MB/s eta 0:00:00
+Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+   ---------------------------------------- 0.0/137.0 kB ? eta -:--:--
+   -- ------------------------------------- 10.2/137.0 kB ? eta -:--:--
+   -------------------------------------- - 133.1/137.0 kB 2.0 MB/s eta 0:00:01
+   ---------------------------------------- 137.0/137.0 kB 1.2 MB/s eta 0:00:00
+Downloading charset_normalizer-3.5.1-cp311-cp311-win_amd64.whl (206 kB)
+   ---------------------------------------- 0.0/206.7 kB ? eta -:--:--
+   ----------------------- ---------------- 122.9/206.7 kB 3.6 MB/s eta 0:00:01
+   ---------------------------------------- 206.7/206.7 kB 2.5 MB/s eta 0:00:00
+Downloading pyogrio-0.13.0-cp311-abi3-win_amd64.whl (23.8 MB)
+   ---------------------------------------- 0.0/23.8 MB ? eta -:--:--
+   ---------------------------------------- 0.1/23.8 MB 4.2 MB/s eta 0:00:06
+   ---------------------------------------- 0.3/23.8 MB 2.8 MB/s eta 0:00:09
+    --------------------------------------- 0.4/23.8 MB 3.1 MB/s eta 0:00:08
+    --------------------------------------- 0.5/23.8 MB 2.8 MB/s eta 0:00:09
+   - -------------------------------------- 0.6/23.8 MB 2.7 MB/s eta 0:00:09
+   - -------------------------------------- 0.8/23.8 MB 2.9 MB/s eta 0:00:08
+   - -------------------------------------- 1.0/23.8 MB 2.9 MB/s eta 0:00:08
+   - -------------------------------------- 1.1/23.8 MB 3.1 MB/s eta 0:00:08
+   -- ------------------------------------- 1.3/23.8 MB 3.0 MB/s eta 0:00:08
+   -- ------------------------------------- 1.4/23.8 MB 3.1 MB/s eta 0:00:08
+   -- ------------------------------------- 1.6/23.8 MB 3.2 MB/s eta 0:00:07
+   -- ------------------------------------- 1.8/23.8 MB 3.2 MB/s eta 0:00:07
+   --- ------------------------------------ 1.9/23.8 MB 3.3 MB/s eta 0:00:07
+   --- ------------------------------------ 1.9/23.8 MB 3.0 MB/s eta 0:00:08
+   --- ------------------------------------ 2.0/23.8 MB 2.9 MB/s eta 0:00:08
+   --- ------------------------------------ 2.0/23.8 MB 2.7 MB/s eta 0:00:09
+   --- ------------------------------------ 2.0/23.8 MB 2.7 MB/s eta 0:00:09
+   --- ------------------------------------ 2.0/23.8 MB 2.7 MB/s eta 0:00:09
+   --- ------------------------------------ 2.0/23.8 MB 2.7 MB/s eta 0:00:09
+   --- ------------------------------------ 2.0/23.8 MB 2.7 MB/s eta 0:00:09
+   --- ------------------------------------ 2.0/23.8 MB 2.7 MB/s eta 0:00:09
+   --- ------------------------------------ 2.0/23.8 MB 2.7 MB/s eta 0:00:09
+   --- ------------------------------------ 2.0/23.8 MB 1.9 MB/s eta 0:00:12
+   --- ------------------------------------ 2.3/23.8 MB 2.1 MB/s eta 0:00:11
+   --- ------------------------------------ 2.3/23.8 MB 2.0 MB/s eta 0:00:11
+   --- ------------------------------------ 2.4/23.8 MB 2.0 MB/s eta 0:00:11
+   ---- ----------------------------------- 2.4/23.8 MB 1.9 MB/s eta 0:00:12
+   ---- ----------------------------------- 2.5/23.8 MB 1.9 MB/s eta 0:00:11
+   ---- ----------------------------------- 2.6/23.8 MB 1.9 MB/s eta 0:00:12
+   ---- ----------------------------------- 2.7/23.8 MB 1.9 MB/s eta 0:00:12
+   ---- ----------------------------------- 2.8/23.8 MB 1.9 MB/s eta 0:00:11
+   ---- ----------------------------------- 2.9/23.8 MB 2.0 MB/s eta 0:00:11
+   ---- ----------------------------------- 3.0/23.8 MB 1.9 MB/s eta 0:00:11
+   ----- ---------------------------------- 3.0/23.8 MB 1.9 MB/s eta 0:00:11
+   ----- ---------------------------------- 3.2/23.8 MB 2.0 MB/s eta 0:00:11
+   ----- ---------------------------------- 3.3/23.8 MB 1.9 MB/s eta 0:00:11
+   ----- ---------------------------------- 3.4/23.8 MB 2.0 MB/s eta 0:00:11
+   ------ --------------------------------- 3.6/23.8 MB 2.0 MB/s eta 0:00:10
+   ------ --------------------------------- 3.7/23.8 MB 2.0 MB/s eta 0:00:10
+   ------ --------------------------------- 3.8/23.8 MB 2.1 MB/s eta 0:00:10
+   ------ --------------------------------- 3.9/23.8 MB 2.1 MB/s eta 0:00:10
+   ------ --------------------------------- 4.1/23.8 MB 2.1 MB/s eta 0:00:10
+   ------- -------------------------------- 4.2/23.8 MB 2.1 MB/s eta 0:00:10
+   ------- -------------------------------- 4.3/23.8 MB 2.1 MB/s eta 0:00:10
+   ------- -------------------------------- 4.3/23.8 MB 2.1 MB/s eta 0:00:10
+   ------- -------------------------------- 4.5/23.8 MB 2.1 MB/s eta 0:00:10
+   ------- -------------------------------- 4.6/23.8 MB 2.1 MB/s eta 0:00:10
+   ------- -------------------------------- 4.7/23.8 MB 2.1 MB/s eta 0:00:10
+   -------- ------------------------------- 4.8/23.8 MB 2.1 MB/s eta 0:00:10
+   -------- ------------------------------- 4.9/23.8 MB 2.1 MB/s eta 0:00:09
+   -------- ------------------------------- 5.0/23.8 MB 2.1 MB/s eta 0:00:09
+   -------- ------------------------------- 5.0/23.8 MB 2.1 MB/s eta 0:00:09
+   -------- ------------------------------- 5.0/23.8 MB 2.1 MB/s eta 0:00:09
+   -------- ------------------------------- 5.0/23.8 MB 2.0 MB/s eta 0:00:10
+   -------- ------------------------------- 5.0/23.8 MB 2.0 MB/s eta 0:00:10
+   -------- ------------------------------- 5.0/23.8 MB 2.0 MB/s eta 0:00:10
+   -------- ------------------------------- 5.0/23.8 MB 1.9 MB/s eta 0:00:11
+   -------- ------------------------------- 5.3/23.8 MB 2.0 MB/s eta 0:00:10
+   --------- ------------------------------ 5.4/23.8 MB 2.0 MB/s eta 0:00:10
+   --------- ------------------------------ 5.5/23.8 MB 2.0 MB/s eta 0:00:10
+   --------- ------------------------------ 5.6/23.8 MB 2.0 MB/s eta 0:00:10
+   --------- ------------------------------ 5.8/23.8 MB 2.0 MB/s eta 0:00:09
+   --------- ------------------------------ 5.9/23.8 MB 2.0 MB/s eta 0:00:09
+   ---------- ----------------------------- 6.0/23.8 MB 2.0 MB/s eta 0:00:09
+   ---------- ----------------------------- 6.1/23.8 MB 2.0 MB/s eta 0:00:09
+   ---------- ----------------------------- 6.2/23.8 MB 2.0 MB/s eta 0:00:09
+   ---------- ----------------------------- 6.3/23.8 MB 2.0 MB/s eta 0:00:09
+   ---------- ----------------------------- 6.4/23.8 MB 2.0 MB/s eta 0:00:09
+   ---------- ----------------------------- 6.5/23.8 MB 2.0 MB/s eta 0:00:09
+   ----------- ---------------------------- 6.6/23.8 MB 2.1 MB/s eta 0:00:09
+   ----------- ---------------------------- 6.7/23.8 MB 2.0 MB/s eta 0:00:09
+   ----------- ---------------------------- 6.9/23.8 MB 2.1 MB/s eta 0:00:09
+   ----------- ---------------------------- 7.0/23.8 MB 2.1 MB/s eta 0:00:09
+   ------------ --------------------------- 7.2/23.8 MB 2.1 MB/s eta 0:00:09
+   ------------ --------------------------- 7.3/23.8 MB 2.1 MB/s eta 0:00:08
+   ------------ --------------------------- 7.4/23.8 MB 2.1 MB/s eta 0:00:08
+   ------------ --------------------------- 7.5/23.8 MB 2.1 MB/s eta 0:00:08
+   ------------ --------------------------- 7.7/23.8 MB 2.1 MB/s eta 0:00:08
+   ------------- -------------------------- 7.9/23.8 MB 2.1 MB/s eta 0:00:08
+   ------------- -------------------------- 7.9/23.8 MB 2.2 MB/s eta 0:00:08
+   ------------- -------------------------- 8.2/23.8 MB 2.2 MB/s eta 0:00:08
+   -------------- ------------------------- 8.4/23.8 MB 2.2 MB/s eta 0:00:07
+   -------------- ------------------------- 8.4/23.8 MB 2.2 MB/s eta 0:00:08
+   -------------- ------------------------- 8.6/23.8 MB 2.2 MB/s eta 0:00:07
+   -------------- ------------------------- 8.8/23.8 MB 2.2 MB/s eta 0:00:07
+   --------------- ------------------------ 9.0/23.8 MB 2.3 MB/s eta 0:00:07
+   --------------- ------------------------ 9.2/23.8 MB 2.3 MB/s eta 0:00:07
+   --------------- ------------------------ 9.4/23.8 MB 2.3 MB/s eta 0:00:07
+   ---------------- ----------------------- 9.6/23.8 MB 2.3 MB/s eta 0:00:07
+   ---------------- ----------------------- 9.6/23.8 MB 2.3 MB/s eta 0:00:07
+   ---------------- ----------------------- 9.8/23.8 MB 2.3 MB/s eta 0:00:07
+   ---------------- ----------------------- 9.9/23.8 MB 2.3 MB/s eta 0:00:06
+   ---------------- ----------------------- 10.0/23.8 MB 2.3 MB/s eta 0:00:06
+   ----------------- ---------------------- 10.2/23.8 MB 2.3 MB/s eta 0:00:06
+   ----------------- ---------------------- 10.3/23.8 MB 2.3 MB/s eta 0:00:06
+   ----------------- ---------------------- 10.4/23.8 MB 2.3 MB/s eta 0:00:06
+   ----------------- ---------------------- 10.5/23.8 MB 2.3 MB/s eta 0:00:06
+   ----------------- ---------------------- 10.6/23.8 MB 2.3 MB/s eta 0:00:06
+   ----------------- ---------------------- 10.6/23.8 MB 2.3 MB/s eta 0:00:06
+   ----------------- ---------------------- 10.6/23.8 MB 2.3 MB/s eta 0:00:06
+   ----------------- ---------------------- 10.6/23.8 MB 2.3 MB/s eta 0:00:06
+   ----------------- ---------------------- 10.7/23.8 MB 2.2 MB/s eta 0:00:06
+   ------------------ --------------------- 10.7/23.8 MB 2.2 MB/s eta 0:00:06
+   ------------------ --------------------- 10.8/23.8 MB 2.2 MB/s eta 0:00:06
+   ------------------ --------------------- 10.9/23.8 MB 2.2 MB/s eta 0:00:06
+   ------------------ --------------------- 11.1/23.8 MB 2.2 MB/s eta 0:00:06
+   ------------------ --------------------- 11.2/23.8 MB 2.2 MB/s eta 0:00:06
+   ------------------ --------------------- 11.3/23.8 MB 2.2 MB/s eta 0:00:06
+   ------------------- -------------------- 11.5/23.8 MB 2.2 MB/s eta 0:00:06
+   ------------------- -------------------- 11.7/23.8 MB 2.2 MB/s eta 0:00:06
+   ------------------- -------------------- 11.9/23.8 MB 2.2 MB/s eta 0:00:06
+   -------------------- ------------------- 11.9/23.8 MB 2.2 MB/s eta 0:00:06
+   -------------------- ------------------- 12.1/23.8 MB 2.2 MB/s eta 0:00:06
+   -------------------- ------------------- 12.3/23.8 MB 2.4 MB/s eta 0:00:05
+   --------------------- ------------------ 12.5/23.8 MB 2.4 MB/s eta 0:00:05
+   --------------------- ------------------ 12.6/23.8 MB 2.5 MB/s eta 0:00:05
+   --------------------- ------------------ 12.7/23.8 MB 2.5 MB/s eta 0:00:05
+   --------------------- ------------------ 12.8/23.8 MB 2.5 MB/s eta 0:00:05
+   --------------------- ------------------ 13.0/23.8 MB 2.5 MB/s eta 0:00:05
+   ---------------------- ----------------- 13.1/23.8 MB 2.5 MB/s eta 0:00:05
+   ---------------------- ----------------- 13.2/23.8 MB 2.5 MB/s eta 0:00:05
+   ---------------------- ----------------- 13.3/23.8 MB 2.5 MB/s eta 0:00:05
+   ---------------------- ----------------- 13.4/23.8 MB 2.5 MB/s eta 0:00:05
+   ---------------------- ----------------- 13.5/23.8 MB 2.5 MB/s eta 0:00:05
+   ---------------------- ----------------- 13.6/23.8 MB 2.5 MB/s eta 0:00:05
+   ----------------------- ---------------- 13.7/23.8 MB 2.5 MB/s eta 0:00:05
+   ----------------------- ---------------- 13.9/23.8 MB 2.5 MB/s eta 0:00:04
+   ----------------------- ---------------- 14.0/23.8 MB 2.5 MB/s eta 0:00:04
+   ----------------------- ---------------- 14.1/23.8 MB 2.5 MB/s eta 0:00:04
+   ------------------------ --------------- 14.3/23.8 MB 2.5 MB/s eta 0:00:04
+   ------------------------ --------------- 14.4/23.8 MB 2.5 MB/s eta 0:00:04
+   ------------------------ --------------- 14.6/23.8 MB 2.5 MB/s eta 0:00:04
+   ------------------------ --------------- 14.7/23.8 MB 2.5 MB/s eta 0:00:04
+   ------------------------ --------------- 14.9/23.8 MB 2.6 MB/s eta 0:00:04
+   ------------------------- -------------- 15.0/23.8 MB 2.6 MB/s eta 0:00:04
+   ------------------------- -------------- 15.2/23.8 MB 2.8 MB/s eta 0:00:04
+   ------------------------- -------------- 15.4/23.8 MB 2.8 MB/s eta 0:00:04
+   -------------------------- ------------- 15.5/23.8 MB 2.7 MB/s eta 0:00:04
+   -------------------------- ------------- 15.7/23.8 MB 2.8 MB/s eta 0:00:03
+   -------------------------- ------------- 15.7/23.8 MB 2.8 MB/s eta 0:00:03
+   -------------------------- ------------- 15.9/23.8 MB 2.8 MB/s eta 0:00:03
+   -------------------------- ------------- 15.9/23.8 MB 2.7 MB/s eta 0:00:03
+   -------------------------- ------------- 16.0/23.8 MB 2.7 MB/s eta 0:00:03
+   -------------------------- ------------- 16.0/23.8 MB 2.7 MB/s eta 0:00:03
+   -------------------------- ------------- 16.0/23.8 MB 2.7 MB/s eta 0:00:03
+   -------------------------- ------------- 16.0/23.8 MB 2.7 MB/s eta 0:00:03
+   --------------------------- ------------ 16.2/23.8 MB 2.6 MB/s eta 0:00:03
+   --------------------------- ------------ 16.2/23.8 MB 2.6 MB/s eta 0:00:03
+   --------------------------- ------------ 16.3/23.8 MB 2.7 MB/s eta 0:00:03
+   --------------------------- ------------ 16.3/23.8 MB 2.7 MB/s eta 0:00:03
+   --------------------------- ------------ 16.4/23.8 MB 2.6 MB/s eta 0:00:03
+   --------------------------- ------------ 16.5/23.8 MB 2.6 MB/s eta 0:00:03
+   --------------------------- ------------ 16.6/23.8 MB 2.6 MB/s eta 0:00:03
+   --------------------------- ------------ 16.7/23.8 MB 2.6 MB/s eta 0:00:03
+   ---------------------------- ----------- 16.8/23.8 MB 2.6 MB/s eta 0:00:03
+   ---------------------------- ----------- 16.8/23.8 MB 2.6 MB/s eta 0:00:03
+   ---------------------------- ----------- 16.9/23.8 MB 2.6 MB/s eta 0:00:03
+   ---------------------------- ----------- 17.0/23.8 MB 2.6 MB/s eta 0:00:03
+   ---------------------------- ----------- 17.0/23.8 MB 2.5 MB/s eta 0:00:03
+   ---------------------------- ----------- 17.2/23.8 MB 2.5 MB/s eta 0:00:03
+   ----------------------------- ---------- 17.3/23.8 MB 2.5 MB/s eta 0:00:03
+   ----------------------------- ---------- 17.5/23.8 MB 2.5 MB/s eta 0:00:03
+   ----------------------------- ---------- 17.6/23.8 MB 2.5 MB/s eta 0:00:03
+   ----------------------------- ---------- 17.8/23.8 MB 2.5 MB/s eta 0:00:03
+   ------------------------------ --------- 17.9/23.8 MB 2.5 MB/s eta 0:00:03
+   ------------------------------ --------- 18.0/23.8 MB 2.5 MB/s eta 0:00:03
+   ------------------------------ --------- 18.2/23.8 MB 2.5 MB/s eta 0:00:03
+   ------------------------------ --------- 18.4/23.8 MB 2.5 MB/s eta 0:00:03
+   ------------------------------- -------- 18.5/23.8 MB 2.5 MB/s eta 0:00:03
+   ------------------------------- -------- 18.6/23.8 MB 2.5 MB/s eta 0:00:03
+   ------------------------------- -------- 18.8/23.8 MB 2.5 MB/s eta 0:00:02
+   ------------------------------- -------- 19.0/23.8 MB 2.5 MB/s eta 0:00:02
+   -------------------------------- ------- 19.1/23.8 MB 2.5 MB/s eta 0:00:02
+   -------------------------------- ------- 19.2/23.8 MB 2.5 MB/s eta 0:00:02
+   -------------------------------- ------- 19.4/23.8 MB 2.5 MB/s eta 0:00:02
+   -------------------------------- ------- 19.6/23.8 MB 2.5 MB/s eta 0:00:02
+   --------------------------------- ------ 19.8/23.8 MB 2.5 MB/s eta 0:00:02
+   --------------------------------- ------ 20.0/23.8 MB 2.5 MB/s eta 0:00:02
+   --------------------------------- ------ 20.2/23.8 MB 2.5 MB/s eta 0:00:02
+   ---------------------------------- ----- 20.3/23.8 MB 2.6 MB/s eta 0:00:02
+   ---------------------------------- ----- 20.5/23.8 MB 2.5 MB/s eta 0:00:02
+   ---------------------------------- ----- 20.5/23.8 MB 2.5 MB/s eta 0:00:02
+   ---------------------------------- ----- 20.7/23.8 MB 2.6 MB/s eta 0:00:02
+   ---------------------------------- ----- 20.8/23.8 MB 2.6 MB/s eta 0:00:02
+   ----------------------------------- ---- 21.0/23.8 MB 2.7 MB/s eta 0:00:02
+   ----------------------------------- ---- 21.1/23.8 MB 2.7 MB/s eta 0:00:01
+   ----------------------------------- ---- 21.2/23.8 MB 2.7 MB/s eta 0:00:01
+   ----------------------------------- ---- 21.4/23.8 MB 2.7 MB/s eta 0:00:01
+   ------------------------------------ --- 21.5/23.8 MB 2.7 MB/s eta 0:00:01
+   ------------------------------------ --- 21.6/23.8 MB 2.7 MB/s eta 0:00:01
+   ------------------------------------ --- 21.8/23.8 MB 2.7 MB/s eta 0:00:01
+   ------------------------------------- -- 22.1/23.8 MB 2.7 MB/s eta 0:00:01
+   ------------------------------------- -- 22.2/23.8 MB 2.7 MB/s eta 0:00:01
+   ------------------------------------- -- 22.4/23.8 MB 2.7 MB/s eta 0:00:01
+   ------------------------------------- -- 22.5/23.8 MB 2.7 MB/s eta 0:00:01
+   -------------------------------------- - 22.8/23.8 MB 2.8 MB/s eta 0:00:01
+   -------------------------------------- - 23.0/23.8 MB 2.8 MB/s eta 0:00:01
+   -------------------------------------- - 23.2/23.8 MB 2.8 MB/s eta 0:00:01
+   ---------------------------------------  23.3/23.8 MB 2.8 MB/s eta 0:00:01
+   ---------------------------------------  23.5/23.8 MB 2.8 MB/s eta 0:00:01
+   ---------------------------------------  23.6/23.8 MB 2.8 MB/s eta 0:00:01
+   ---------------------------------------  23.8/23.8 MB 2.8 MB/s eta 0:00:01
+   ---------------------------------------  23.8/23.8 MB 2.8 MB/s eta 0:00:01
+   ---------------------------------------  23.8/23.8 MB 2.8 MB/s eta 0:00:01
+   ---------------------------------------  23.8/23.8 MB 2.8 MB/s eta 0:00:01
+   ---------------------------------------- 23.8/23.8 MB 2.7 MB/s eta 0:00:00
+Downloading pyproj-3.7.2-cp311-cp311-win_amd64.whl (6.3 MB)
+   ---------------------------------------- 0.0/6.3 MB ? eta -:--:--
+   - -------------------------------------- 0.2/6.3 MB 3.7 MB/s eta 0:00:02
+   -- ------------------------------------- 0.4/6.3 MB 4.8 MB/s eta 0:00:02
+   --- ------------------------------------ 0.6/6.3 MB 4.1 MB/s eta 0:00:02
+   ---- ----------------------------------- 0.7/6.3 MB 3.9 MB/s eta 0:00:02
+   ----- ---------------------------------- 0.9/6.3 MB 3.8 MB/s eta 0:00:02
+   ------ --------------------------------- 1.0/6.3 MB 3.7 MB/s eta 0:00:02
+   ------- -------------------------------- 1.2/6.3 MB 3.6 MB/s eta 0:00:02
+   --------- ------------------------------ 1.4/6.3 MB 3.8 MB/s eta 0:00:02
+   ---------- ----------------------------- 1.6/6.3 MB 3.8 MB/s eta 0:00:02
+   ----------- ---------------------------- 1.8/6.3 MB 3.8 MB/s eta 0:00:02
+   ------------ --------------------------- 2.0/6.3 MB 4.1 MB/s eta 0:00:02
+   -------------- ------------------------- 2.2/6.3 MB 4.1 MB/s eta 0:00:01
+   --------------- ------------------------ 2.4/6.3 MB 3.9 MB/s eta 0:00:01
+   --------------- ------------------------ 2.5/6.3 MB 3.8 MB/s eta 0:00:02
+   ---------------- ----------------------- 2.7/6.3 MB 3.8 MB/s eta 0:00:01
+   ------------------ --------------------- 2.8/6.3 MB 3.8 MB/s eta 0:00:01
+   ------------------ --------------------- 3.0/6.3 MB 3.7 MB/s eta 0:00:01
+   ------------------- -------------------- 3.1/6.3 MB 3.7 MB/s eta 0:00:01
+   -------------------- ------------------- 3.3/6.3 MB 3.7 MB/s eta 0:00:01
+   ---------------------- ----------------- 3.5/6.3 MB 3.8 MB/s eta 0:00:01
+   ---------------------- ----------------- 3.6/6.3 MB 3.7 MB/s eta 0:00:01
+   ------------------------ --------------- 3.9/6.3 MB 3.7 MB/s eta 0:00:01
+   -------------------------- ------------- 4.1/6.3 MB 3.8 MB/s eta 0:00:01
+   --------------------------- ------------ 4.3/6.3 MB 3.8 MB/s eta 0:00:01
+   ---------------------------- ----------- 4.6/6.3 MB 3.9 MB/s eta 0:00:01
+   ------------------------------ --------- 4.7/6.3 MB 3.9 MB/s eta 0:00:01
+   ------------------------------- -------- 4.9/6.3 MB 4.0 MB/s eta 0:00:01
+   -------------------------------- ------- 5.1/6.3 MB 4.0 MB/s eta 0:00:01
+   ---------------------------------- ----- 5.4/6.3 MB 4.0 MB/s eta 0:00:01
+   ----------------------------------- ---- 5.7/6.3 MB 4.1 MB/s eta 0:00:01
+   ------------------------------------ --- 5.8/6.3 MB 4.0 MB/s eta 0:00:01
+   ------------------------------------- -- 5.9/6.3 MB 4.0 MB/s eta 0:00:01
+   ---------------------------------------  6.2/6.3 MB 4.0 MB/s eta 0:00:01
+   ---------------------------------------  6.3/6.3 MB 4.0 MB/s eta 0:00:01
+   ---------------------------------------- 6.3/6.3 MB 3.9 MB/s eta 0:00:00
+Downloading pystac_core-1.15.2-py3-none-any.whl (117 kB)
+   ---------------------------------------- 0.0/117.3 kB ? eta -:--:--
+   -------------------------------------- - 112.6/117.3 kB 6.4 MB/s eta 0:00:01
+   ---------------------------------------- 117.3/117.3 kB 2.3 MB/s eta 0:00:00
+Downloading pytz-2026.3.post1-py2.py3-none-any.whl (508 kB)
+   ---------------------------------------- 0.0/508.3 kB ? eta -:--:--
+   --------------- ----------------------- 204.8/508.3 kB 13.0 MB/s eta 0:00:01
+   ---------------------------------- ----- 440.3/508.3 kB 5.5 MB/s eta 0:00:01
+   ---------------------------------------- 508.3/508.3 kB 4.0 MB/s eta 0:00:00
+Downloading wrapt-2.4.0-cp311-cp311-win_amd64.whl (96 kB)
+   ---------------------------------------- 0.0/96.3 kB ? eta -:--:--
+   ---------------------------------------- 96.3/96.3 kB 2.8 MB/s eta 0:00:00
+Downloading pystac_ext_classification-2.0.1-py3-none-any.whl (7.4 kB)
+Downloading pystac_ext_datacube-2.2.1-py3-none-any.whl (7.1 kB)
+Downloading pystac_ext_eo-1.1.1-py3-none-any.whl (7.7 kB)
+Downloading pystac_ext_file-2.1.1-py3-none-any.whl (5.8 kB)
+Downloading pystac_ext_grid-1.1.1-py3-none-any.whl (3.6 kB)
+Downloading pystac_ext_item_assets-1.0.1-py3-none-any.whl (3.7 kB)
 </pre></div>
 </div>
 </div>
