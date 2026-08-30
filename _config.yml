@@ -1,8 +1,10 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: My sample book
-author: The Jupyter Book Community
+# Informasi identitas buku
+title: Tugas Pembelajaran Sains Data
+author: Fahdimas Akmal
+copyright: "2026, Fahdimas Akmal"
 logo: logo.png
 
 # Force re-execution of notebooks on each build.
