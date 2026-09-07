@@ -2,5 +2,4 @@ format: jb-book
 root: intro
 chapters:
   - file: Materi/Polutan
-  - file: Materi/Polusi_bangkalan
   - file: Materi/Tugas2
