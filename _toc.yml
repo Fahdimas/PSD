@@ -1,7 +1,6 @@
 format: jb-book
 root: intro
 chapters:
-  - file: Materi/Polutan
-  - file: Materi/Tugas123
-  - file: Materi/Fix1
-  - file: Materi/Fix2
+  - file: Materi/TugasFix1
+  - file: Materi/TugasFix2
+  - file: Materi/TugasFix3
