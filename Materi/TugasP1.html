@@ -1184,60 +1184,64 @@ File ekstraksi NO2_Kwanyar_TSFEL.csv sudah tersimpan.
 </ol>
 <div class="math notranslate nohighlight">
 \[F(n) = \sqrt{\frac{1}{N} \sum_{k=1}^{N} [y(k) - y_n(k)]^2} \propto n^\alpha\]</div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   $F(n)$: Fungsi fluktuasi rata-rata akar kuadrat
-*   $y(k)$: Deret kumulatif dari sinyal polusi
-*   $y_n(k)$: Garis regresi tren lokal pada jendela skala $n$
-*   $\alpha$: Nilai DFA (eksponen yang dihasilkan)
-</pre></div>
-</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(F(n)\)</span>: Fungsi fluktuasi rata-rata akar kuadrat</p></li>
+<li><p><span class="math notranslate nohighlight">\(y(k)\)</span>: Deret kumulatif dari sinyal polusi</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_n(k)\)</span>: Garis regresi tren lokal pada jendela skala <span class="math notranslate nohighlight">\(n\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span>: Nilai DFA (eksponen yang dihasilkan)</p></li>
+</ul>
 <ol class="arabic simple" start="64">
 <li><p><strong>higuchi_fractal_dimension</strong>: Menghitung dimensi fraktal <span class="math notranslate nohighlight">\(D\)</span> dari perkiraan panjang kurva deret waktu polusi <span class="math notranslate nohighlight">\(L(k)\)</span> di berbagai interval waktu <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[L(k) \propto k^{-D}\]</div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   $L(k)$: Panjang geometris kurva deret waktu
-*   $k$: Jeda interval waktu observasi
-*   $D$: Nilai Dimensi Fraktal Higuchi
-</pre></div>
-</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(L(k)\)</span>: Panjang geometris kurva deret waktu</p></li>
+<li><p><span class="math notranslate nohighlight">\(k\)</span>: Jeda interval waktu observasi</p></li>
+<li><p><span class="math notranslate nohighlight">\(D\)</span>: Nilai Dimensi Fraktal Higuchi</p></li>
+</ul>
 <ol class="arabic" start="65">
 <li><p><strong>hurst_exponent</strong>: Mengukur sifat memori jangka panjang polusi (apakah polusi terus naik, atau berbalik turun).</p>
 <div class="math notranslate nohighlight">
 \[\mathbb{E}\left[\frac{R(n)}{S(n)}\right] = C n^H\]</div>
+</li>
+</ol>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(R(n)\)</span>: Rentang jangkauan (nilai maksimal dikurangi minimal) data kumulatif</p></li>
 <li><p><span class="math notranslate nohighlight">\(S(n)\)</span>: Standar deviasi data dalam skala jendela pengamatan <span class="math notranslate nohighlight">\(n\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(n\)</span>: Lebar rentang waktu pengamatan</p></li>
 <li><p><span class="math notranslate nohighlight">\(H\)</span>: Hurst Exponent</p></li>
 </ul>
-</li>
+<ol class="arabic" start="66">
 <li><p><strong>maximum_fractal_length</strong>: Menghitung batas ukuran segmen skala log-log plot maksimal sebelum data tersebut kehilangan karakterisik fraktalnya.</p>
 <div class="math notranslate nohighlight">
 \[MFL = \arg\max_{n} (\text{Linearitas Log-Log Plot } L(n))\]</div>
+</li>
+</ol>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(MFL\)</span>: Maximum Fractal Length</p></li>
 <li><p><span class="math notranslate nohighlight">\(n\)</span>: Skala interval pengamatan</p></li>
 </ul>
-</li>
+<ol class="arabic simple" start="67">
 <li><p><strong>mse (Multiscale Entropy)</strong>: Entropi Sampel (<span class="math notranslate nohighlight">\(SampEn\)</span>) yang dihitung pada deret waktu yang sudah diturunkan resolusinya (dirata-ratakan) dalam skala <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[SampEn(y^{(\tau)}) = -\ln \frac{A}{B}\]</div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   $SampEn$: Sample Entropy (entropi sampel)
-*   $y^{(\tau)}$: Sinyal yang telah diskalakan dengan merata-ratakan setiap titik sejauh skala $\tau$
-*   $A, B$: Jumlah pasangan *template* sinyal yang masih mirip setelah diperpanjang satu titik observasi
-</pre></div>
-</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(SampEn\)</span>: Sample Entropy (entropi sampel)</p></li>
+<li><p><span class="math notranslate nohighlight">\(y^{(\tau)}\)</span>: Sinyal yang telah diskalakan dengan merata-ratakan setiap titik sejauh skala <span class="math notranslate nohighlight">\(\tau\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(A, B\)</span>: Jumlah pasangan <em>template</em> sinyal yang masih mirip setelah diperpanjang satu titik observasi</p></li>
+</ul>
 <ol class="arabic simple" start="68">
 <li><p><strong>petrosian_fractal_dimension</strong>: Estimasi dimensi fraktal berbasis jumlah pembalikan arah (<span class="math notranslate nohighlight">\(N_{\Delta}\)</span>) sinyal polusi.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[PFD = \frac{\log_{10}(N)}{\log_{10}(N) + \log_{10}\left(\frac{N}{N + 0.4N_{\Delta}}\right)}\]</div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   $PFD$: Petrosian Fractal Dimension
-*   $N$: Total baris data deret waktu
-*   $N_{\Delta}$: Jumlah perubahan tanda (naik $\rightarrow$ turun, atau turun $\rightarrow$ naik) dari turunan nilai polusi
-</pre></div>
-</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(PFD\)</span>: Petrosian Fractal Dimension</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Total baris data deret waktu</p></li>
+<li><p><span class="math notranslate nohighlight">\(N_{\Delta}\)</span>: Jumlah perubahan tanda (naik <span class="math notranslate nohighlight">\(\rightarrow\)</span> turun, atau turun <span class="math notranslate nohighlight">\(\rightarrow\)</span> naik) dari turunan nilai polusi</p></li>
+</ul>
 </section>
 </section>
 
