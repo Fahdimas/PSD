@@ -376,6 +376,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muat-data-dan-pembersihan-outlier-missing-values">1. Muat Data dan Pembersihan (Outlier &amp; Missing Values)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imputasi-missing-value-dengan-interpolasi-waktu">2. Imputasi Missing Value dengan Interpolasi Waktu</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-polutan-tsfel">3. Ekstraksi Fitur Polutan (TSFEL)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-domain-21-fitur"><strong>1. Statistical Domain (21 Fitur)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-domain-15-fitur"><strong>2. Temporal Domain (15 Fitur)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-domain-26-fitur"><strong>3. Spectral Domain (26 Fitur)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fractal-domain-6-fitur"><strong>4. Fractal Domain (6 Fitur)</strong></a></li>
 </ul>
             </nav>
         </div>
@@ -610,6 +614,556 @@ File ekstraksi NO2_Kwanyar_TSFEL.csv sudah tersimpan.
 </div>
 </div>
 </section>
+<section id="statistical-domain-21-fitur">
+<h2><strong>1. Statistical Domain (21 Fitur)</strong><a class="headerlink" href="#statistical-domain-21-fitur" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>abs_energy</strong>: Total kuadrat dari seluruh nilai polusi.
+$<span class="math notranslate nohighlight">\(E = \sum_{i=1}^{N} x_i^2\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(E\)</span>: Energi absolut (Absolute Energy)</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data pengamatan</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi pada waktu ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>average_power</strong>: Rata-rata daya (energi per unit waktu) dari sinyal.
+$<span class="math notranslate nohighlight">\(P_{avg} = \frac{1}{N} \sum_{i=1}^{N} x_i^2\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P_{avg}\)</span>: Rata-rata daya polusi</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi pada waktu ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>calc_max</strong>: Nilai polusi paling tinggi dalam dataset.
+$<span class="math notranslate nohighlight">\(Max = \max(x_1, x_2, \dots, x_N)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Max\)</span>: Nilai puncak tertinggi (maksimum)</p></li>
+<li><p><span class="math notranslate nohighlight">\(x\)</span>: Deret data polusi</p></li>
+</ul>
+</li>
+<li><p><strong>calc_mean</strong>: Nilai rata-rata dari seluruh deret waktu.
+$<span class="math notranslate nohighlight">\(\mu = \frac{1}{N} \sum_{i=1}^{N} x_i\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span>: Nilai rata-rata (mean)</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi pada waktu ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>calc_median</strong>: Nilai tengah data saat diurutkan dari terkecil hingga terbesar.
+$<span class="math notranslate nohighlight">\(Median = x_{(N+1)/2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Median\)</span>: Nilai tengah kumpulan data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x\)</span>: Deret data polusi yang sudah diurutkan</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data (contoh rumus untuk <span class="math notranslate nohighlight">\(N\)</span> ganjil)</p></li>
+</ul>
+</li>
+<li><p><strong>calc_min</strong>: Nilai polusi paling rendah dalam dataset.
+$<span class="math notranslate nohighlight">\(Min = \min(x_1, x_2, \dots, x_N)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Min\)</span>: Nilai batas bawah (minimum)</p></li>
+<li><p><span class="math notranslate nohighlight">\(x\)</span>: Deret data polusi</p></li>
+</ul>
+</li>
+<li><p><strong>calc_std</strong>: Standar deviasi (penyebaran data dari rata-ratanya).
+$<span class="math notranslate nohighlight">\(\sigma = \sqrt{\frac{1}{N-1} \sum_{i=1}^{N} (x_i - \mu)^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span>: Standar deviasi</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi pada waktu ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span>: Nilai rata-rata polusi</p></li>
+</ul>
+</li>
+<li><p><strong>calc_var</strong>: Varians (kuadrat dari standar deviasi).
+$<span class="math notranslate nohighlight">\(\sigma^2 = \frac{1}{N-1} \sum_{i=1}^{N} (x_i - \mu)^2\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\sigma^2\)</span>: Varians</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi pada waktu ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span>: Nilai rata-rata polusi</p></li>
+</ul>
+</li>
+<li><p><strong>ecdf</strong>: Fungsi Distribusi Kumulatif Empiris. Menghitung proporsi data yang bernilai kurang dari atau sama dengan ambang batas.
+$<span class="math notranslate nohighlight">\(F(t) = \frac{1}{N} \sum_{i=1}^{N} I(x_i \le t)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(F(t)\)</span>: Probabilitas kumulatif pada ambang batas <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total data</p></li>
+<li><p><span class="math notranslate nohighlight">\(I\)</span>: Fungsi indikator (bernilai 1 jika <span class="math notranslate nohighlight">\(x_i \le t\)</span>, dan 0 jika sebaliknya)</p></li>
+<li><p><span class="math notranslate nohighlight">\(t\)</span>: Nilai ambang batas yang diuji</p></li>
+</ul>
+</li>
+<li><p><strong>ecdf_percentile</strong>: Menemukan nilai polusi pada batas proporsi kumulatif tertentu (misal persentil ke-20).
+$<span class="math notranslate nohighlight">\(P_p = \inf \{t : F(t) \ge p\}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P_p\)</span>: Nilai polusi pada persentil <span class="math notranslate nohighlight">\(p\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(F(t)\)</span>: Fungsi distribusi kumulatif ECDF</p></li>
+<li><p><span class="math notranslate nohighlight">\(p\)</span>: Persentase probabilitas sasaran (contoh: 0.20 untuk 20%)</p></li>
+</ul>
+</li>
+<li><p><strong>ecdf_percentile_count</strong>: Jumlah baris data yang nilainya jatuh di antara dua batas persentil.
+$<span class="math notranslate nohighlight">\(Count = \sum_{i=1}^{N} I(P_{bawah} \le x_i \le P_{atas})\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Count\)</span>: Jumlah baris data yang memenuhi syarat</p></li>
+<li><p><span class="math notranslate nohighlight">\(I\)</span>: Fungsi indikator</p></li>
+<li><p><span class="math notranslate nohighlight">\(P_{bawah}\)</span>: Nilai polusi di batas persentil bawah</p></li>
+<li><p><span class="math notranslate nohighlight">\(P_{atas}\)</span>: Nilai polusi di batas persentil atas</p></li>
+</ul>
+</li>
+<li><p><strong>ecdf_slope</strong>: Kemiringan garis antara dua batas persentil kurva ECDF.
+$<span class="math notranslate nohighlight">\(Slope = \frac{P_{atas} - P_{bawah}}{p_{atas} - p_{bawah}}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Slope\)</span>: Tingkat kemiringan ECDF</p></li>
+<li><p><span class="math notranslate nohighlight">\(P_{atas}, P_{bawah}\)</span>: Nilai polusi pada batas atas dan bawah</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_{atas}, p_{bawah}\)</span>: Probabilitas persentil atas dan bawah (contoh: 0.80 dan 0.20)</p></li>
+</ul>
+</li>
+<li><p><strong>entropy</strong>: Entropi Shannon dari distribusi frekuensi nilai polusi.
+$<span class="math notranslate nohighlight">\(H_{shannon} = -\sum_{i=1}^{K} p(x_i) \log_2 p(x_i)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_{shannon}\)</span>: Nilai entropi (keragaman informasi)</p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span>: Jumlah kelompok/bin nilai polusi yang unik</p></li>
+<li><p><span class="math notranslate nohighlight">\(p(x_i)\)</span>: Probabilitas (peluang) munculnya nilai <span class="math notranslate nohighlight">\(x_i\)</span> dalam dataset</p></li>
+</ul>
+</li>
+<li><p><strong>hist_mode</strong>: Nilai yang paling sering muncul (modus), didapat dari bin frekuensi tertinggi dalam histogram.
+$<span class="math notranslate nohighlight">\(Mode = \arg\max_{x} (f(x))\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Mode\)</span>: Nilai paling dominan (modus)</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x)\)</span>: Jumlah frekuensi kemunculan untuk rentang nilai <span class="math notranslate nohighlight">\(x\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>interq_range</strong>: Jarak interkuartil (selisih kuartil 3 dan kuartil 1).
+$<span class="math notranslate nohighlight">\(IQR = Q_3 - Q_1\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(IQR\)</span>: Interquartile Range</p></li>
+<li><p><span class="math notranslate nohighlight">\(Q_3\)</span>: Kuartil ketiga (persentil 75%)</p></li>
+<li><p><span class="math notranslate nohighlight">\(Q_1\)</span>: Kuartil pertama (persentil 25%)</p></li>
+</ul>
+</li>
+<li><p><strong>kurtosis</strong>: Derajat keruncingan (banyaknya ekor tebal/outlier) dari sebaran data.
+$<span class="math notranslate nohighlight">\(Kurtosis = \frac{1}{N} \sum_{i=1}^{N} \left(\frac{x_i - \mu}{\sigma}\right)^4\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Kurtosis\)</span>: Nilai keruncingan</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span>: Nilai rata-rata polusi</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span>: Standar deviasi</p></li>
+</ul>
+</li>
+<li><p><strong>mean_abs_deviation</strong>: Rata-rata dari nilai mutlak selisih setiap data dengan rata-ratanya.
+$<span class="math notranslate nohighlight">\(MAD_{mean} = \frac{1}{N} \sum_{i=1}^{N} |x_i - \mu|\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(MAD_{mean}\)</span>: Mean Absolute Deviation</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span>: Nilai rata-rata polusi</p></li>
+</ul>
+</li>
+<li><p><strong>median_abs_deviation</strong>: Nilai tengah (median) dari mutlak selisih setiap data dengan median datanya.
+$<span class="math notranslate nohighlight">\(MAD_{median} = \text{median}(|x_i - Median|)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(MAD_{median}\)</span>: Median Absolute Deviation</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi</p></li>
+<li><p><span class="math notranslate nohighlight">\(Median\)</span>: Nilai tengah dari keseluruhan data</p></li>
+</ul>
+</li>
+<li><p><strong>pk_pk_distance</strong>: Jarak dari puncak ke puncak ekstrem (rentang absolut maksimum).
+$<span class="math notranslate nohighlight">\(Distance_{pk} = \max(x) - \min(x)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Distance_{pk}\)</span>: Jarak Peak-to-Peak</p></li>
+<li><p><span class="math notranslate nohighlight">\(\max(x)\)</span>: Nilai polusi tertinggi</p></li>
+<li><p><span class="math notranslate nohighlight">\(\min(x)\)</span>: Nilai polusi terendah</p></li>
+</ul>
+</li>
+<li><p><strong>rms</strong>: Akar dari nilai rata-rata kuadrat (Root Mean Square).
+$<span class="math notranslate nohighlight">\(RMS = \sqrt{\frac{1}{N} \sum_{i=1}^{N} x_i^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(RMS\)</span>: Root Mean Square</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi</p></li>
+</ul>
+</li>
+<li><p><strong>skewness</strong>: Derajat kemencengan (ketidaksimetrisan) distribusi data polusi.
+$<span class="math notranslate nohighlight">\(Skewness = \frac{1}{N} \sum_{i=1}^{N} \left(\frac{x_i - \mu}{\sigma}\right)^3\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Skewness\)</span>: Nilai kemencengan</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span>: Rata-rata polusi</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span>: Standar deviasi</p></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+</section>
+<section id="temporal-domain-15-fitur">
+<h2><strong>2. Temporal Domain (15 Fitur)</strong><a class="headerlink" href="#temporal-domain-15-fitur" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple" start="22">
+<li><p><strong>auc</strong>: Total luas area pergerakan data di bawah kurva (integrasi trapesium).
+$<span class="math notranslate nohighlight">\(AUC = \sum_{i=1}^{N-1} \frac{(x_i + x_{i+1})}{2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(AUC\)</span>: Area Under Curve</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah titik waktu pengamatan</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai polusi pada waktu ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x_{i+1}\)</span>: Nilai polusi pada waktu berikutnya</p></li>
+</ul>
+</li>
+<li><p><strong>autocorr</strong>: Autokorelasi, korelasi sinyal terhadap dirinya sendiri pada jeda waktu (lag) tertunda.
+$<span class="math notranslate nohighlight">\(R(k) = \frac{\sum_{i=1}^{N-k} (x_i - \mu)(x_{i+k} - \mu)}{\sum_{i=1}^{N} (x_i - \mu)^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(R(k)\)</span>: Koefisien autokorelasi</p></li>
+<li><p><span class="math notranslate nohighlight">\(k\)</span>: Jumlah jeda waktu (lag)</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai polusi pada waktu ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span>: Rata-rata polusi keseluruhan</p></li>
+</ul>
+</li>
+<li><p><strong>calc_centroid</strong>: Pusat massa waktu dari kurva polusi. Mengukur pada waktu ke-berapa polusi paling terkonsentrasi.
+$<span class="math notranslate nohighlight">\(t_c = \frac{\sum_{i=1}^{N} i \cdot x_i}{\sum_{i=1}^{N} x_i}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(t_c\)</span>: Temporal centroid (pusat massa waktu)</p></li>
+<li><p><span class="math notranslate nohighlight">\(i\)</span>: Indeks urutan waktu</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai polusi pada indeks ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>distance</strong>: Total perpindahan absolut yang dilewati oleh sinyal dari awal hingga akhir.
+$<span class="math notranslate nohighlight">\(D_{seq} = \sum_{i=1}^{N-1} |x_{i+1} - x_i|\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(D_{seq}\)</span>: Jarak lintasan sekuensial</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_{i+1} - x_i\)</span>: Selisih lonjakan polusi antar waktu</p></li>
+</ul>
+</li>
+<li><p><strong>lempel_ziv</strong>: Nilai kompleksitas menggunakan algoritma kompresi Lempel-Ziv.
+$<span class="math notranslate nohighlight">\(LZ = c(N) \left( \frac{\log_2 N}{N} \right)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(LZ\)</span>: Kompleksitas Lempel-Ziv</p></li>
+<li><p><span class="math notranslate nohighlight">\(c(N)\)</span>: Jumlah pola urutan biner unik yang ditemukan dalam data</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Total panjang data</p></li>
+</ul>
+</li>
+<li><p><strong>mean_abs_diff</strong>: Rata-rata dari nilai absolut lonjakan antar waktu.
+$<span class="math notranslate nohighlight">\(MAD_{diff} = \frac{1}{N-1} \sum_{i=1}^{N-1} |x_{i+1} - x_i|\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(MAD_{diff}\)</span>: Mean Absolute Difference</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah titik waktu</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_{i+1} - x_i\)</span>: Perbedaan nilai berurutan</p></li>
+</ul>
+</li>
+<li><p><strong>mean_diff</strong>: Rata-rata murni dari selisih antar data (termasuk nilai minus).
+$<span class="math notranslate nohighlight">\(M_{diff} = \frac{1}{N-1} \sum_{i=1}^{N-1} (x_{i+1} - x_i)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(M_{diff}\)</span>: Mean Difference</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_{i+1} - x_i\)</span>: Perbedaan mentah nilai polusi berurutan</p></li>
+</ul>
+</li>
+<li><p><strong>median_abs_diff</strong>: Nilai tengah (median) dari lonjakan absolut antar waktu.
+$<span class="math notranslate nohighlight">\(MedAD_{diff} = \text{median}(|x_{i+1} - x_i|)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(MedAD_{diff}\)</span>: Median Absolute Difference</p></li>
+<li><p><span class="math notranslate nohighlight">\(|x_{i+1} - x_i|\)</span>: Kumpulan nilai absolut selisih berurutan</p></li>
+</ul>
+</li>
+<li><p><strong>median_diff</strong>: Nilai tengah dari lonjakan mentah berurutan.
+$<span class="math notranslate nohighlight">\(Med_{diff} = \text{median}(x_{i+1} - x_i)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Med_{diff}\)</span>: Median Difference</p></li>
+</ul>
+</li>
+<li><p><strong>negative_turning</strong>: Jumlah kali kurva polusi membentuk lembah (lokal minimum).
+$<span class="math notranslate nohighlight">\(Turns_{-} = \sum_{i=2}^{N-1} I(x_{i-1} &gt; x_i &lt; x_{i+1})\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Turns_{-}\)</span>: Jumlah titik balik negatif</p></li>
+<li><p><span class="math notranslate nohighlight">\(I\)</span>: Fungsi indikator yang bernilai 1 jika <span class="math notranslate nohighlight">\(x_i\)</span> lebih kecil dari data sebelum dan sesudahnya</p></li>
+</ul>
+</li>
+<li><p><strong>neighbourhood_peaks</strong>: Jumlah puncak dominan relatif terhadap data di sekitarnya.
+$<span class="math notranslate nohighlight">\(Peaks = \sum_{i} I(\text{is\_peak}(x_i, threshold))\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Peaks\)</span>: Jumlah puncak lokal yang valid</p></li>
+<li><p><span class="math notranslate nohighlight">\(threshold\)</span>: Ambang batas minimum kelonjakan puncak</p></li>
+</ul>
+</li>
+<li><p><strong>positive_turning</strong>: Jumlah kali kurva polusi membentuk gunung (lokal maksimum).
+$<span class="math notranslate nohighlight">\(Turns_{+} = \sum_{i=2}^{N-1} I(x_{i-1} &lt; x_i &gt; x_{i+1})\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Turns_{+}\)</span>: Jumlah titik balik positif</p></li>
+<li><p><span class="math notranslate nohighlight">\(I\)</span>: Fungsi indikator yang bernilai 1 jika <span class="math notranslate nohighlight">\(x_i\)</span> lebih besar dari data sebelum dan sesudahnya</p></li>
+</ul>
+</li>
+<li><p><strong>slope</strong>: Nilai kemiringan (<span class="math notranslate nohighlight">\(m\)</span>) dari regresi linier keseluruhan tren waktu polusi.
+$<span class="math notranslate nohighlight">\(Slope = \frac{N \sum (i \cdot x_i) - \sum i \sum x_i}{N \sum i^2 - (\sum i)^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Slope\)</span>: Kemiringan tren waktu</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Total titik pengamatan</p></li>
+<li><p><span class="math notranslate nohighlight">\(i\)</span>: Indeks waktu (variabel X pada regresi)</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai polusi (variabel Y pada regresi)</p></li>
+</ul>
+</li>
+<li><p><strong>sum_abs_diff</strong>: Total kumulatif dari seluruh selisih absolut lonjakan waktu ke waktu.
+$<span class="math notranslate nohighlight">\(SumDiff = \sum_{i=1}^{N-1} |x_{i+1} - x_i|\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(SumDiff\)</span>: Jumlah fluktuasi total</p></li>
+<li><p><span class="math notranslate nohighlight">\(|x_{i+1} - x_i|\)</span>: Selisih absolut data berurutan</p></li>
+</ul>
+</li>
+<li><p><strong>zero_cross</strong>: Jumlah titik waktu di mana polusi memotong rata-ratanya atau memotong nilai nol.
+$<span class="math notranslate nohighlight">\(ZC = \frac{1}{2} \sum_{i=1}^{N-1} |\text{sgn}(x_{i+1}) - \text{sgn}(x_i)|\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(ZC\)</span>: Zero Crossing Rate</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{sgn}\)</span>: Fungsi tanda (menghasilkan 1 jika positif, -1 jika negatif)</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai polusi yang sudah dikurangi rata-ratanya</p></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+</section>
+<section id="spectral-domain-26-fitur">
+<h2><strong>3. Spectral Domain (26 Fitur)</strong><a class="headerlink" href="#spectral-domain-26-fitur" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple" start="37">
+<li><p><strong>fundamental_frequency</strong>: Frekuensi dasar terendah yang memiliki magnitudo paling dominan.
+$<span class="math notranslate nohighlight">\(f_{fund} = \arg\max_{k&gt;0} |X(k)|\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f_{fund}\)</span>: Frekuensi fundamental</p></li>
+<li><p><span class="math notranslate nohighlight">\(X(k)\)</span>: Magnitudo spektrum (hasil FFT) pada indeks frekuensi ke-<span class="math notranslate nohighlight">\(k\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>human_range_energy</strong>: Energi pada rentang pita frekuensi biologis tertentu.
+$<span class="math notranslate nohighlight">\(E_{human} = \sum_{f(k) \in [0.6, 2.5]} |X(k)|^2\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(E_{human}\)</span>: Total energi rentang manusia</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(k)\)</span>: Nilai frekuensi pada indeks ke-<span class="math notranslate nohighlight">\(k\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(|X(k)|^2\)</span>: Daya (power) pada frekuensi tersebut</p></li>
+</ul>
+</li>
+<li><p><strong>lpcc</strong>: <em>Linear Prediction Cepstral Coefficients</em>. Hasil ekstraksi amplop spektrum daya menggunakan filter prediktif linear.
+$<span class="math notranslate nohighlight">\(C_{lpcc} = \text{Cepstrum}(\text{LPC}(X))\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(C_{lpcc}\)</span>: Koefisien LPCC</p></li>
+<li><p><span class="math notranslate nohighlight">\(LPC(X)\)</span>: Pemodelan filter Linear Predictive Coding pada deret waktu <span class="math notranslate nohighlight">\(X\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>max_frequency</strong>: Indeks frekuensi yang menyimpan magnitudo energi paling tinggi.
+$<span class="math notranslate nohighlight">\(f_{max} = f(\arg\max_{k} |X(k)|^2)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f_{max}\)</span>: Frekuensi puncak maksimum</p></li>
+<li><p><span class="math notranslate nohighlight">\(|X(k)|^2\)</span>: Daya spektral di indeks ke-<span class="math notranslate nohighlight">\(k\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>max_power_spectrum</strong>: Besaran nilai daya energi tertinggi itu sendiri.
+$<span class="math notranslate nohighlight">\(P_{max} = \max_k (|X(k)|^2)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P_{max}\)</span>: Nilai daya spektral maksimum</p></li>
+<li><p><span class="math notranslate nohighlight">\(|X(k)|^2\)</span>: Energi daya spektral</p></li>
+</ul>
+</li>
+<li><p><strong>median_frequency</strong>: Frekuensi tengah yang membagi energi spektrum menjadi dua bagian sama besar.
+$<span class="math notranslate nohighlight">\(f_{med} : \sum_{k=1}^{med} |X(k)|^2 = \frac{1}{2} \sum_{k=1}^{K} |X(k)|^2\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f_{med}\)</span>: Median Frequency</p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span>: Jumlah total <em>bin</em> frekuensi</p></li>
+</ul>
+</li>
+<li><p><strong>mfcc</strong>: <em>Mel-Frequency Cepstral Coefficients</em>. Koefisien spektral dalam skala logaritmik Mel.
+$<span class="math notranslate nohighlight">\(C_m = \sum_{k=1}^{K} (\log S_k) \cos \left[ m \left( k - \frac{1}{2} \right) \frac{\pi}{K} \right]\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(C_m\)</span>: Koefisien MFCC ke-<span class="math notranslate nohighlight">\(m\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S_k\)</span>: Energi keluaran dari <em>filterbank</em> skala-Mel ke-<span class="math notranslate nohighlight">\(k\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span>: Total <em>filterbank</em></p></li>
+</ul>
+</li>
+<li><p><strong>power_bandwidth</strong>: Lebar pita frekuensi (Hz) yang menampung daya spektral utama.
+$<span class="math notranslate nohighlight">\(Band_{width} = f_{atas} - f_{bawah}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Band_{width}\)</span>: Lebar pita frekuensi</p></li>
+<li><p><span class="math notranslate nohighlight">\(f_{atas}, f_{bawah}\)</span>: Titik frekuensi atas dan bawah yang membatasi 99% energi</p></li>
+</ul>
+</li>
+<li><p><strong>spectral_centroid</strong>: Titik berat rata-rata frekuensi (Pusat massa spektrum).
+$<span class="math notranslate nohighlight">\(Centroid = \frac{\sum_{k} f(k)|X(k)|^2}{\sum_{k} |X(k)|^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Centroid\)</span>: Pusat massa spektral (dalam satuan Hz)</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(k)\)</span>: Nilai frekuensi</p></li>
+<li><p><span class="math notranslate nohighlight">\(|X(k)|^2\)</span>: Daya (bobot) pada frekuensi tersebut</p></li>
+</ul>
+</li>
+<li><p><strong>spectral_decrease</strong>: Tingkat kelandaian spektrum menuju frekuensi tinggi.
+$<span class="math notranslate nohighlight">\(Decrease = \frac{1}{\sum_{k=2}^{K} |X(k)|} \sum_{k=2}^{K} \frac{|X(k)| - |X(1)|}{k-1}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Decrease\)</span>: Indeks penurunan spektral</p></li>
+<li><p><span class="math notranslate nohighlight">\(|X(1)|\)</span>: Magnitudo spektrum di frekuensi dasar terendah</p></li>
+<li><p><span class="math notranslate nohighlight">\(|X(k)|\)</span>: Magnitudo di indeks ke-<span class="math notranslate nohighlight">\(k\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>spectral_distance</strong>: Jarak Euclidean antar bin spektrum daya berurutan.
+$<span class="math notranslate nohighlight">\(D_{spec} = \sqrt{\sum_{k} (|X_1(k)| - |X_2(k)|)^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(D_{spec}\)</span>: Spectral Distance</p></li>
+<li><p><span class="math notranslate nohighlight">\(X_1, X_2\)</span>: Spektrum frekuensi dari dua jendela waktu yang berbeda</p></li>
+</ul>
+</li>
+<li><p><strong>spectral_entropy</strong>: Entropi kerumitan sinyal frekuensi.
+$<span class="math notranslate nohighlight">\(H_{spec} = -\sum_{k} p_k \log_2 p_k \quad \text{dimana} \quad p_k = \frac{|X(k)|^2}{\sum |X(k)|^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_{spec}\)</span>: Spectral Entropy</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_k\)</span>: Rasio probabilitas (bobot energi) pada indeks frekuensi ke-<span class="math notranslate nohighlight">\(k\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>spectral_kurtosis</strong>: Derajat keruncingan kurva spektrum frekuensi (mengukur adanya lonjakan <em>outlier</em> spektral).
+$<span class="math notranslate nohighlight">\(Kurt_{spec} = \frac{\sum_{k} (f(k) - Centroid)^4 |X(k)|^2}{\left(\sum_{k} (f(k) - Centroid)^2 |X(k)|^2\right)^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Kurt_{spec}\)</span>: Spectral Kurtosis</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(k)\)</span>: Frekuensi</p></li>
+<li><p><span class="math notranslate nohighlight">\(Centroid\)</span>: Titik pusat spektrum</p></li>
+</ul>
+</li>
+<li><p><strong>spectral_positive_turning</strong>: Jumlah puncak lokal (gunung) di dalam sebaran domain frekuensi.
+$<span class="math notranslate nohighlight">\(Turns_{spec+} = \sum_{k=2}^{K-1} I(|X(k-1)| &lt; |X(k)| &gt; |X(k+1)|)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Turns_{spec+}\)</span>: Jumlah puncak spektral</p></li>
+<li><p><span class="math notranslate nohighlight">\(|X(k)|\)</span>: Magnitudo energi di bin ke-<span class="math notranslate nohighlight">\(k\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>spectral_roll_off</strong>: Titik frekuensi batas di mana 85% energi berada di bawahnya.
+$<span class="math notranslate nohighlight">\(f_c : \sum_{k=1}^{c} |X(k)|^2 = 0.85 \sum_{k=1}^{K} |X(k)|^2\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f_c\)</span>: Frekuensi Roll-Off</p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span>: Total bin frekuensi</p></li>
+</ul>
+</li>
+<li><p><strong>spectral_roll_on</strong>: Titik frekuensi terendah di mana 15% energi berada di bawahnya (batas bawah pendar energi).
+$<span class="math notranslate nohighlight">\(f_{on} : \sum_{k=1}^{on} |X(k)|^2 = 0.15 \sum_{k=1}^{K} |X(k)|^2\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f_{on}\)</span>: Frekuensi Roll-On</p></li>
+</ul>
+</li>
+<li><p><strong>spectral_skewness</strong>: Derajat kemencengan kurva sebaran magnitudo spektrum.
+$<span class="math notranslate nohighlight">\(Skew_{spec} = \frac{\sum_{k} (f(k) - Centroid)^3 |X(k)|^2}{\left(\sum_{k} (f(k) - Centroid)^2 |X(k)|^2\right)^{1.5}}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Skew_{spec}\)</span>: Spectral Skewness</p></li>
+<li><p><span class="math notranslate nohighlight">\(Centroid\)</span>: Pusat spektrum rata-rata</p></li>
+</ul>
+</li>
+<li><p><strong>spectral_slope</strong>: Kemiringan garis regresi dari pola penyebaran spektrum secara keseluruhan.
+$<span class="math notranslate nohighlight">\(Slope_{spec} = \frac{K \sum (f(k) \cdot |X(k)|) - \sum f(k) \sum |X(k)|}{K \sum f(k)^2 - (\sum f(k))^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Slope_{spec}\)</span>: Kemiringan spektrum (mewakili apakah sinyal didominasi frekuensi rendah atau tinggi)</p></li>
+</ul>
+</li>
+<li><p><strong>spectral_spread</strong>: Standar deviasi (lebar sebaran energi) di sekitar <em>Spectral Centroid</em>.
+$<span class="math notranslate nohighlight">\(Spread = \sqrt{\frac{\sum_k (f(k) - Centroid)^2 |X(k)|^2}{\sum_k |X(k)|^2}}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Spread\)</span>: Persebaran spektral</p></li>
+<li><p><span class="math notranslate nohighlight">\(Centroid\)</span>: Titik berat frekuensi</p></li>
+</ul>
+</li>
+<li><p><strong>spectral_variation</strong>: Jumlah fluktuasi perbedaan wujud spektrum dari waktu ke waktu.
+$<span class="math notranslate nohighlight">\(Var_{spec} = \sum_{k} ||X_t(k)| - |X_{t-1}(k)||\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Var_{spec}\)</span>: Variasi spektral</p></li>
+<li><p><span class="math notranslate nohighlight">\(X_t\)</span>: Spektrum frekuensi di waktu saat ini</p></li>
+<li><p><span class="math notranslate nohighlight">\(X_{t-1}\)</span>: Spektrum frekuensi di jendela waktu sebelumnya</p></li>
+</ul>
+</li>
+<li><p><strong>spectrogram_mean_coeff</strong>: Nilai rata-rata dari seluruh sel matriks STFT (<em>Short-Time Fourier Transform</em>).
+$<span class="math notranslate nohighlight">\(Mean_{STFT} = \frac{1}{T \cdot K} \sum_{t=1}^{T} \sum_{k=1}^{K} |S(t, k)|\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Mean_{STFT}\)</span>: Rata-rata koefisien spektrogram</p></li>
+<li><p><span class="math notranslate nohighlight">\(T\)</span>: Total blok/jendela waktu</p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span>: Total bin frekuensi</p></li>
+<li><p><span class="math notranslate nohighlight">\(S(t, k)\)</span>: Koefisien STFT pada waktu <span class="math notranslate nohighlight">\(t\)</span> frekuensi <span class="math notranslate nohighlight">\(k\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>wavelet_abs_mean</strong>: Rata-rata dari nilai absolut koefisien Transformasi Wavelet Diskrit.
+$<span class="math notranslate nohighlight">\(W_{abs} = \frac{1}{J} \sum_{j=1}^{J} |C_j|\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(W_{abs}\)</span>: Rata-rata mutlak wavelet</p></li>
+<li><p><span class="math notranslate nohighlight">\(J\)</span>: Jumlah total koefisien wavelet yang dihasilkan</p></li>
+<li><p><span class="math notranslate nohighlight">\(C_j\)</span>: Nilai koefisien wavelet ke-<span class="math notranslate nohighlight">\(j\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>wavelet_energy</strong>: Total energi dari kumpulan koefisien wavelet.
+$<span class="math notranslate nohighlight">\(W_{energy} = \sum_{j=1}^{J} C_j^2\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(W_{energy}\)</span>: Energi total wavelet</p></li>
+<li><p><span class="math notranslate nohighlight">\(C_j\)</span>: Koefisien wavelet</p></li>
+</ul>
+</li>
+<li><p><strong>wavelet_entropy</strong>: Entropi kerumitan informasi di dalam set koefisien wavelet.
+$<span class="math notranslate nohighlight">\(H_{wavelet} = -\sum_{j=1}^{J} p_j \log_2 p_j\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_{wavelet}\)</span>: Entropi wavelet</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_j\)</span>: Energi koefisien yang dinormalisasi (<span class="math notranslate nohighlight">\(C_j^2 / \sum C_i^2\)</span>)</p></li>
+</ul>
+</li>
+<li><p><strong>wavelet_std</strong>: Standar deviasi dari sebaran fluktuasi koefisien wavelet.
+$<span class="math notranslate nohighlight">\(W_{std} = \sqrt{\frac{1}{J-1} \sum_{j=1}^{J} (C_j - \mu_w)^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(W_{std}\)</span>: Standar deviasi wavelet</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu_w\)</span>: Nilai rata-rata dari seluruh koefisien wavelet</p></li>
+</ul>
+</li>
+<li><p><strong>wavelet_var</strong>: Varians dari penyebaran koefisien wavelet.
+$<span class="math notranslate nohighlight">\(W_{var} = \frac{1}{J-1} \sum_{j=1}^{J} (C_j - \mu_w)^2\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(W_{var}\)</span>: Varians wavelet</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu_w\)</span>: Rata-rata koefisien wavelet</p></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+</section>
+<section id="fractal-domain-6-fitur">
+<h2><strong>4. Fractal Domain (6 Fitur)</strong><a class="headerlink" href="#fractal-domain-6-fitur" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple" start="63">
+<li><p><strong>dfa (Detrended Fluctuation Analysis)</strong>: Eksponen fraktal berdasarkan fungsi fluktuasi <span class="math notranslate nohighlight">\(F(n)\)</span> yang sudah dihapus tren lokalnya (<span class="math notranslate nohighlight">\(y_n(k)\)</span>).
+$<span class="math notranslate nohighlight">\(F(n) = \sqrt{\frac{1}{N} \sum_{k=1}^{N} [y(k) - y_n(k)]^2} \propto n^\alpha\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(F(n)\)</span>: Fungsi fluktuasi rata-rata akar kuadrat</p></li>
+<li><p><span class="math notranslate nohighlight">\(y(k)\)</span>: Deret kumulatif dari sinyal polusi</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_n(k)\)</span>: Garis regresi tren lokal pada jendela skala <span class="math notranslate nohighlight">\(n\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span>: Nilai DFA (eksponen yang dihasilkan)</p></li>
+</ul>
+</li>
+<li><p><strong>higuchi_fractal_dimension</strong>: Menghitung dimensi fraktal <span class="math notranslate nohighlight">\(D\)</span> dari perkiraan panjang kurva deret waktu polusi <span class="math notranslate nohighlight">\(L(k)\)</span> di berbagai interval waktu <span class="math notranslate nohighlight">\(k\)</span>.
+$<span class="math notranslate nohighlight">\(L(k) \propto k^{-D}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(L(k)\)</span>: Panjang geometris kurva deret waktu</p></li>
+<li><p><span class="math notranslate nohighlight">\(k\)</span>: Jeda interval waktu observasi</p></li>
+<li><p><span class="math notranslate nohighlight">\(D\)</span>: Nilai Dimensi Fraktal Higuchi</p></li>
+</ul>
+</li>
+<li><p><strong>hurst_exponent</strong>: Mengukur sifat memori jangka panjang polusi (apakah polusi terus naik, atau berbalik turun).
+$<span class="math notranslate nohighlight">\(\mathbb{E}\left[\frac{R(n)}{S(n)}\right] = C n^H\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(R(n)\)</span>: Rentang jangkauan (nilai maksimal dikurangi minimal) data kumulatif</p></li>
+<li><p><span class="math notranslate nohighlight">\(S(n)\)</span>: Standar deviasi data dalam skala jendela pengamatan <span class="math notranslate nohighlight">\(n\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span>: Lebar rentang waktu pengamatan</p></li>
+<li><p><span class="math notranslate nohighlight">\(H\)</span>: Hurst Exponent</p></li>
+</ul>
+</li>
+<li><p><strong>maximum_fractal_length</strong>: Menghitung batas ukuran segmen skala log-log plot maksimal sebelum data tersebut kehilangan karakterisik fraktalnya.
+$<span class="math notranslate nohighlight">\(MFL = \arg\max_{n} (\text{Linearitas Log-Log Plot } L(n))\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(MFL\)</span>: Maximum Fractal Length</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span>: Skala interval pengamatan</p></li>
+</ul>
+</li>
+<li><p><strong>mse (Multiscale Entropy)</strong>: Entropi Sampel (<span class="math notranslate nohighlight">\(SampEn\)</span>) yang dihitung pada deret waktu yang sudah diturunkan resolusinya (dirata-ratakan) dalam skala <span class="math notranslate nohighlight">\(\tau\)</span>.
+$<span class="math notranslate nohighlight">\(SampEn(y^{(\tau)}) = -\ln \frac{A}{B}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(SampEn\)</span>: Sample Entropy (entropi sampel)</p></li>
+<li><p><span class="math notranslate nohighlight">\(y^{(\tau)}\)</span>: Sinyal yang telah diskalakan dengan merata-ratakan setiap titik sejauh skala <span class="math notranslate nohighlight">\(\tau\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(A, B\)</span>: Jumlah pasangan <em>template</em> sinyal yang masih mirip setelah diperpanjang satu titik observasi</p></li>
+</ul>
+</li>
+<li><p><strong>petrosian_fractal_dimension</strong>: Estimasi dimensi fraktal berbasis jumlah pembalikan arah (<span class="math notranslate nohighlight">\(N_{\Delta}\)</span>) sinyal polusi.
+$<span class="math notranslate nohighlight">\(PFD = \frac{\log_{10}(N)}{\log_{10}(N) + \log_{10}\left(\frac{N}{N + 0.4N_{\Delta}}\right)}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(PFD\)</span>: Petrosian Fractal Dimension</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Total baris data deret waktu</p></li>
+<li><p><span class="math notranslate nohighlight">\(N_{\Delta}\)</span>: Jumlah perubahan tanda (naik <span class="math notranslate nohighlight">\(\rightarrow\)</span> turun, atau turun <span class="math notranslate nohighlight">\(\rightarrow\)</span> naik) dari turunan nilai polusi</p></li>
+</ul>
+</li>
+</ol>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -670,6 +1224,10 @@ File ekstraksi NO2_Kwanyar_TSFEL.csv sudah tersimpan.
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muat-data-dan-pembersihan-outlier-missing-values">1. Muat Data dan Pembersihan (Outlier &amp; Missing Values)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imputasi-missing-value-dengan-interpolasi-waktu">2. Imputasi Missing Value dengan Interpolasi Waktu</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-polutan-tsfel">3. Ekstraksi Fitur Polutan (TSFEL)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-domain-21-fitur"><strong>1. Statistical Domain (21 Fitur)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-domain-15-fitur"><strong>2. Temporal Domain (15 Fitur)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-domain-26-fitur"><strong>3. Spectral Domain (26 Fitur)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fractal-domain-6-fitur"><strong>4. Fractal Domain (6 Fitur)</strong></a></li>
 </ul>
   </nav></div>
 
