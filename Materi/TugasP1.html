@@ -631,46 +631,52 @@ File ekstraksi NO2_Kwanyar_TSFEL.csv sudah tersimpan.
 <li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi pada waktu ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
 </ul>
 </li>
-<li><p><strong>average_power</strong>: Rata-rata daya (energi per unit waktu) dari sinyal.
-$<span class="math notranslate nohighlight">\(P_{avg} = \frac{1}{N} \sum_{i=1}^{N} x_i^2\)</span>$</p>
+<li><p><strong>average_power</strong>: Rata-rata daya (energi per unit waktu) dari sinyal.</p>
+<div class="math notranslate nohighlight">
+\[P_{avg} = \frac{1}{N} \sum_{i=1}^{N} x_i^2\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(P_{avg}\)</span>: Rata-rata daya polusi</p></li>
 <li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data</p></li>
 <li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi pada waktu ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
 </ul>
 </li>
-<li><p><strong>calc_max</strong>: Nilai polusi paling tinggi dalam dataset.
-$<span class="math notranslate nohighlight">\(Max = \max(x_1, x_2, \dots, x_N)\)</span>$</p>
+<li><p><strong>calc_max</strong>: Nilai polusi paling tinggi dalam dataset.</p>
+<div class="math notranslate nohighlight">
+\[Max = \max(x_1, x_2, \dots, x_N)\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(Max\)</span>: Nilai puncak tertinggi (maksimum)</p></li>
 <li><p><span class="math notranslate nohighlight">\(x\)</span>: Deret data polusi</p></li>
 </ul>
 </li>
-<li><p><strong>calc_mean</strong>: Nilai rata-rata dari seluruh deret waktu.
-$<span class="math notranslate nohighlight">\(\mu = \frac{1}{N} \sum_{i=1}^{N} x_i\)</span>$</p>
+<li><p><strong>calc_mean</strong>: Nilai rata-rata dari seluruh deret waktu.</p>
+<div class="math notranslate nohighlight">
+\[\mu = \frac{1}{N} \sum_{i=1}^{N} x_i\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\mu\)</span>: Nilai rata-rata (mean)</p></li>
 <li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data</p></li>
 <li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi pada waktu ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
 </ul>
 </li>
-<li><p><strong>calc_median</strong>: Nilai tengah data saat diurutkan dari terkecil hingga terbesar.
-$<span class="math notranslate nohighlight">\(Median = x_{(N+1)/2}\)</span>$</p>
+<li><p><strong>calc_median</strong>: Nilai tengah data saat diurutkan dari terkecil hingga terbesar.</p>
+<div class="math notranslate nohighlight">
+\[Median = x_{(N+1)/2}\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(Median\)</span>: Nilai tengah kumpulan data</p></li>
 <li><p><span class="math notranslate nohighlight">\(x\)</span>: Deret data polusi yang sudah diurutkan</p></li>
 <li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data (contoh rumus untuk <span class="math notranslate nohighlight">\(N\)</span> ganjil)</p></li>
 </ul>
 </li>
-<li><p><strong>calc_min</strong>: Nilai polusi paling rendah dalam dataset.
-$<span class="math notranslate nohighlight">\(Min = \min(x_1, x_2, \dots, x_N)\)</span>$</p>
+<li><p><strong>calc_min</strong>: Nilai polusi paling rendah dalam dataset.</p>
+<div class="math notranslate nohighlight">
+\[Min = \min(x_1, x_2, \dots, x_N)\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(Min\)</span>: Nilai batas bawah (minimum)</p></li>
 <li><p><span class="math notranslate nohighlight">\(x\)</span>: Deret data polusi</p></li>
 </ul>
 </li>
-<li><p><strong>calc_std</strong>: Standar deviasi (penyebaran data dari rata-ratanya).
-$<span class="math notranslate nohighlight">\(\sigma = \sqrt{\frac{1}{N-1} \sum_{i=1}^{N} (x_i - \mu)^2}\)</span>$</p>
+<li><p><strong>calc_std</strong>: Standar deviasi (penyebaran data dari rata-ratanya).</p>
+<div class="math notranslate nohighlight">
+\[\sigma = \sqrt{\frac{1}{N-1} \sum_{i=1}^{N} (x_i - \mu)^2}\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\sigma\)</span>: Standar deviasi</p></li>
 <li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data</p></li>
@@ -678,8 +684,9 @@ $<span class="math notranslate nohighlight">\(\sigma = \sqrt{\frac{1}{N-1} \sum_
 <li><p><span class="math notranslate nohighlight">\(\mu\)</span>: Nilai rata-rata polusi</p></li>
 </ul>
 </li>
-<li><p><strong>calc_var</strong>: Varians (kuadrat dari standar deviasi).
-$<span class="math notranslate nohighlight">\(\sigma^2 = \frac{1}{N-1} \sum_{i=1}^{N} (x_i - \mu)^2\)</span>$</p>
+<li><p><strong>calc_var</strong>: Varians (kuadrat dari standar deviasi).</p>
+<div class="math notranslate nohighlight">
+\[\sigma^2 = \frac{1}{N-1} \sum_{i=1}^{N} (x_i - \mu)^2\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\sigma^2\)</span>: Varians</p></li>
 <li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data</p></li>
@@ -687,8 +694,9 @@ $<span class="math notranslate nohighlight">\(\sigma^2 = \frac{1}{N-1} \sum_{i=1
 <li><p><span class="math notranslate nohighlight">\(\mu\)</span>: Nilai rata-rata polusi</p></li>
 </ul>
 </li>
-<li><p><strong>ecdf</strong>: Fungsi Distribusi Kumulatif Empiris. Menghitung proporsi data yang bernilai kurang dari atau sama dengan ambang batas.
-$<span class="math notranslate nohighlight">\(F(t) = \frac{1}{N} \sum_{i=1}^{N} I(x_i \le t)\)</span>$</p>
+<li><p><strong>ecdf</strong>: Fungsi Distribusi Kumulatif Empiris. Menghitung proporsi data yang bernilai kurang dari atau sama dengan ambang batas.</p>
+<div class="math notranslate nohighlight">
+\[F(t) = \frac{1}{N} \sum_{i=1}^{N} I(x_i \le t)\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(F(t)\)</span>: Probabilitas kumulatif pada ambang batas <span class="math notranslate nohighlight">\(t\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total data</p></li>
@@ -696,8 +704,9 @@ $<span class="math notranslate nohighlight">\(F(t) = \frac{1}{N} \sum_{i=1}^{N} 
 <li><p><span class="math notranslate nohighlight">\(t\)</span>: Nilai ambang batas yang diuji</p></li>
 </ul>
 </li>
-<li><p><strong>ecdf_percentile</strong>: Menemukan nilai polusi pada batas proporsi kumulatif tertentu (misal persentil ke-20).
-$<span class="math notranslate nohighlight">\(P_p = \inf \{t : F(t) \ge p\}\)</span>$</p>
+<li><p><strong>ecdf_percentile</strong>: Menemukan nilai polusi pada batas proporsi kumulatif tertentu (misal persentil ke-20).</p>
+<div class="math notranslate nohighlight">
+\[P_p = \inf \{t : F(t) \ge p\}\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(P_p\)</span>: Nilai polusi pada persentil <span class="math notranslate nohighlight">\(p\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(F(t)\)</span>: Fungsi distribusi kumulatif ECDF</p></li>
