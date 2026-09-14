@@ -1,0 +1,1292 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Analisis dan Ekstraksi Fitur Time Series Kualitas Udara (NO2) &#8212; Tugas Pembelajaran Sains Data</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Materi/TugasP1';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Analisis dan Ekstraksi Fitur Time Series Kualitas Udara (NO2)" href="TugasFix3.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Tugas Pembelajaran Sains Data - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Tugas Pembelajaran Sains Data - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Profil Mahasiswa
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="TugasFix1.html">Analisis Runtun Waktu Kualitas Udara (Sentinel-5P)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TugasFix2.html">IMPLEMENTASI KE DALAM AIVEN POSTGRE PG ADMIN DAN KNIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TugasFix3.html">Analisis dan Ekstraksi Fitur Time Series Kualitas Udara (NO2)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisis dan Ekstraksi Fitur Time Series Kualitas Udara (NO2)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FMateri/TugasP1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Materi/TugasP1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Analisis dan Ekstraksi Fitur Time Series Kualitas Udara (NO2)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muat-data-dan-pembersihan-outlier-missing-values">1. Muat Data dan Pembersihan (Outlier &amp; Missing Values)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imputasi-missing-value-dengan-interpolasi-waktu">2. Imputasi Missing Value dengan Interpolasi Waktu</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-polutan-tsfel">3. Ekstraksi Fitur Polutan (TSFEL)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-68-fitur-ekstraksi">Penjelasan 68 Fitur Ekstraksi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-domain-21-fitur"><strong>1. Statistical Domain (21 Fitur)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-domain-15-fitur"><strong>2. Temporal Domain (15 Fitur)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-domain-26-fitur"><strong>3. Spectral Domain (26 Fitur)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fractal-domain-6-fitur"><strong>4. Fractal Domain (6 Fitur)</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-dan-ekstraksi-fitur-time-series-kualitas-udara-no2">
+<h1>Analisis dan Ekstraksi Fitur Time Series Kualitas Udara (NO2)<a class="headerlink" href="#analisis-dan-ekstraksi-fitur-time-series-kualitas-udara-no2" title="Permalink to this heading">#</a></h1>
+<p><strong>Lokasi:</strong> Kecamatan Kwanyar, Kabupaten Bangkalan
+<strong>Rentang Waktu:</strong> 31 Agustus 2025 - 31 Agustus 2026</p>
+<p>Tahap pertama dalam <em>pipeline</em> ini adalah mempersiapkan lingkungan kerja dengan menginstal library <strong>TSFEL (Time Series Feature Extraction Library)</strong> yang akan digunakan untuk mengekstrak puluhan fitur statistik dari data polusi.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!pip install tsfel
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting tsfel
+  Downloading tsfel-0.2.0-py3-none-any.whl.metadata (9.4 kB)
+Requirement already satisfied: ipython&gt;=7.4.0 in /usr/local/lib/python3.13/dist-packages (from tsfel) (7.34.0)
+Requirement already satisfied: numpy&gt;=1.18.5 in /usr/local/lib/python3.13/dist-packages (from tsfel) (2.1.3)
+Requirement already satisfied: pandas&gt;=1.5.3 in /usr/local/lib/python3.13/dist-packages (from tsfel) (2.2.3)
+Requirement already satisfied: PyWavelets&gt;=1.4.1 in /usr/local/lib/python3.13/dist-packages (from tsfel) (1.9.0)
+Requirement already satisfied: requests&gt;=2.31.0 in /usr/local/lib/python3.13/dist-packages (from tsfel) (2.32.4)
+Requirement already satisfied: scikit-learn&gt;=0.21.3 in /usr/local/lib/python3.13/dist-packages (from tsfel) (1.6.1)
+Requirement already satisfied: scipy&gt;=1.7.3 in /usr/local/lib/python3.13/dist-packages (from tsfel) (1.16.3)
+Requirement already satisfied: setuptools&gt;=47.1.1 in /usr/local/lib/python3.13/dist-packages (from tsfel) (80.10.2)
+Requirement already satisfied: statsmodels&gt;=0.12.0 in /usr/local/lib/python3.13/dist-packages (from tsfel) (0.15.0)
+Collecting jedi&gt;=0.16 (from ipython&gt;=7.4.0-&gt;tsfel)
+  Downloading jedi-0.20.0-py2.py3-none-any.whl.metadata (23 kB)
+Requirement already satisfied: decorator in /usr/local/lib/python3.13/dist-packages (from ipython&gt;=7.4.0-&gt;tsfel) (4.4.2)
+Requirement already satisfied: pickleshare in /usr/local/lib/python3.13/dist-packages (from ipython&gt;=7.4.0-&gt;tsfel) (0.7.5)
+Requirement already satisfied: traitlets&gt;=4.2 in /usr/local/lib/python3.13/dist-packages (from ipython&gt;=7.4.0-&gt;tsfel) (5.7.1)
+Requirement already satisfied: prompt-toolkit!=3.0.0,!=3.0.1,&lt;3.1.0,&gt;=2.0.0 in /usr/local/lib/python3.13/dist-packages (from ipython&gt;=7.4.0-&gt;tsfel) (3.0.53)
+Requirement already satisfied: pygments in /usr/local/lib/python3.13/dist-packages (from ipython&gt;=7.4.0-&gt;tsfel) (2.21.0)
+Requirement already satisfied: backcall in /usr/local/lib/python3.13/dist-packages (from ipython&gt;=7.4.0-&gt;tsfel) (0.2.0)
+Requirement already satisfied: matplotlib-inline in /usr/local/lib/python3.13/dist-packages (from ipython&gt;=7.4.0-&gt;tsfel) (0.2.2)
+Requirement already satisfied: pexpect&gt;4.3 in /usr/local/lib/python3.13/dist-packages (from ipython&gt;=7.4.0-&gt;tsfel) (4.9.0)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /usr/local/lib/python3.13/dist-packages (from pandas&gt;=1.5.3-&gt;tsfel) (2.9.0.post0)
+Requirement already satisfied: pytz&gt;=2020.1 in /usr/local/lib/python3.13/dist-packages (from pandas&gt;=1.5.3-&gt;tsfel) (2025.2)
+Requirement already satisfied: tzdata&gt;=2022.7 in /usr/local/lib/python3.13/dist-packages (from pandas&gt;=1.5.3-&gt;tsfel) (2026.3)
+Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /usr/local/lib/python3.13/dist-packages (from requests&gt;=2.31.0-&gt;tsfel) (3.4.9)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.13/dist-packages (from requests&gt;=2.31.0-&gt;tsfel) (3.19)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /usr/local/lib/python3.13/dist-packages (from requests&gt;=2.31.0-&gt;tsfel) (2.5.0)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.13/dist-packages (from requests&gt;=2.31.0-&gt;tsfel) (2026.7.22)
+Requirement already satisfied: joblib&gt;=1.2.0 in /usr/local/lib/python3.13/dist-packages (from scikit-learn&gt;=0.21.3-&gt;tsfel) (1.6.0)
+Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /usr/local/lib/python3.13/dist-packages (from scikit-learn&gt;=0.21.3-&gt;tsfel) (3.6.0)
+Requirement already satisfied: patsy&gt;=0.5.6 in /usr/local/lib/python3.13/dist-packages (from statsmodels&gt;=0.12.0-&gt;tsfel) (1.0.3)
+Requirement already satisfied: packaging&gt;=21.3 in /usr/local/lib/python3.13/dist-packages (from statsmodels&gt;=0.12.0-&gt;tsfel) (26.3)
+Requirement already satisfied: formulaic&gt;=1.1.0 in /usr/local/lib/python3.13/dist-packages (from statsmodels&gt;=0.12.0-&gt;tsfel) (1.2.2)
+Requirement already satisfied: interface-meta&gt;=1.2.0 in /usr/local/lib/python3.13/dist-packages (from formulaic&gt;=1.1.0-&gt;statsmodels&gt;=0.12.0-&gt;tsfel) (2.0.1)
+Requirement already satisfied: narwhals&gt;=1.17 in /usr/local/lib/python3.13/dist-packages (from formulaic&gt;=1.1.0-&gt;statsmodels&gt;=0.12.0-&gt;tsfel) (2.25.0)
+Requirement already satisfied: typing-extensions&gt;=4.2.0 in /usr/local/lib/python3.13/dist-packages (from formulaic&gt;=1.1.0-&gt;statsmodels&gt;=0.12.0-&gt;tsfel) (4.16.0)
+Requirement already satisfied: wrapt&gt;=1.17.0rc1 in /usr/local/lib/python3.13/dist-packages (from formulaic&gt;=1.1.0-&gt;statsmodels&gt;=0.12.0-&gt;tsfel) (2.4.0)
+Requirement already satisfied: parso&lt;0.9.0,&gt;=0.8.6 in /usr/local/lib/python3.13/dist-packages (from jedi&gt;=0.16-&gt;ipython&gt;=7.4.0-&gt;tsfel) (0.8.7)
+Requirement already satisfied: cloudpickle&gt;=3.0 in /usr/local/lib/python3.13/dist-packages (from joblib&gt;=1.2.0-&gt;scikit-learn&gt;=0.21.3-&gt;tsfel) (3.1.2)
+Requirement already satisfied: ptyprocess&gt;=0.5 in /usr/local/lib/python3.13/dist-packages (from pexpect&gt;4.3-&gt;ipython&gt;=7.4.0-&gt;tsfel) (0.7.0)
+Requirement already satisfied: wcwidth&gt;=0.1.4 in /usr/local/lib/python3.13/dist-packages (from prompt-toolkit!=3.0.0,!=3.0.1,&lt;3.1.0,&gt;=2.0.0-&gt;ipython&gt;=7.4.0-&gt;tsfel) (0.8.3)
+Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.13/dist-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=1.5.3-&gt;tsfel) (1.17.0)
+Downloading tsfel-0.2.0-py3-none-any.whl (63 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">63.4/63.4 kB</span> <span class=" -Color -Color-Red">3.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading jedi-0.20.0-py2.py3-none-any.whl (4.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">4.9/4.9 MB</span> <span class=" -Color -Color-Red">79.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hInstalling collected packages: jedi, tsfel
+Successfully installed jedi-0.20.0 tsfel-0.2.0
+</pre></div>
+</div>
+</div>
+</div>
+<section id="muat-data-dan-pembersihan-outlier-missing-values">
+<h2>1. Muat Data dan Pembersihan (Outlier &amp; Missing Values)<a class="headerlink" href="#muat-data-dan-pembersihan-outlier-missing-values" title="Permalink to this heading">#</a></h2>
+<p>Tahap ini bertujuan untuk membaca data historis <code class="docutils literal notranslate"><span class="pre">KualitasUdara_Kwanyar.csv</span></code>. Nilai ekstrem (outliers) akan dideteksi menggunakan metode IQR (Interquartile Range) lalu dihapus (diubah menjadi NaN). Setelah itu, seluruh <em>missing values</em> akan diisi kembali (imputasi) menggunakan metode interpolasi waktu.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;KualitasUdara_Kwanyar.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">target_pollutant</span> <span class="o">=</span> <span class="s1">&#39;NO2&#39;</span>
+
+<span class="c1"># Paksa kolom target jadi numerik, nilai yang gagal dikonversi -&gt; NaN</span>
+<span class="n">df</span><span class="p">[</span><span class="n">target_pollutant</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">target_pollutant</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+
+<span class="n">n_missing_before</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">target_pollutant</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jumlah nilai kosong bawaan/non-numerik: </span><span class="si">{</span><span class="n">n_missing_before</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Deteksi Outlier dengan IQR</span>
+<span class="n">Q1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">target_pollutant</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">Q3</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">target_pollutant</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
+<span class="n">lower_bound</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+<span class="n">upper_bound</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+
+<span class="c1"># Ubah nilai outlier menjadi NaN</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="n">target_pollutant</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lower_bound</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">target_pollutant</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">upper_bound</span><span class="p">),</span> <span class="n">target_pollutant</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="c1"># Imputasi Missing Value &amp; Outlier menggunakan interpolasi waktu</span>
+<span class="n">df_clean</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">bfill</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pembersihan selesai! Outlier sudah dihilangkan dan Missing Value sudah diimputasi.&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- MENYIMPAN HASIL INTERPOLASI ---</span>
+<span class="n">df_clean_csv</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">nama_file_bersih</span> <span class="o">=</span> <span class="s1">&#39;KualitasUdara_Kwanyar_Cleaned.csv&#39;</span>
+<span class="n">df_clean_csv</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">nama_file_bersih</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File hasil interpolasi &#39;</span><span class="si">{</span><span class="n">nama_file_bersih</span><span class="si">}</span><span class="s2">&#39; siap diunduh.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah nilai kosong bawaan/non-numerik: 173
+Pembersihan selesai! Outlier sudah dihilangkan dan Missing Value sudah diimputasi.
+ File hasil interpolasi bernama &#39;KualitasUdara_Kwanyar_Cleaned.csv&#39; 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="imputasi-missing-value-dengan-interpolasi-waktu">
+<h2>2. Imputasi Missing Value dengan Interpolasi Waktu<a class="headerlink" href="#imputasi-missing-value-dengan-interpolasi-waktu" title="Permalink to this heading">#</a></h2>
+<p>Data yang hilang atau <em>outlier</em> yang telah dihapus tidak boleh dibiarkan kosong karena akan menggagalkan ekstraksi fitur TSFEL. Untuk mengatasinya, kita menggunakan metode <strong>Interpolasi Waktu (Time Interpolation)</strong>.</p>
+<p>Metode ini memperkirakan nilai yang hilang dengan menarik garis lurus proporsional antara titik data sebelum dan sesudah nilai yang kosong.</p>
+<p><strong>Rumus Dasar (Linear Interpolation):</strong>
+$<span class="math notranslate nohighlight">\(y = y_0 + (x - x_0) \frac{y_1 - y_0}{x_1 - x_0}\)</span>$</p>
+<p><strong>Contoh Perhitungan Manual (Data Asli NO2 Kwanyar):</strong>
+Perekaman NO2 gagal (kosong) pada tanggal <strong>10 September 2025</strong>. Kita akan menghitung nilai penggantinya menggunakan data 9 Sept dan 11 Sept.</p>
+<p><strong>Tabel Sebelum Imputasi:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Tanggal</p></th>
+<th class="head text-left"><p>Konsentrasi NO2</p></th>
+<th class="head text-left"><p>Keterangan</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>9 Sept 2025</p></td>
+<td class="text-left"><p>0.000028185</p></td>
+<td class="text-left"><p>Data Valid</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>10 Sept 2025</p></td>
+<td class="text-left"><p>NaN</p></td>
+<td class="text-left"><p><strong>Missing Value</strong></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>11 Sept 2025</p></td>
+<td class="text-left"><p>0.000010713</p></td>
+<td class="text-left"><p>Data Valid</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Perhitungan:</strong>
+$<span class="math notranslate nohighlight">\(y = 0.000028185 + (1) \frac{0.000010713 - 0.000028185}{2}\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(y = 0.000028185 - 0.000008736 = 0.000019449\)</span>$</p>
+<p>Metode ini diimplementasikan secara otomatis menggunakan <code class="docutils literal notranslate"><span class="pre">df.interpolate(method='time')</span></code> untuk seluruh baris kosong.</p>
+</section>
+<section id="ekstraksi-fitur-polutan-tsfel">
+<h2>3. Ekstraksi Fitur Polutan (TSFEL)<a class="headerlink" href="#ekstraksi-fitur-polutan-tsfel" title="Permalink to this heading">#</a></h2>
+<p>Tahap ini mengekstraksi data deret waktu polutan <span class="math notranslate nohighlight">\(NO_2\)</span> yang sudah bersih menjadi 68 fitur statistik, spektral, dan temporal menggunakan library TSFEL. Data hasil ekstraksi ini kemudian akan diekspor untuk dibandingkan dengan daerah lain.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tsfel.feature_extraction.features</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tsfel_features</span>
+
+<span class="c1"># Frekuensi sampling (1 per hari)</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">signal_1d</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="n">target_pollutant</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># ---------- Daftar 68 fitur  ----------</span>
+<span class="n">FEATURE_LIST</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;abs_energy auc autocorr average_power calc_centroid calc_max calc_mean</span>
+<span class="s2">calc_median calc_min calc_std calc_var dfa distance ecdf ecdf_percentile ecdf_percentile_count</span>
+<span class="s2">ecdf_slope entropy fundamental_frequency higuchi_fractal_dimension hist_mode human_range_energy</span>
+<span class="s2">hurst_exponent interq_range kurtosis lempel_ziv lpcc max_frequency max_power_spectrum</span>
+<span class="s2">maximum_fractal_length mean_abs_deviation mean_abs_diff mean_diff median_abs_deviation</span>
+<span class="s2">median_abs_diff median_diff median_frequency mfcc mse negative_turning neighbourhood_peaks</span>
+<span class="s2">petrosian_fractal_dimension pk_pk_distance positive_turning power_bandwidth rms skewness slope</span>
+<span class="s2">spectral_centroid spectral_decrease spectral_distance spectral_entropy spectral_kurtosis</span>
+<span class="s2">spectral_positive_turning spectral_roll_off spectral_roll_on spectral_skewness spectral_slope</span>
+<span class="s2">spectral_spread spectral_variation spectrogram_mean_coeff sum_abs_diff wavelet_abs_mean</span>
+<span class="s2">wavelet_energy wavelet_entropy wavelet_std wavelet_var zero_cross&quot;&quot;&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah fitur yang diminta:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">FEATURE_LIST</span><span class="p">))</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">to_scalar</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;values&quot;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_one</span><span class="p">(</span><span class="n">fn_name</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">fs</span><span class="p">):</span>
+    <span class="n">fn</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">tsfel_features</span><span class="p">,</span> <span class="n">fn_name</span><span class="p">)</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span>
+    <span class="k">if</span> <span class="s2">&quot;fs&quot;</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">fs</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">to_scalar</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="n">row</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">fn_name</span> <span class="ow">in</span> <span class="n">FEATURE_LIST</span><span class="p">:</span>
+    <span class="n">row</span><span class="p">[</span><span class="n">fn_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">extract_one</span><span class="p">(</span><span class="n">fn_name</span><span class="p">,</span> <span class="n">signal_1d</span><span class="p">,</span> <span class="n">fs</span><span class="p">)</span>
+
+<span class="n">extracted_features_final</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">row</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Berhasil! Jumlah fitur yang dihasilkan untuk </span><span class="si">{</span><span class="n">target_pollutant</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">extracted_features_final</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Menyimpan file ke dalam format CSV</span>
+<span class="n">nama_file_csv</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">target_pollutant</span><span class="si">}</span><span class="s1">_Kwanyar_TSFEL.csv&#39;</span>
+<span class="n">extracted_features_final</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">nama_file_csv</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File ekstraksi </span><span class="si">{</span><span class="n">nama_file_csv</span><span class="si">}</span><span class="s2"> sudah tersimpan.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah fitur yang diminta: 68
+Berhasil! Jumlah fitur yang dihasilkan untuk NO2: 68
+File ekstraksi NO2_Kwanyar_TSFEL.csv sudah tersimpan.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="penjelasan-68-fitur-ekstraksi">
+<h2>Penjelasan 68 Fitur Ekstraksi<a class="headerlink" href="#penjelasan-68-fitur-ekstraksi" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="statistical-domain-21-fitur">
+<h2><strong>1. Statistical Domain (21 Fitur)</strong><a class="headerlink" href="#statistical-domain-21-fitur" title="Permalink to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>abs_energy</strong>: Total kuadrat dari seluruh nilai polusi.</p>
+<div class="math notranslate nohighlight">
+\[E = \sum_{i=1}^{N} x_i^2\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(E\)</span>: Energi absolut (Absolute Energy)</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data pengamatan</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi pada waktu ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>average_power</strong>: Rata-rata daya (energi per unit waktu) dari sinyal.
+$<span class="math notranslate nohighlight">\(P_{avg} = \frac{1}{N} \sum_{i=1}^{N} x_i^2\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P_{avg}\)</span>: Rata-rata daya polusi</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi pada waktu ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>calc_max</strong>: Nilai polusi paling tinggi dalam dataset.
+$<span class="math notranslate nohighlight">\(Max = \max(x_1, x_2, \dots, x_N)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Max\)</span>: Nilai puncak tertinggi (maksimum)</p></li>
+<li><p><span class="math notranslate nohighlight">\(x\)</span>: Deret data polusi</p></li>
+</ul>
+</li>
+<li><p><strong>calc_mean</strong>: Nilai rata-rata dari seluruh deret waktu.
+$<span class="math notranslate nohighlight">\(\mu = \frac{1}{N} \sum_{i=1}^{N} x_i\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span>: Nilai rata-rata (mean)</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi pada waktu ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>calc_median</strong>: Nilai tengah data saat diurutkan dari terkecil hingga terbesar.
+$<span class="math notranslate nohighlight">\(Median = x_{(N+1)/2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Median\)</span>: Nilai tengah kumpulan data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x\)</span>: Deret data polusi yang sudah diurutkan</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data (contoh rumus untuk <span class="math notranslate nohighlight">\(N\)</span> ganjil)</p></li>
+</ul>
+</li>
+<li><p><strong>calc_min</strong>: Nilai polusi paling rendah dalam dataset.
+$<span class="math notranslate nohighlight">\(Min = \min(x_1, x_2, \dots, x_N)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Min\)</span>: Nilai batas bawah (minimum)</p></li>
+<li><p><span class="math notranslate nohighlight">\(x\)</span>: Deret data polusi</p></li>
+</ul>
+</li>
+<li><p><strong>calc_std</strong>: Standar deviasi (penyebaran data dari rata-ratanya).
+$<span class="math notranslate nohighlight">\(\sigma = \sqrt{\frac{1}{N-1} \sum_{i=1}^{N} (x_i - \mu)^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span>: Standar deviasi</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi pada waktu ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span>: Nilai rata-rata polusi</p></li>
+</ul>
+</li>
+<li><p><strong>calc_var</strong>: Varians (kuadrat dari standar deviasi).
+$<span class="math notranslate nohighlight">\(\sigma^2 = \frac{1}{N-1} \sum_{i=1}^{N} (x_i - \mu)^2\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\sigma^2\)</span>: Varians</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi pada waktu ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span>: Nilai rata-rata polusi</p></li>
+</ul>
+</li>
+<li><p><strong>ecdf</strong>: Fungsi Distribusi Kumulatif Empiris. Menghitung proporsi data yang bernilai kurang dari atau sama dengan ambang batas.
+$<span class="math notranslate nohighlight">\(F(t) = \frac{1}{N} \sum_{i=1}^{N} I(x_i \le t)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(F(t)\)</span>: Probabilitas kumulatif pada ambang batas <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total data</p></li>
+<li><p><span class="math notranslate nohighlight">\(I\)</span>: Fungsi indikator (bernilai 1 jika <span class="math notranslate nohighlight">\(x_i \le t\)</span>, dan 0 jika sebaliknya)</p></li>
+<li><p><span class="math notranslate nohighlight">\(t\)</span>: Nilai ambang batas yang diuji</p></li>
+</ul>
+</li>
+<li><p><strong>ecdf_percentile</strong>: Menemukan nilai polusi pada batas proporsi kumulatif tertentu (misal persentil ke-20).
+$<span class="math notranslate nohighlight">\(P_p = \inf \{t : F(t) \ge p\}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P_p\)</span>: Nilai polusi pada persentil <span class="math notranslate nohighlight">\(p\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(F(t)\)</span>: Fungsi distribusi kumulatif ECDF</p></li>
+<li><p><span class="math notranslate nohighlight">\(p\)</span>: Persentase probabilitas sasaran (contoh: 0.20 untuk 20%)</p></li>
+</ul>
+</li>
+<li><p><strong>ecdf_percentile_count</strong>: Jumlah baris data yang nilainya jatuh di antara dua batas persentil.
+$<span class="math notranslate nohighlight">\(Count = \sum_{i=1}^{N} I(P_{bawah} \le x_i \le P_{atas})\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Count\)</span>: Jumlah baris data yang memenuhi syarat</p></li>
+<li><p><span class="math notranslate nohighlight">\(I\)</span>: Fungsi indikator</p></li>
+<li><p><span class="math notranslate nohighlight">\(P_{bawah}\)</span>: Nilai polusi di batas persentil bawah</p></li>
+<li><p><span class="math notranslate nohighlight">\(P_{atas}\)</span>: Nilai polusi di batas persentil atas</p></li>
+</ul>
+</li>
+<li><p><strong>ecdf_slope</strong>: Kemiringan garis antara dua batas persentil kurva ECDF.
+$<span class="math notranslate nohighlight">\(Slope = \frac{P_{atas} - P_{bawah}}{p_{atas} - p_{bawah}}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Slope\)</span>: Tingkat kemiringan ECDF</p></li>
+<li><p><span class="math notranslate nohighlight">\(P_{atas}, P_{bawah}\)</span>: Nilai polusi pada batas atas dan bawah</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_{atas}, p_{bawah}\)</span>: Probabilitas persentil atas dan bawah (contoh: 0.80 dan 0.20)</p></li>
+</ul>
+</li>
+<li><p><strong>entropy</strong>: Entropi Shannon dari distribusi frekuensi nilai polusi.
+$<span class="math notranslate nohighlight">\(H_{shannon} = -\sum_{i=1}^{K} p(x_i) \log_2 p(x_i)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_{shannon}\)</span>: Nilai entropi (keragaman informasi)</p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span>: Jumlah kelompok/bin nilai polusi yang unik</p></li>
+<li><p><span class="math notranslate nohighlight">\(p(x_i)\)</span>: Probabilitas (peluang) munculnya nilai <span class="math notranslate nohighlight">\(x_i\)</span> dalam dataset</p></li>
+</ul>
+</li>
+<li><p><strong>hist_mode</strong>: Nilai yang paling sering muncul (modus), didapat dari bin frekuensi tertinggi dalam histogram.
+$<span class="math notranslate nohighlight">\(Mode = \arg\max_{x} (f(x))\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Mode\)</span>: Nilai paling dominan (modus)</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x)\)</span>: Jumlah frekuensi kemunculan untuk rentang nilai <span class="math notranslate nohighlight">\(x\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>interq_range</strong>: Jarak interkuartil (selisih kuartil 3 dan kuartil 1).
+$<span class="math notranslate nohighlight">\(IQR = Q_3 - Q_1\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(IQR\)</span>: Interquartile Range</p></li>
+<li><p><span class="math notranslate nohighlight">\(Q_3\)</span>: Kuartil ketiga (persentil 75%)</p></li>
+<li><p><span class="math notranslate nohighlight">\(Q_1\)</span>: Kuartil pertama (persentil 25%)</p></li>
+</ul>
+</li>
+<li><p><strong>kurtosis</strong>: Derajat keruncingan (banyaknya ekor tebal/outlier) dari sebaran data.
+$<span class="math notranslate nohighlight">\(Kurtosis = \frac{1}{N} \sum_{i=1}^{N} \left(\frac{x_i - \mu}{\sigma}\right)^4\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Kurtosis\)</span>: Nilai keruncingan</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span>: Nilai rata-rata polusi</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span>: Standar deviasi</p></li>
+</ul>
+</li>
+<li><p><strong>mean_abs_deviation</strong>: Rata-rata dari nilai mutlak selisih setiap data dengan rata-ratanya.
+$<span class="math notranslate nohighlight">\(MAD_{mean} = \frac{1}{N} \sum_{i=1}^{N} |x_i - \mu|\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(MAD_{mean}\)</span>: Mean Absolute Deviation</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span>: Nilai rata-rata polusi</p></li>
+</ul>
+</li>
+<li><p><strong>median_abs_deviation</strong>: Nilai tengah (median) dari mutlak selisih setiap data dengan median datanya.
+$<span class="math notranslate nohighlight">\(MAD_{median} = \text{median}(|x_i - Median|)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(MAD_{median}\)</span>: Median Absolute Deviation</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi</p></li>
+<li><p><span class="math notranslate nohighlight">\(Median\)</span>: Nilai tengah dari keseluruhan data</p></li>
+</ul>
+</li>
+<li><p><strong>pk_pk_distance</strong>: Jarak dari puncak ke puncak ekstrem (rentang absolut maksimum).
+$<span class="math notranslate nohighlight">\(Distance_{pk} = \max(x) - \min(x)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Distance_{pk}\)</span>: Jarak Peak-to-Peak</p></li>
+<li><p><span class="math notranslate nohighlight">\(\max(x)\)</span>: Nilai polusi tertinggi</p></li>
+<li><p><span class="math notranslate nohighlight">\(\min(x)\)</span>: Nilai polusi terendah</p></li>
+</ul>
+</li>
+<li><p><strong>rms</strong>: Akar dari nilai rata-rata kuadrat (Root Mean Square).
+$<span class="math notranslate nohighlight">\(RMS = \sqrt{\frac{1}{N} \sum_{i=1}^{N} x_i^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(RMS\)</span>: Root Mean Square</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi</p></li>
+</ul>
+</li>
+<li><p><strong>skewness</strong>: Derajat kemencengan (ketidaksimetrisan) distribusi data polusi.
+$<span class="math notranslate nohighlight">\(Skewness = \frac{1}{N} \sum_{i=1}^{N} \left(\frac{x_i - \mu}{\sigma}\right)^3\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Skewness\)</span>: Nilai kemencengan</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total baris data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai kadar polusi</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span>: Rata-rata polusi</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span>: Standar deviasi</p></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+</section>
+<section id="temporal-domain-15-fitur">
+<h2><strong>2. Temporal Domain (15 Fitur)</strong><a class="headerlink" href="#temporal-domain-15-fitur" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple" start="22">
+<li><p><strong>auc</strong>: Total luas area pergerakan data di bawah kurva (integrasi trapesium).
+$<span class="math notranslate nohighlight">\(AUC = \sum_{i=1}^{N-1} \frac{(x_i + x_{i+1})}{2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(AUC\)</span>: Area Under Curve</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah titik waktu pengamatan</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai polusi pada waktu ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x_{i+1}\)</span>: Nilai polusi pada waktu berikutnya</p></li>
+</ul>
+</li>
+<li><p><strong>autocorr</strong>: Autokorelasi, korelasi sinyal terhadap dirinya sendiri pada jeda waktu (lag) tertunda.
+$<span class="math notranslate nohighlight">\(R(k) = \frac{\sum_{i=1}^{N-k} (x_i - \mu)(x_{i+k} - \mu)}{\sum_{i=1}^{N} (x_i - \mu)^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(R(k)\)</span>: Koefisien autokorelasi</p></li>
+<li><p><span class="math notranslate nohighlight">\(k\)</span>: Jumlah jeda waktu (lag)</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah total data</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai polusi pada waktu ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span>: Rata-rata polusi keseluruhan</p></li>
+</ul>
+</li>
+<li><p><strong>calc_centroid</strong>: Pusat massa waktu dari kurva polusi. Mengukur pada waktu ke-berapa polusi paling terkonsentrasi.
+$<span class="math notranslate nohighlight">\(t_c = \frac{\sum_{i=1}^{N} i \cdot x_i}{\sum_{i=1}^{N} x_i}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(t_c\)</span>: Temporal centroid (pusat massa waktu)</p></li>
+<li><p><span class="math notranslate nohighlight">\(i\)</span>: Indeks urutan waktu</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai polusi pada indeks ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>distance</strong>: Total perpindahan absolut yang dilewati oleh sinyal dari awal hingga akhir.
+$<span class="math notranslate nohighlight">\(D_{seq} = \sum_{i=1}^{N-1} |x_{i+1} - x_i|\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(D_{seq}\)</span>: Jarak lintasan sekuensial</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_{i+1} - x_i\)</span>: Selisih lonjakan polusi antar waktu</p></li>
+</ul>
+</li>
+<li><p><strong>lempel_ziv</strong>: Nilai kompleksitas menggunakan algoritma kompresi Lempel-Ziv.
+$<span class="math notranslate nohighlight">\(LZ = c(N) \left( \frac{\log_2 N}{N} \right)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(LZ\)</span>: Kompleksitas Lempel-Ziv</p></li>
+<li><p><span class="math notranslate nohighlight">\(c(N)\)</span>: Jumlah pola urutan biner unik yang ditemukan dalam data</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Total panjang data</p></li>
+</ul>
+</li>
+<li><p><strong>mean_abs_diff</strong>: Rata-rata dari nilai absolut lonjakan antar waktu.
+$<span class="math notranslate nohighlight">\(MAD_{diff} = \frac{1}{N-1} \sum_{i=1}^{N-1} |x_{i+1} - x_i|\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(MAD_{diff}\)</span>: Mean Absolute Difference</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Jumlah titik waktu</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_{i+1} - x_i\)</span>: Perbedaan nilai berurutan</p></li>
+</ul>
+</li>
+<li><p><strong>mean_diff</strong>: Rata-rata murni dari selisih antar data (termasuk nilai minus).
+$<span class="math notranslate nohighlight">\(M_{diff} = \frac{1}{N-1} \sum_{i=1}^{N-1} (x_{i+1} - x_i)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(M_{diff}\)</span>: Mean Difference</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_{i+1} - x_i\)</span>: Perbedaan mentah nilai polusi berurutan</p></li>
+</ul>
+</li>
+<li><p><strong>median_abs_diff</strong>: Nilai tengah (median) dari lonjakan absolut antar waktu.
+$<span class="math notranslate nohighlight">\(MedAD_{diff} = \text{median}(|x_{i+1} - x_i|)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(MedAD_{diff}\)</span>: Median Absolute Difference</p></li>
+<li><p><span class="math notranslate nohighlight">\(|x_{i+1} - x_i|\)</span>: Kumpulan nilai absolut selisih berurutan</p></li>
+</ul>
+</li>
+<li><p><strong>median_diff</strong>: Nilai tengah dari lonjakan mentah berurutan.
+$<span class="math notranslate nohighlight">\(Med_{diff} = \text{median}(x_{i+1} - x_i)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Med_{diff}\)</span>: Median Difference</p></li>
+</ul>
+</li>
+<li><p><strong>negative_turning</strong>: Jumlah kali kurva polusi membentuk lembah (lokal minimum).
+$<span class="math notranslate nohighlight">\(Turns_{-} = \sum_{i=2}^{N-1} I(x_{i-1} &gt; x_i &lt; x_{i+1})\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Turns_{-}\)</span>: Jumlah titik balik negatif</p></li>
+<li><p><span class="math notranslate nohighlight">\(I\)</span>: Fungsi indikator yang bernilai 1 jika <span class="math notranslate nohighlight">\(x_i\)</span> lebih kecil dari data sebelum dan sesudahnya</p></li>
+</ul>
+</li>
+<li><p><strong>neighbourhood_peaks</strong>: Jumlah puncak dominan relatif terhadap data di sekitarnya.
+$<span class="math notranslate nohighlight">\(Peaks = \sum_{i} I(\text{is\_peak}(x_i, threshold))\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Peaks\)</span>: Jumlah puncak lokal yang valid</p></li>
+<li><p><span class="math notranslate nohighlight">\(threshold\)</span>: Ambang batas minimum kelonjakan puncak</p></li>
+</ul>
+</li>
+<li><p><strong>positive_turning</strong>: Jumlah kali kurva polusi membentuk gunung (lokal maksimum).
+$<span class="math notranslate nohighlight">\(Turns_{+} = \sum_{i=2}^{N-1} I(x_{i-1} &lt; x_i &gt; x_{i+1})\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Turns_{+}\)</span>: Jumlah titik balik positif</p></li>
+<li><p><span class="math notranslate nohighlight">\(I\)</span>: Fungsi indikator yang bernilai 1 jika <span class="math notranslate nohighlight">\(x_i\)</span> lebih besar dari data sebelum dan sesudahnya</p></li>
+</ul>
+</li>
+<li><p><strong>slope</strong>: Nilai kemiringan (<span class="math notranslate nohighlight">\(m\)</span>) dari regresi linier keseluruhan tren waktu polusi.
+$<span class="math notranslate nohighlight">\(Slope = \frac{N \sum (i \cdot x_i) - \sum i \sum x_i}{N \sum i^2 - (\sum i)^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Slope\)</span>: Kemiringan tren waktu</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Total titik pengamatan</p></li>
+<li><p><span class="math notranslate nohighlight">\(i\)</span>: Indeks waktu (variabel X pada regresi)</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai polusi (variabel Y pada regresi)</p></li>
+</ul>
+</li>
+<li><p><strong>sum_abs_diff</strong>: Total kumulatif dari seluruh selisih absolut lonjakan waktu ke waktu.
+$<span class="math notranslate nohighlight">\(SumDiff = \sum_{i=1}^{N-1} |x_{i+1} - x_i|\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(SumDiff\)</span>: Jumlah fluktuasi total</p></li>
+<li><p><span class="math notranslate nohighlight">\(|x_{i+1} - x_i|\)</span>: Selisih absolut data berurutan</p></li>
+</ul>
+</li>
+<li><p><strong>zero_cross</strong>: Jumlah titik waktu di mana polusi memotong rata-ratanya atau memotong nilai nol.
+$<span class="math notranslate nohighlight">\(ZC = \frac{1}{2} \sum_{i=1}^{N-1} |\text{sgn}(x_{i+1}) - \text{sgn}(x_i)|\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(ZC\)</span>: Zero Crossing Rate</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{sgn}\)</span>: Fungsi tanda (menghasilkan 1 jika positif, -1 jika negatif)</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai polusi yang sudah dikurangi rata-ratanya</p></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+</section>
+<section id="spectral-domain-26-fitur">
+<h2><strong>3. Spectral Domain (26 Fitur)</strong><a class="headerlink" href="#spectral-domain-26-fitur" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple" start="37">
+<li><p><strong>fundamental_frequency</strong>: Frekuensi dasar terendah yang memiliki magnitudo paling dominan.
+$<span class="math notranslate nohighlight">\(f_{fund} = \arg\max_{k&gt;0} |X(k)|\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f_{fund}\)</span>: Frekuensi fundamental</p></li>
+<li><p><span class="math notranslate nohighlight">\(X(k)\)</span>: Magnitudo spektrum (hasil FFT) pada indeks frekuensi ke-<span class="math notranslate nohighlight">\(k\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>human_range_energy</strong>: Energi pada rentang pita frekuensi biologis tertentu.
+$<span class="math notranslate nohighlight">\(E_{human} = \sum_{f(k) \in [0.6, 2.5]} |X(k)|^2\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(E_{human}\)</span>: Total energi rentang manusia</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(k)\)</span>: Nilai frekuensi pada indeks ke-<span class="math notranslate nohighlight">\(k\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(|X(k)|^2\)</span>: Daya (power) pada frekuensi tersebut</p></li>
+</ul>
+</li>
+<li><p><strong>lpcc</strong>: <em>Linear Prediction Cepstral Coefficients</em>. Hasil ekstraksi amplop spektrum daya menggunakan filter prediktif linear.
+$<span class="math notranslate nohighlight">\(C_{lpcc} = \text{Cepstrum}(\text{LPC}(X))\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(C_{lpcc}\)</span>: Koefisien LPCC</p></li>
+<li><p><span class="math notranslate nohighlight">\(LPC(X)\)</span>: Pemodelan filter Linear Predictive Coding pada deret waktu <span class="math notranslate nohighlight">\(X\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>max_frequency</strong>: Indeks frekuensi yang menyimpan magnitudo energi paling tinggi.
+$<span class="math notranslate nohighlight">\(f_{max} = f(\arg\max_{k} |X(k)|^2)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f_{max}\)</span>: Frekuensi puncak maksimum</p></li>
+<li><p><span class="math notranslate nohighlight">\(|X(k)|^2\)</span>: Daya spektral di indeks ke-<span class="math notranslate nohighlight">\(k\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>max_power_spectrum</strong>: Besaran nilai daya energi tertinggi itu sendiri.
+$<span class="math notranslate nohighlight">\(P_{max} = \max_k (|X(k)|^2)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P_{max}\)</span>: Nilai daya spektral maksimum</p></li>
+<li><p><span class="math notranslate nohighlight">\(|X(k)|^2\)</span>: Energi daya spektral</p></li>
+</ul>
+</li>
+<li><p><strong>median_frequency</strong>: Frekuensi tengah yang membagi energi spektrum menjadi dua bagian sama besar.
+$<span class="math notranslate nohighlight">\(f_{med} : \sum_{k=1}^{med} |X(k)|^2 = \frac{1}{2} \sum_{k=1}^{K} |X(k)|^2\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f_{med}\)</span>: Median Frequency</p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span>: Jumlah total <em>bin</em> frekuensi</p></li>
+</ul>
+</li>
+<li><p><strong>mfcc</strong>: <em>Mel-Frequency Cepstral Coefficients</em>. Koefisien spektral dalam skala logaritmik Mel.
+$<span class="math notranslate nohighlight">\(C_m = \sum_{k=1}^{K} (\log S_k) \cos \left[ m \left( k - \frac{1}{2} \right) \frac{\pi}{K} \right]\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(C_m\)</span>: Koefisien MFCC ke-<span class="math notranslate nohighlight">\(m\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S_k\)</span>: Energi keluaran dari <em>filterbank</em> skala-Mel ke-<span class="math notranslate nohighlight">\(k\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span>: Total <em>filterbank</em></p></li>
+</ul>
+</li>
+<li><p><strong>power_bandwidth</strong>: Lebar pita frekuensi (Hz) yang menampung daya spektral utama.
+$<span class="math notranslate nohighlight">\(Band_{width} = f_{atas} - f_{bawah}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Band_{width}\)</span>: Lebar pita frekuensi</p></li>
+<li><p><span class="math notranslate nohighlight">\(f_{atas}, f_{bawah}\)</span>: Titik frekuensi atas dan bawah yang membatasi 99% energi</p></li>
+</ul>
+</li>
+<li><p><strong>spectral_centroid</strong>: Titik berat rata-rata frekuensi (Pusat massa spektrum).
+$<span class="math notranslate nohighlight">\(Centroid = \frac{\sum_{k} f(k)|X(k)|^2}{\sum_{k} |X(k)|^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Centroid\)</span>: Pusat massa spektral (dalam satuan Hz)</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(k)\)</span>: Nilai frekuensi</p></li>
+<li><p><span class="math notranslate nohighlight">\(|X(k)|^2\)</span>: Daya (bobot) pada frekuensi tersebut</p></li>
+</ul>
+</li>
+<li><p><strong>spectral_decrease</strong>: Tingkat kelandaian spektrum menuju frekuensi tinggi.
+$<span class="math notranslate nohighlight">\(Decrease = \frac{1}{\sum_{k=2}^{K} |X(k)|} \sum_{k=2}^{K} \frac{|X(k)| - |X(1)|}{k-1}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Decrease\)</span>: Indeks penurunan spektral</p></li>
+<li><p><span class="math notranslate nohighlight">\(|X(1)|\)</span>: Magnitudo spektrum di frekuensi dasar terendah</p></li>
+<li><p><span class="math notranslate nohighlight">\(|X(k)|\)</span>: Magnitudo di indeks ke-<span class="math notranslate nohighlight">\(k\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>spectral_distance</strong>: Jarak Euclidean antar bin spektrum daya berurutan.
+$<span class="math notranslate nohighlight">\(D_{spec} = \sqrt{\sum_{k} (|X_1(k)| - |X_2(k)|)^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(D_{spec}\)</span>: Spectral Distance</p></li>
+<li><p><span class="math notranslate nohighlight">\(X_1, X_2\)</span>: Spektrum frekuensi dari dua jendela waktu yang berbeda</p></li>
+</ul>
+</li>
+<li><p><strong>spectral_entropy</strong>: Entropi kerumitan sinyal frekuensi.
+$<span class="math notranslate nohighlight">\(H_{spec} = -\sum_{k} p_k \log_2 p_k \quad \text{dimana} \quad p_k = \frac{|X(k)|^2}{\sum |X(k)|^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_{spec}\)</span>: Spectral Entropy</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_k\)</span>: Rasio probabilitas (bobot energi) pada indeks frekuensi ke-<span class="math notranslate nohighlight">\(k\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>spectral_kurtosis</strong>: Derajat keruncingan kurva spektrum frekuensi (mengukur adanya lonjakan <em>outlier</em> spektral).
+$<span class="math notranslate nohighlight">\(Kurt_{spec} = \frac{\sum_{k} (f(k) - Centroid)^4 |X(k)|^2}{\left(\sum_{k} (f(k) - Centroid)^2 |X(k)|^2\right)^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Kurt_{spec}\)</span>: Spectral Kurtosis</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(k)\)</span>: Frekuensi</p></li>
+<li><p><span class="math notranslate nohighlight">\(Centroid\)</span>: Titik pusat spektrum</p></li>
+</ul>
+</li>
+<li><p><strong>spectral_positive_turning</strong>: Jumlah puncak lokal (gunung) di dalam sebaran domain frekuensi.
+$<span class="math notranslate nohighlight">\(Turns_{spec+} = \sum_{k=2}^{K-1} I(|X(k-1)| &lt; |X(k)| &gt; |X(k+1)|)\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Turns_{spec+}\)</span>: Jumlah puncak spektral</p></li>
+<li><p><span class="math notranslate nohighlight">\(|X(k)|\)</span>: Magnitudo energi di bin ke-<span class="math notranslate nohighlight">\(k\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>spectral_roll_off</strong>: Titik frekuensi batas di mana 85% energi berada di bawahnya.
+$<span class="math notranslate nohighlight">\(f_c : \sum_{k=1}^{c} |X(k)|^2 = 0.85 \sum_{k=1}^{K} |X(k)|^2\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f_c\)</span>: Frekuensi Roll-Off</p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span>: Total bin frekuensi</p></li>
+</ul>
+</li>
+<li><p><strong>spectral_roll_on</strong>: Titik frekuensi terendah di mana 15% energi berada di bawahnya (batas bawah pendar energi).
+$<span class="math notranslate nohighlight">\(f_{on} : \sum_{k=1}^{on} |X(k)|^2 = 0.15 \sum_{k=1}^{K} |X(k)|^2\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f_{on}\)</span>: Frekuensi Roll-On</p></li>
+</ul>
+</li>
+<li><p><strong>spectral_skewness</strong>: Derajat kemencengan kurva sebaran magnitudo spektrum.
+$<span class="math notranslate nohighlight">\(Skew_{spec} = \frac{\sum_{k} (f(k) - Centroid)^3 |X(k)|^2}{\left(\sum_{k} (f(k) - Centroid)^2 |X(k)|^2\right)^{1.5}}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Skew_{spec}\)</span>: Spectral Skewness</p></li>
+<li><p><span class="math notranslate nohighlight">\(Centroid\)</span>: Pusat spektrum rata-rata</p></li>
+</ul>
+</li>
+<li><p><strong>spectral_slope</strong>: Kemiringan garis regresi dari pola penyebaran spektrum secara keseluruhan.
+$<span class="math notranslate nohighlight">\(Slope_{spec} = \frac{K \sum (f(k) \cdot |X(k)|) - \sum f(k) \sum |X(k)|}{K \sum f(k)^2 - (\sum f(k))^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Slope_{spec}\)</span>: Kemiringan spektrum (mewakili apakah sinyal didominasi frekuensi rendah atau tinggi)</p></li>
+</ul>
+</li>
+<li><p><strong>spectral_spread</strong>: Standar deviasi (lebar sebaran energi) di sekitar <em>Spectral Centroid</em>.
+$<span class="math notranslate nohighlight">\(Spread = \sqrt{\frac{\sum_k (f(k) - Centroid)^2 |X(k)|^2}{\sum_k |X(k)|^2}}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Spread\)</span>: Persebaran spektral</p></li>
+<li><p><span class="math notranslate nohighlight">\(Centroid\)</span>: Titik berat frekuensi</p></li>
+</ul>
+</li>
+<li><p><strong>spectral_variation</strong>: Jumlah fluktuasi perbedaan wujud spektrum dari waktu ke waktu.
+$<span class="math notranslate nohighlight">\(Var_{spec} = \sum_{k} ||X_t(k)| - |X_{t-1}(k)||\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Var_{spec}\)</span>: Variasi spektral</p></li>
+<li><p><span class="math notranslate nohighlight">\(X_t\)</span>: Spektrum frekuensi di waktu saat ini</p></li>
+<li><p><span class="math notranslate nohighlight">\(X_{t-1}\)</span>: Spektrum frekuensi di jendela waktu sebelumnya</p></li>
+</ul>
+</li>
+<li><p><strong>spectrogram_mean_coeff</strong>: Nilai rata-rata dari seluruh sel matriks STFT (<em>Short-Time Fourier Transform</em>).
+$<span class="math notranslate nohighlight">\(Mean_{STFT} = \frac{1}{T \cdot K} \sum_{t=1}^{T} \sum_{k=1}^{K} |S(t, k)|\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Mean_{STFT}\)</span>: Rata-rata koefisien spektrogram</p></li>
+<li><p><span class="math notranslate nohighlight">\(T\)</span>: Total blok/jendela waktu</p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span>: Total bin frekuensi</p></li>
+<li><p><span class="math notranslate nohighlight">\(S(t, k)\)</span>: Koefisien STFT pada waktu <span class="math notranslate nohighlight">\(t\)</span> frekuensi <span class="math notranslate nohighlight">\(k\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>wavelet_abs_mean</strong>: Rata-rata dari nilai absolut koefisien Transformasi Wavelet Diskrit.
+$<span class="math notranslate nohighlight">\(W_{abs} = \frac{1}{J} \sum_{j=1}^{J} |C_j|\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(W_{abs}\)</span>: Rata-rata mutlak wavelet</p></li>
+<li><p><span class="math notranslate nohighlight">\(J\)</span>: Jumlah total koefisien wavelet yang dihasilkan</p></li>
+<li><p><span class="math notranslate nohighlight">\(C_j\)</span>: Nilai koefisien wavelet ke-<span class="math notranslate nohighlight">\(j\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>wavelet_energy</strong>: Total energi dari kumpulan koefisien wavelet.
+$<span class="math notranslate nohighlight">\(W_{energy} = \sum_{j=1}^{J} C_j^2\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(W_{energy}\)</span>: Energi total wavelet</p></li>
+<li><p><span class="math notranslate nohighlight">\(C_j\)</span>: Koefisien wavelet</p></li>
+</ul>
+</li>
+<li><p><strong>wavelet_entropy</strong>: Entropi kerumitan informasi di dalam set koefisien wavelet.
+$<span class="math notranslate nohighlight">\(H_{wavelet} = -\sum_{j=1}^{J} p_j \log_2 p_j\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_{wavelet}\)</span>: Entropi wavelet</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_j\)</span>: Energi koefisien yang dinormalisasi (<span class="math notranslate nohighlight">\(C_j^2 / \sum C_i^2\)</span>)</p></li>
+</ul>
+</li>
+<li><p><strong>wavelet_std</strong>: Standar deviasi dari sebaran fluktuasi koefisien wavelet.
+$<span class="math notranslate nohighlight">\(W_{std} = \sqrt{\frac{1}{J-1} \sum_{j=1}^{J} (C_j - \mu_w)^2}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(W_{std}\)</span>: Standar deviasi wavelet</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu_w\)</span>: Nilai rata-rata dari seluruh koefisien wavelet</p></li>
+</ul>
+</li>
+<li><p><strong>wavelet_var</strong>: Varians dari penyebaran koefisien wavelet.
+$<span class="math notranslate nohighlight">\(W_{var} = \frac{1}{J-1} \sum_{j=1}^{J} (C_j - \mu_w)^2\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(W_{var}\)</span>: Varians wavelet</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu_w\)</span>: Rata-rata koefisien wavelet</p></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+</section>
+<section id="fractal-domain-6-fitur">
+<h2><strong>4. Fractal Domain (6 Fitur)</strong><a class="headerlink" href="#fractal-domain-6-fitur" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple" start="63">
+<li><p><strong>dfa (Detrended Fluctuation Analysis)</strong>: Eksponen fraktal berdasarkan fungsi fluktuasi <span class="math notranslate nohighlight">\(F(n)\)</span> yang sudah dihapus tren lokalnya (<span class="math notranslate nohighlight">\(y_n(k)\)</span>).
+$<span class="math notranslate nohighlight">\(F(n) = \sqrt{\frac{1}{N} \sum_{k=1}^{N} [y(k) - y_n(k)]^2} \propto n^\alpha\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(F(n)\)</span>: Fungsi fluktuasi rata-rata akar kuadrat</p></li>
+<li><p><span class="math notranslate nohighlight">\(y(k)\)</span>: Deret kumulatif dari sinyal polusi</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_n(k)\)</span>: Garis regresi tren lokal pada jendela skala <span class="math notranslate nohighlight">\(n\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span>: Nilai DFA (eksponen yang dihasilkan)</p></li>
+</ul>
+</li>
+<li><p><strong>higuchi_fractal_dimension</strong>: Menghitung dimensi fraktal <span class="math notranslate nohighlight">\(D\)</span> dari perkiraan panjang kurva deret waktu polusi <span class="math notranslate nohighlight">\(L(k)\)</span> di berbagai interval waktu <span class="math notranslate nohighlight">\(k\)</span>.
+$<span class="math notranslate nohighlight">\(L(k) \propto k^{-D}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(L(k)\)</span>: Panjang geometris kurva deret waktu</p></li>
+<li><p><span class="math notranslate nohighlight">\(k\)</span>: Jeda interval waktu observasi</p></li>
+<li><p><span class="math notranslate nohighlight">\(D\)</span>: Nilai Dimensi Fraktal Higuchi</p></li>
+</ul>
+</li>
+<li><p><strong>hurst_exponent</strong>: Mengukur sifat memori jangka panjang polusi (apakah polusi terus naik, atau berbalik turun).
+$<span class="math notranslate nohighlight">\(\mathbb{E}\left[\frac{R(n)}{S(n)}\right] = C n^H\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(R(n)\)</span>: Rentang jangkauan (nilai maksimal dikurangi minimal) data kumulatif</p></li>
+<li><p><span class="math notranslate nohighlight">\(S(n)\)</span>: Standar deviasi data dalam skala jendela pengamatan <span class="math notranslate nohighlight">\(n\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span>: Lebar rentang waktu pengamatan</p></li>
+<li><p><span class="math notranslate nohighlight">\(H\)</span>: Hurst Exponent</p></li>
+</ul>
+</li>
+<li><p><strong>maximum_fractal_length</strong>: Menghitung batas ukuran segmen skala log-log plot maksimal sebelum data tersebut kehilangan karakterisik fraktalnya.
+$<span class="math notranslate nohighlight">\(MFL = \arg\max_{n} (\text{Linearitas Log-Log Plot } L(n))\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(MFL\)</span>: Maximum Fractal Length</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span>: Skala interval pengamatan</p></li>
+</ul>
+</li>
+<li><p><strong>mse (Multiscale Entropy)</strong>: Entropi Sampel (<span class="math notranslate nohighlight">\(SampEn\)</span>) yang dihitung pada deret waktu yang sudah diturunkan resolusinya (dirata-ratakan) dalam skala <span class="math notranslate nohighlight">\(\tau\)</span>.
+$<span class="math notranslate nohighlight">\(SampEn(y^{(\tau)}) = -\ln \frac{A}{B}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(SampEn\)</span>: Sample Entropy (entropi sampel)</p></li>
+<li><p><span class="math notranslate nohighlight">\(y^{(\tau)}\)</span>: Sinyal yang telah diskalakan dengan merata-ratakan setiap titik sejauh skala <span class="math notranslate nohighlight">\(\tau\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(A, B\)</span>: Jumlah pasangan <em>template</em> sinyal yang masih mirip setelah diperpanjang satu titik observasi</p></li>
+</ul>
+</li>
+<li><p><strong>petrosian_fractal_dimension</strong>: Estimasi dimensi fraktal berbasis jumlah pembalikan arah (<span class="math notranslate nohighlight">\(N_{\Delta}\)</span>) sinyal polusi.
+$<span class="math notranslate nohighlight">\(PFD = \frac{\log_{10}(N)}{\log_{10}(N) + \log_{10}\left(\frac{N}{N + 0.4N_{\Delta}}\right)}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(PFD\)</span>: Petrosian Fractal Dimension</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span>: Total baris data deret waktu</p></li>
+<li><p><span class="math notranslate nohighlight">\(N_{\Delta}\)</span>: Jumlah perubahan tanda (naik <span class="math notranslate nohighlight">\(\rightarrow\)</span> turun, atau turun <span class="math notranslate nohighlight">\(\rightarrow\)</span> naik) dari turunan nilai polusi</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Materi"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="TugasFix3.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Analisis dan Ekstraksi Fitur Time Series Kualitas Udara (NO2)</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muat-data-dan-pembersihan-outlier-missing-values">1. Muat Data dan Pembersihan (Outlier &amp; Missing Values)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imputasi-missing-value-dengan-interpolasi-waktu">2. Imputasi Missing Value dengan Interpolasi Waktu</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-polutan-tsfel">3. Ekstraksi Fitur Polutan (TSFEL)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-68-fitur-ekstraksi">Penjelasan 68 Fitur Ekstraksi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-domain-21-fitur"><strong>1. Statistical Domain (21 Fitur)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-domain-15-fitur"><strong>2. Temporal Domain (15 Fitur)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-domain-26-fitur"><strong>3. Spectral Domain (26 Fitur)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fractal-domain-6-fitur"><strong>4. Fractal Domain (6 Fitur)</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Fahdimas Akmal
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Fahdimas Akmal.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
