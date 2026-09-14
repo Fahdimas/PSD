@@ -385,8 +385,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integrasi-master-dataset">4.5 Integrasi Master Dataset</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengecekan-missing-value">5. Pengecekan Missing Value</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-data-aneh-outliers-visualisasi">6. Deteksi Data Aneh (Outliers) &amp; Visualisasi</a></li>
 </ul>
             </nav>
         </div>
@@ -807,79 +805,6 @@ Successfully installed deprecated-1.3.1 openeo-0.52.0 pystac-1.15.2 pystac-core-
 </div>
 </section>
 </section>
-<section id="pengecekan-missing-value">
-<h2>5. Pengecekan Missing Value<a class="headerlink" href="#pengecekan-missing-value" title="Permalink to this heading">#</a></h2>
-<p>Pengecekan missing values ini dilakukan untuk mengetahui persentase data yang kosong atau hilang.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;KualitasUdara_Kwanyar.csv&quot;</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
-
-<span class="n">missing_count</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="n">missing_percentage</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
-<span class="n">df_missing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Jumlah Missing Value&#39;</span><span class="p">:</span> <span class="n">missing_count</span><span class="p">,</span> <span class="s1">&#39;Persentase (%)&#39;</span><span class="p">:</span> <span class="n">missing_percentage</span><span class="p">})</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- LAPORAN PENGECEKAN MISSING VALUE ---&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df_missing</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- LAPORAN PENGECEKAN MISSING VALUE ---
-      Jumlah Missing Value  Persentase (%)
-date                     0        0.000000
-NO2                    173       47.267760
-CO                     205       56.010929
-O3                       5        1.366120
-SO2                    146       39.890710
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="deteksi-data-aneh-outliers-visualisasi">
-<h2>6. Deteksi Data Aneh (Outliers) &amp; Visualisasi<a class="headerlink" href="#deteksi-data-aneh-outliers-visualisasi" title="Permalink to this heading">#</a></h2>
-<p>Kadar polusi udara bisa saja memiliki anomali atau outlier akibat cuaca ekstrem atau lonjakan emisi tiba-tiba. Deteksi anomali ini menggunakan metode Interquartile Range (IQR) dengan batas bawah (lower bound) dan batas atas (upper bound). Visualisasi di bawah ini menampilkan fluktuasi time series dengan titik merah sebagai representasi outlier.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fitur_polutan</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CO&#39;</span><span class="p">,</span> <span class="s1">&#39;NO2&#39;</span><span class="p">,</span> <span class="s1">&#39;SO2&#39;</span><span class="p">,</span> <span class="s1">&#39;O3&#39;</span><span class="p">]</span>
-<span class="n">warna_polutan</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;CO&#39;</span><span class="p">:</span> <span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="s1">&#39;NO2&#39;</span><span class="p">:</span> <span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="s1">&#39;SO2&#39;</span><span class="p">:</span> <span class="s1">&#39;tab:green&#39;</span><span class="p">,</span> <span class="s1">&#39;O3&#39;</span><span class="p">:</span> <span class="s1">&#39;tab:blue&#39;</span><span class="p">}</span>
-
-<span class="k">for</span> <span class="n">kolom</span> <span class="ow">in</span> <span class="n">fitur_polutan</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">kolom</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-        <span class="n">Q1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">kolom</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
-        <span class="n">Q3</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">kolom</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
-        <span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
-
-        <span class="n">lower_bound</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span><span class="p">)</span>
-        <span class="n">upper_bound</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span><span class="p">)</span>
-
-        <span class="n">outliers_iqr</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="n">kolom</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lower_bound</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">kolom</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">upper_bound</span><span class="p">)]</span>
-
-        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">kolom</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">kolom</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">warna_polutan</span><span class="p">[</span><span class="n">kolom</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">outliers_iqr</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">outliers_iqr</span><span class="p">[</span><span class="n">kolom</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Outlier&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-
-        <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">upper_bound</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Upper Bound&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">lower_bound</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Lower Bound&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
-
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Deteksi Outlier </span><span class="si">{</span><span class="n">kolom</span><span class="si">}</span><span class="s2"> Kecamatan Kwanyar (IQR)&quot;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Tanggal&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kadar </span><span class="si">{</span><span class="n">kolom</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/adff4c92044caa29a261e528f8c070305da39e495c694c7ca54ed6bdbf5e528e.png" src="../_images/adff4c92044caa29a261e528f8c070305da39e495c694c7ca54ed6bdbf5e528e.png" />
-<img alt="../_images/0e3c457899d9dcb96f9d10027afa135ab5e3d72e76f6c1623cd149fa1f9e26f3.png" src="../_images/0e3c457899d9dcb96f9d10027afa135ab5e3d72e76f6c1623cd149fa1f9e26f3.png" />
-<img alt="../_images/4b8cda7d8154d384a0ef00451046a40285b936988df610f81198cda92434f967.png" src="../_images/4b8cda7d8154d384a0ef00451046a40285b936988df610f81198cda92434f967.png" />
-<img alt="../_images/674828181b9e121502bee96d077a51e5940725eeb44935c5fb00bab3ace8dfc2.png" src="../_images/674828181b9e121502bee96d077a51e5940725eeb44935c5fb00bab3ace8dfc2.png" />
-</div>
-</div>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -957,8 +882,6 @@ SO2                    146       39.890710
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integrasi-master-dataset">4.5 Integrasi Master Dataset</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengecekan-missing-value">5. Pengecekan Missing Value</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-data-aneh-outliers-visualisasi">6. Deteksi Data Aneh (Outliers) &amp; Visualisasi</a></li>
 </ul>
   </nav></div>
 
