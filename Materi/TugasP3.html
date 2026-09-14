@@ -64,11 +64,10 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Materi/TugasFix3';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Materi/TugasP3';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Analisis dan Ekstraksi Fitur Time Series Kualitas Udara (NO2)" href="TugasP3.html" />
-    <link rel="prev" title="IMPLEMENTASI KE DALAM AIVEN POSTGRE PG ADMIN DAN KNIME" href="TugasFix2.html" />
+    <link rel="prev" title="Analisis dan Ekstraksi Fitur Time Series Kualitas Udara (NO2)" href="TugasFix3.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,8 +177,8 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="TugasFix1.html">Analisis Runtun Waktu Kualitas Udara (Sentinel-5P)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="TugasFix2.html">IMPLEMENTASI KE DALAM AIVEN POSTGRE PG ADMIN DAN KNIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TugasFix3.html">Analisis dan Ekstraksi Fitur Time Series Kualitas Udara (NO2)</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisis dan Ekstraksi Fitur Time Series Kualitas Udara (NO2)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="TugasP3.html">Analisis dan Ekstraksi Fitur Time Series Kualitas Udara (NO2)</a></li>
 </ul>
 
     </div>
@@ -251,7 +250,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FMateri/TugasFix3.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FMateri/TugasP3.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -281,7 +280,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/Materi/TugasFix3.ipynb" target="_blank"
+      <li><a href="../_sources/Materi/TugasP3.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -378,6 +377,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muat-data-dan-pembersihan-outlier-missing-values">1. Muat Data dan Pembersihan (Outlier &amp; Missing Values)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imputasi-missing-value-dengan-interpolasi-waktu">2. Imputasi Missing Value dengan Interpolasi Waktu</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-polutan-tsfel">3. Ekstraksi Fitur Polutan (TSFEL)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-68-fitur-ekstraksi">Penjelasan 68 Fitur Ekstraksi</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-domain-21-fitur"><strong>1. Statistical Domain (21 Fitur)</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-domain-15-fitur"><strong>2. Temporal Domain (15 Fitur)</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-domain-26-fitur"><strong>3. Spectral Domain (26 Fitur)</strong></a></li>
@@ -615,6 +615,9 @@ File ekstraksi NO2_Kwanyar_TSFEL.csv sudah tersimpan.
 </div>
 </div>
 </div>
+</section>
+<section id="penjelasan-68-fitur-ekstraksi">
+<h2>Penjelasan 68 Fitur Ekstraksi<a class="headerlink" href="#penjelasan-68-fitur-ekstraksi" title="Permalink to this heading">#</a></h2>
 </section>
 <section id="statistical-domain-21-fitur">
 <h2><strong>1. Statistical Domain (21 Fitur)</strong><a class="headerlink" href="#statistical-domain-21-fitur" title="Permalink to this heading">#</a></h2>
@@ -1200,22 +1203,13 @@ $<span class="math notranslate nohighlight">\(PFD = \frac{\log_{10}(N)}{\log_{10
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="TugasFix2.html"
+       href="TugasFix3.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">IMPLEMENTASI KE DALAM AIVEN POSTGRE PG ADMIN DAN KNIME</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="TugasP3.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Analisis dan Ekstraksi Fitur Time Series Kualitas Udara (NO2)</p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -1236,6 +1230,7 @@ $<span class="math notranslate nohighlight">\(PFD = \frac{\log_{10}(N)}{\log_{10
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muat-data-dan-pembersihan-outlier-missing-values">1. Muat Data dan Pembersihan (Outlier &amp; Missing Values)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imputasi-missing-value-dengan-interpolasi-waktu">2. Imputasi Missing Value dengan Interpolasi Waktu</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-polutan-tsfel">3. Ekstraksi Fitur Polutan (TSFEL)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-68-fitur-ekstraksi">Penjelasan 68 Fitur Ekstraksi</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-domain-21-fitur"><strong>1. Statistical Domain (21 Fitur)</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-domain-15-fitur"><strong>2. Temporal Domain (15 Fitur)</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-domain-26-fitur"><strong>3. Spectral Domain (26 Fitur)</strong></a></li>
