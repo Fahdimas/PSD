@@ -1,6 +1,10 @@
 format: jb-book
-root: intro
+root: intro.md
 chapters:
-  - file: Materi/TugasFix1
-  - file: Materi/TugasFix2
-  - file: Materi/TugasFix3
+  - file: Materi/TugasFix1.ipynb
+  - file: Materi/TugasFix2.ipynb
+  - file: Materi/TugasP1.ipynb
+  - file: Materi/T1.ipynb
+  - file: Materi/T2.ipynb
+  - file: Materi/T3.ipynb
+  - file: Materi/T4.ipynb
