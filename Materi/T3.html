@@ -176,9 +176,6 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="TugasFix1.html">Analisis Runtun Waktu Kualitas Udara (Sentinel-5P)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="TugasFix2.html">IMPLEMENTASI KE DALAM AIVEN POSTGRE PG ADMIN DAN KNIME</a></li>
-<li class="toctree-l1"><a class="reference internal" href="TugasP1.html">Analisis dan Ekstraksi Fitur Time Series Kualitas Udara (NO2)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="T1.html">1. Business Understanding</a></li>
 
 
@@ -187,6 +184,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="T2.html">IMPLEMENTASI KE DALAM AIVEN POSTGRE PG ADMIN DAN KNIME</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisis dan Ekstraksi Fitur Time Series Kualitas Udara (NO2, CO, SO2)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="T4.html">Analisis Klaster Kualitas Udara (CO, NO2, SO2) - Wilayah Kwanyar, Bangkalan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T4Fix.html">Laporan Analisis K-Means Clustering Polutan (CO, NO2, SO2)</a></li>
+
 </ul>
 
     </div>
@@ -528,8 +527,9 @@ File hasil interpolasi &#39;KualitasUdara_Kwanyar_Sekitarnya_Cleaned.csv&#39; .
 <h2>2. Imputasi Missing Value dengan Interpolasi Waktu<a class="headerlink" href="#imputasi-missing-value-dengan-interpolasi-waktu" title="Permalink to this heading">#</a></h2>
 <p>Data yang hilang atau <em>outlier</em> yang telah dihapus di kolom NO2, CO, maupun SO2 tidak boleh dibiarkan kosong karena akan menggagalkan ekstraksi fitur TSFEL. Untuk mengatasinya, kita menggunakan metode <strong>Interpolasi Waktu (Time Interpolation)</strong>.</p>
 <p>Metode ini memperkirakan nilai yang hilang dengan menarik garis lurus secara proporsional antara titik data hari sebelum dan sesudah nilai yang kosong.</p>
-<p><strong>Rumus Linear Interpolation:</strong>
-$<span class="math notranslate nohighlight">\(y = y_0 + (x - x_0) \frac{y_1 - y_0}{x_1 - x_0}\)</span>$</p>
+<p><strong>Rumus Linear Interpolation:</strong></p>
+<div class="math notranslate nohighlight">
+\[y = y_0 + (x - x_0) \frac{y_1 - y_0}{x_1 - x_0}\]</div>
 <p><strong>Keterangan Rumus:</strong></p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(y\)</span> = Nilai polusi estimasi pada hari yang kosong (target).</p></li>
@@ -641,10 +641,13 @@ Berhasil! Ekstraksi 68 fitur untuk SO2 telah disimpan di &#39;SO2_Kwanyar_Sekita
 <hr class="docutils" />
 <section id="fitur-1-neighbourhood-peaks-signal-n">
 <h3>Fitur 1: neighbourhood_peaks(signal, n)<a class="headerlink" href="#fitur-1-neighbourhood-peaks-signal-n" title="Permalink to this heading">#</a></h3>
-<ul>
+<ul class="simple">
 <li><p><strong>Deskripsi Fitur:</strong> Fitur temporal ini menghitung <strong>jumlah puncak lokal (<em>local peaks</em>)</strong> yang menonjol di dalam rentang data deret waktu. Sebuah titik observasi (<span class="math notranslate nohighlight">\(x_i\)</span>) diklasifikasikan sebagai “puncak” apabila nilainya <strong>lebih besar</strong> dari <span class="math notranslate nohighlight">\(n\)</span> data tetangga di sebelah kirinya dan <span class="math notranslate nohighlight">\(n\)</span> data tetangga di sebelah kanannya.</p></li>
-<li><p><strong>Rumus Matematika:</strong>
-$<span class="math notranslate nohighlight">\(Peaks = \sum_{i=n}^{N-n} I(x_i &gt; x_{i \pm k}, \forall k \in [1, n])\)</span>$</p></li>
+<li><p><strong>Rumus Matematika:</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Peaks = \sum_{i=n}^{N-n} I(x_i &gt; x_{i \pm k}, \forall k \in [1, n])\]</div>
+<ul>
 <li><p><strong>Keterangan Rumus:</strong></p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(I\)</span>: Fungsi indikator (Menghasilkan angka 1 jika titik tersebut memenuhi syarat puncak, dan 0 jika tidak).</p></li>
@@ -688,9 +691,11 @@ Pertama, kita memindai 20 data sampel <span class="math notranslate nohighlight"
 <li><p>Nilai Maksimum (<span class="math notranslate nohighlight">\(\max(x)\)</span>) jatuh pada indeks ke-1 yaitu <span class="math notranslate nohighlight">\(x_1 = 0.00001846\)</span></p></li>
 <li><p>Nilai Minimum (<span class="math notranslate nohighlight">\(\min(x)\)</span>) jatuh pada indeks ke-19 yaitu <span class="math notranslate nohighlight">\(x_{19} = 0.00000311\)</span></p></li>
 </ul>
-<p>Selanjutnya, operasikan rumusnya:
-$<span class="math notranslate nohighlight">\(Distance_{pk} = 0.00001846 - 0.00000311\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(Distance_{pk} = \mathbf{0.00001535}\)</span>$</p>
+<p>Selanjutnya, operasikan rumusnya:</p>
+<div class="math notranslate nohighlight">
+\[Distance_{pk} = 0.00001846 - 0.00000311\]</div>
+<div class="math notranslate nohighlight">
+\[Distance_{pk} = \mathbf{0.00001535}\]</div>
 <p><em>Hasil akhir pembuktian <code class="docutils literal notranslate"><span class="pre">pk_pk_distance</span></code> untuk 20 sampel tersebut adalah:</em> <strong><span class="math notranslate nohighlight">\(0.00001535\)</span></strong></p>
 </li>
 </ul>
