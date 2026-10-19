@@ -414,7 +414,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-luas-hasil-prediksi-per-area">F. Luas hasil prediksi per area</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Aplikasi Web (Streamlit)</a></li>
 </ul>
             </nav>
         </div>
@@ -2824,76 +2823,7 @@ $<span class="math notranslate nohighlight">\(\text{Luas kelas (ha)} = \text{jum
 </table>
 </div>
 <p>Total tiap area sekitar 3.600 ha, sesuai area 6 km × 6 km = 36 km² = 3.600 ha (selisih kecil karena batas piksel dan konversi koordinat).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">drive</span><span class="p">;</span> <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s2">&quot;/content/drive&quot;</span><span class="p">)</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="o">,</span><span class="w"> </span><span class="nn">json</span><span class="o">,</span><span class="w"> </span><span class="nn">joblib</span>
-<span class="n">DST</span> <span class="o">=</span> <span class="s2">&quot;/content/drive/MyDrive/PSD_Jatim&quot;</span>
-<span class="n">kelas_all</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">DST</span><span class="si">}</span><span class="s2">/kelas_all.npy&quot;</span><span class="p">)</span>
-<span class="n">final_model</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">DST</span><span class="si">}</span><span class="s2">/final_model.joblib&quot;</span><span class="p">)</span>
-<span class="n">meta</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">DST</span><span class="si">}</span><span class="s2">/meta.json&quot;</span><span class="p">))</span>
-<span class="n">aoi_hasil</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">STEP</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">&quot;aoi_hasil&quot;</span><span class="p">],</span> <span class="n">meta</span><span class="p">[</span><span class="s2">&quot;N&quot;</span><span class="p">],</span> <span class="n">meta</span><span class="p">[</span><span class="s2">&quot;W&quot;</span><span class="p">],</span> <span class="n">meta</span><span class="p">[</span><span class="s2">&quot;STEP&quot;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mounted at /content/drive
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="nn">/tmp/ipykernel_879/4247391806.py</span> in <span class="ni">&lt;cell line: 0&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="o">,</span><span class="w"> </span><span class="nn">json</span><span class="o">,</span><span class="w"> </span><span class="nn">joblib</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">DST</span> <span class="o">=</span> <span class="s2">&quot;/content/drive/MyDrive/PSD_Jatim&quot;</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">kelas_all</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">DST</span><span class="si">}</span><span class="s2">/kelas_all.npy&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">final_model</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">DST</span><span class="si">}</span><span class="s2">/final_model.joblib&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">DST</span><span class="si">}</span><span class="s2">/meta.json&quot;</span><span class="p">))</span>
-
-<span class="nn">/usr/local/lib/python3.13/dist-packages/numpy/lib/_npyio_impl.py</span> in <span class="ni">load</span><span class="nt">(file, mmap_mode, allow_pickle, fix_imports, encoding, max_header_size)</span>
-<span class="g g-Whitespace">    </span><span class="mi">457</span>             <span class="n">own_fid</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="g g-Whitespace">    </span><span class="mi">458</span>         <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">459</span>             <span class="n">fid</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">enter_context</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">file</span><span class="p">),</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">460</span>             <span class="n">own_fid</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="g g-Whitespace">    </span><span class="mi">461</span> 
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/content/drive/MyDrive/PSD_Jatim/kelas_all.npy&#39;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>import os, zipfile, shutil
-OUT = &quot;/content/results&quot;   # sesuaikan kalau OUT_DIR-mu beda
-
-# 1) hasil utama TANPA ubin (kecil: PNG, CSV luas, kelas_all.npy, model, meta)
-with zipfile.ZipFile(&quot;/content/ubin.zip&quot;, &quot;w&quot;, zipfile.ZIP_STORED) as z:
-    for root, _, fs in os.walk(OUT):
-        if &quot;tiles_&quot; not in root: continue
-        for f in fs:
-            p = os.path.join(root, f); z.write(p, os.path.relpath(p, OUT))
-
-# 2) web statis (index.html + file pendukungnya)
-shutil.make_archive(&quot;/content/docs_web&quot;, &quot;zip&quot;, &quot;/content/docs&quot;)
-
-!ls -lh /content/*.zip
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-rw-r--r-- 1 root root 1.6M Oct 12 05:12 /content/docs_web.zip
--rw-r--r-- 1 root root 917K Oct 12 03:32 /content/shp_final.zip
--rw-r--r-- 1 root root 284M Oct 12 05:11 /content/ubin.zip
-</pre></div>
-</div>
-</div>
-</div>
 </section>
-</section>
-<section id="id1">
-<h2>Aplikasi Web (Streamlit)<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<p>Tempel tautan aplikasi di sini:
-<a class="reference external" href="https://uts-klasifikasi-psd.streamlit.app/">https://uts-klasifikasi-psd.streamlit.app/</a></p>
 </section>
 </section>
 
@@ -2982,7 +2912,6 @@ shutil.make_archive(&quot;/content/docs_web&quot;, &quot;zip&quot;, &quot;/conte
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-luas-hasil-prediksi-per-area">F. Luas hasil prediksi per area</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Aplikasi Web (Streamlit)</a></li>
 </ul>
   </nav></div>
 
