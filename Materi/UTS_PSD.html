@@ -62,8 +62,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Materi/UTS_PSD';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -405,15 +403,6 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplikasi-web-streamlit">Aplikasi Web (Streamlit)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual">Perhitungan Manual</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pembagian-data">A. Pembagian data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-menentukan-tp-fp-dan-fn">B. Menentukan TP, FP, dan FN</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-akurasi">C. Akurasi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-precision-recall-dan-f1-per-kelas">D. Precision, Recall, dan F1 per kelas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-rata-rata-makro">E. Rata-rata makro</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-luas-hasil-prediksi-per-area">F. Luas hasil prediksi per area</a></li>
-</ul>
-</li>
 </ul>
             </nav>
         </div>
@@ -2597,23 +2586,53 @@ prediksi 119/119
 </section>
 <section id="kesimpulan">
 <h2>7. Kesimpulan<a class="headerlink" href="#kesimpulan" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p><strong>Model Terbaik</strong>: Dari 6 model yang dibandingkan, <strong>SVM (RBF)</strong> memberikan hasil terbaik dengan <strong>akurasi 87.50%</strong> dan <strong>F1 macro 0.875</strong> pada data uji (<em>1.872 titik dari poligon yang tidak digunakan untuk pelatihan</em>).</p></li>
-<li><p><strong>Kinerja Per Klasifikasi</strong>:</p>
+<ol class="arabic">
+<li><p><strong>Model terbaik</strong>: Dari 6 model yang dibandingkan (Random Forest, Extra Trees, Gradient Boosting, HistGradientBoosting, SVM, KNN), <strong>SVM (RBF)</strong> memberikan hasil terbaik dengan <strong>CV F1 = 0,828</strong>, <strong>akurasi 83,40%</strong>, dan <strong>F1 macro 0,831</strong> pada data uji (<em>10.800 titik dari poligon yang tidak dipakai untuk pelatihan</em>).</p></li>
+<li><p><strong>Kinerja per kelas</strong>:</p>
 <ul class="simple">
-<li><p><strong>Kelas Paling Mudah Dikenali</strong>: Mangrove (<span class="math notranslate nohighlight">\(F1\text{-score} = 0.97\)</span>)</p></li>
-<li><p><strong>Kelas Paling Sulit Dikenali</strong>: Danau / Ranu (<span class="math notranslate nohighlight">\(F1\text{-score} = 0.81\)</span>)</p></li>
+<li><p><strong>Paling mudah dikenali</strong>: Perairan Laut (F1 = 0,994), disusul Danau/Ranu (0,980) dan Mangrove (0,930).</p></li>
+<li><p><strong>Paling sulit dikenali</strong>: Lahan Hijau (F1 = 0,570; recall 0,469). Banyak titik Lahan Hijau salah diprediksi sebagai Sawah (676 titik) dan Bangunan (276 titik).</p></li>
+<li><p>Sawah juga kurang baik pada precision (0,615) karena sering menerima salah prediksi dari Lahan Hijau, Bangunan, dan Mangrove.</p></li>
 </ul>
 </li>
-<li><p><strong>Fitur Paling Berpengaruh</strong>: <code class="docutils literal notranslate"><span class="pre">B12</span></code>, <code class="docutils literal notranslate"><span class="pre">B3</span></code>, dan <code class="docutils literal notranslate"><span class="pre">B2</span></code>.</p></li>
-<li><p><strong>Hasil Prediksi Pada 5 Area Contoh (<span class="math notranslate nohighlight">\(6 \times 6\text{ km}\)</span>)</strong>:</p>
-<ul class="simple">
-<li><p><strong>Surabaya–Sidoarjo</strong>: Didominasi oleh <strong>Mangrove</strong> (<span class="math notranslate nohighlight">\(953\text{ ha}\)</span> dari <span class="math notranslate nohighlight">\(3.636\text{ ha}\)</span>)</p></li>
-<li><p><strong>Malang</strong>: Didominasi oleh <strong>Bangunan</strong> (<span class="math notranslate nohighlight">\(2.751\text{ ha}\)</span> dari <span class="math notranslate nohighlight">\(3.642\text{ ha}\)</span>)</p></li>
-<li><p><strong>Nganjuk</strong>: Didominasi oleh <strong>Sawah</strong> (<span class="math notranslate nohighlight">\(1.585\text{ ha}\)</span> dari <span class="math notranslate nohighlight">\(3.624\text{ ha}\)</span>)</p></li>
-<li><p><strong>Banyuwangi</strong>: Didominasi oleh <strong>Bangunan</strong> (<span class="math notranslate nohighlight">\(1.447\text{ ha}\)</span> dari <span class="math notranslate nohighlight">\(3.684\text{ ha}\)</span>)</p></li>
-<li><p><strong>Danau (Ranu)</strong>: Didominasi oleh <strong>Sawah</strong> (<span class="math notranslate nohighlight">\(1.836\text{ ha}\)</span> dari <span class="math notranslate nohighlight">\(3.648\text{ ha}\)</span>)</p></li>
-</ul>
+<li><p><strong>Fitur paling berpengaruh</strong> (permutation importance): <strong>B2, B12, dan NDWI</strong>.</p></li>
+<li><p><strong>Hasil prediksi seluruh Provinsi Jawa Timur</strong> (total sekitar 5,33 juta ha):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Kelas</p></th>
+<th class="head"><p>Luas (ha)</p></th>
+<th class="head"><p>Proporsi</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Lahan Hijau</p></td>
+<td><p>2.523.493</p></td>
+<td><p>47,4%</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sawah</p></td>
+<td><p>1.496.103</p></td>
+<td><p>28,1%</p></td>
+</tr>
+<tr class="row-even"><td><p>Bangunan</p></td>
+<td><p>587.043</p></td>
+<td><p>11,0%</p></td>
+</tr>
+<tr class="row-odd"><td><p>Perairan Laut</p></td>
+<td><p>564.345</p></td>
+<td><p>10,6%</p></td>
+</tr>
+<tr class="row-even"><td><p>Mangrove</p></td>
+<td><p>120.741</p></td>
+<td><p>2,3%</p></td>
+</tr>
+<tr class="row-odd"><td><p>Danau (Ranu)</p></td>
+<td><p>37.442</p></td>
+<td><p>0,7%</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Lahan Hijau menjadi kelas dominan, diikuti Sawah. Kelas Bangunan, Perairan Laut, Mangrove, dan Danau menempati porsi yang jauh lebih kecil.</p>
 </li>
 </ol>
 </section>
@@ -2623,18 +2642,20 @@ prediksi 119/119
 <section id="keterbatasan">
 <h3>Keterbatasan<a class="headerlink" href="#keterbatasan" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Komposit Median Tahunan</strong>: Tidak menangkap dinamika perubahan musiman (misalnya kondisi sawah saat tergenang air vs. saat panen).</p></li>
-<li><p><strong>Sebaran Sampel</strong>: Sampel berasal dari poligon yang digambar secara manual dan sebarannya belum merata di seluruh wilayah Jawa Timur.</p></li>
-<li><p><strong>Piksel Campuran (<em>Mixed Pixels</em>)</strong>: Resolusi <span class="math notranslate nohighlight">\(10 - 20\text{ m}\)</span> menyebabkan keterbatasan pada tepi objek kecil seperti bangunan padat atau batas mangrove yang sempit.</p></li>
-<li><p><strong>Cakupan Prediksi</strong>: Prediksi saat ini baru dilakukan pada area contoh pilihan, belum mencakup seluruh wilayah provinsi.</p></li>
+<li><p><strong>Komposit median satu bulan</strong> (Agustus 2026): tidak menangkap dinamika musiman, misalnya sawah saat tergenang vs. saat panen, sehingga Sawah dan Lahan Hijau mudah tertukar.</p></li>
+<li><p><strong>Sebaran sampel</strong>: poligon digambar manual dan belum merata di seluruh Jawa Timur.</p></li>
+<li><p><strong>Data uji seimbang</strong> (1.800 per kelas): akurasi 83,40% belum mencerminkan proporsi kelas sebenarnya di lapangan. Karena recall Lahan Hijau rendah dan precision Sawah rendah, luas Lahan Hijau kemungkinan terlalu kecil dan luas Sawah terlalu besar pada peta.</p></li>
+<li><p><strong>Piksel campuran (<em>mixed pixels</em>)</strong>: resolusi 10–20 m membatasi akurasi di tepi objek kecil seperti bangunan padat atau mangrove yang sempit.</p></li>
+<li><p><strong>Resolusi peta</strong>: prediksi seluruh provinsi memakai piksel sekitar 110 m (<code class="docutils literal notranslate"><span class="pre">STEP</span> <span class="pre">=</span> <span class="pre">0.001</span></code>) agar muat di memori, sehingga objek kecil kurang tajam.</p></li>
 </ul>
 </section>
 <section id="saran">
 <h3>Saran<a class="headerlink" href="#saran" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Penambahan Sampel</strong>: Menambah poligon sampel di wilayah/kabupaten lain untuk meningkatkan keterwakilan data.</p></li>
-<li><p><strong>Fitur Multi-temporal</strong>: Menggunakan deret waktu (<em>time-series</em>) atau data multi-temporal untuk menangkap fenologi vegetasi/sawah.</p></li>
-<li><p><strong>Validasi Lapangan</strong>: Melakukan validasi ulang dengan citra satelit resolusi sangat tinggi atau survei lapangan (<em>ground truth</em>).</p></li>
+<li><p><strong>Tambah sampel</strong> poligon di lebih banyak kabupaten, terutama untuk Lahan Hijau dan Sawah.</p></li>
+<li><p><strong>Fitur multi-temporal</strong> (deret waktu atau beberapa komposit musim) untuk menangkap fenologi vegetasi dan sawah.</p></li>
+<li><p><strong>Validasi lapangan</strong> atau pakai citra resolusi sangat tinggi sebagai pembanding.</p></li>
+<li><p><strong>Resolusi lebih halus</strong> (<code class="docutils literal notranslate"><span class="pre">STEP</span></code> lebih kecil) bila sumber daya komputasi memungkinkan.</p></li>
 </ul>
 </section>
 </section>
@@ -2642,188 +2663,6 @@ prediksi 119/119
 <h2>Aplikasi Web (Streamlit)<a class="headerlink" href="#aplikasi-web-streamlit" title="Permalink to this heading">#</a></h2>
 <p>Tempel tautan aplikasi di sini:
 <a class="reference external" href="https://uts-klasifikasi-psd.streamlit.app/">https://uts-klasifikasi-psd.streamlit.app/</a></p>
-</section>
-<section id="perhitungan-manual">
-<h2>Perhitungan Manual<a class="headerlink" href="#perhitungan-manual" title="Permalink to this heading">#</a></h2>
-<section id="a-pembagian-data">
-<h3>A. Pembagian data<a class="headerlink" href="#a-pembagian-data" title="Permalink to this heading">#</a></h3>
-<p><em>Sumber: tabel split (sel 4).</em></p>
-<ul class="simple">
-<li><p>Total titik = 6 kelas × 1.500 = <strong>9.000</strong></p></li>
-<li><p>Data latih = 6 kelas × 1.080 = <strong>6.480</strong></p></li>
-<li><p>Data uji = 6 kelas × 312 = <strong>1.872</strong> (312 per kelas, jadi seimbang)</p></li>
-</ul>
-</section>
-<section id="b-menentukan-tp-fp-dan-fn">
-<h3>B. Menentukan TP, FP, dan FN<a class="headerlink" href="#b-menentukan-tp-fp-dan-fn" title="Permalink to this heading">#</a></h3>
-<p><em>Sumber: classification report dan confusion matrix (sel 5).</em></p>
-<ul class="simple">
-<li><p>TP (benar diprediksi) = recall × support, dengan support = 312 per kelas</p></li>
-<li><p>Total prediksi satu kelas = TP / precision</p></li>
-<li><p>FP = total prediksi - TP</p></li>
-<li><p>FN = support - TP</p></li>
-</ul>
-<p>Contoh Sawah: TP = 0,923 × 312 = 288 (cocok dengan diagonal confusion matrix). Total prediksi Sawah = 288 / 0,772 = 373, sehingga FP = 373 - 288 = 85 dan FN = 312 - 288 = 24 (baris Sawah: 1 salah ke Mangrove + 23 salah ke Lahan Hijau = 24).</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Kelas</p></th>
-<th class="head"><p>TP</p></th>
-<th class="head"><p>FP</p></th>
-<th class="head"><p>FN</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Sawah</p></td>
-<td><p>288</p></td>
-<td><p>85</p></td>
-<td><p>24</p></td>
-</tr>
-<tr class="row-odd"><td><p>Bangunan</p></td>
-<td><p>289</p></td>
-<td><p>76</p></td>
-<td><p>23</p></td>
-</tr>
-<tr class="row-even"><td><p>Mangrove</p></td>
-<td><p>300</p></td>
-<td><p>8</p></td>
-<td><p>12</p></td>
-</tr>
-<tr class="row-odd"><td><p>Lahan Hijau</p></td>
-<td><p>243</p></td>
-<td><p>38</p></td>
-<td><p>69</p></td>
-</tr>
-<tr class="row-even"><td><p>Perairan Laut</p></td>
-<td><p>288</p></td>
-<td><p>0</p></td>
-<td><p>24</p></td>
-</tr>
-<tr class="row-odd"><td><p>Danau (Ranu)</p></td>
-<td><p>230</p></td>
-<td><p>27</p></td>
-<td><p>82</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Total</strong></p></td>
-<td><p><strong>1.638</strong></p></td>
-<td><p><strong>234</strong></p></td>
-<td><p><strong>234</strong></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Total FP sama dengan total FN (234), dan sama dengan jumlah data uji yang salah (1.872 - 1.638 = 234).</p>
-</section>
-<section id="c-akurasi">
-<h3>C. Akurasi<a class="headerlink" href="#c-akurasi" title="Permalink to this heading">#</a></h3>
-<div class="math notranslate nohighlight">
-\[\text{Akurasi} = \frac{\sum TP}{N} = \frac{1.638}{1.872} = 0{,}875 = 87{,}50\%\]</div>
-</section>
-<section id="d-precision-recall-dan-f1-per-kelas">
-<h3>D. Precision, Recall, dan F1 per kelas<a class="headerlink" href="#d-precision-recall-dan-f1-per-kelas" title="Permalink to this heading">#</a></h3>
-<div class="math notranslate nohighlight">
-\[\text{Precision} = \frac{TP}{TP+FP} \qquad \text{Recall} = \frac{TP}{TP+FN} \qquad F1 = \frac{2 \times P \times R}{P + R}\]</div>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Kelas</p></th>
-<th class="head"><p>Precision</p></th>
-<th class="head"><p>Recall</p></th>
-<th class="head"><p>F1</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Sawah</p></td>
-<td><p>288/373 = 0,772</p></td>
-<td><p>288/312 = 0,923</p></td>
-<td><p>0,841</p></td>
-</tr>
-<tr class="row-odd"><td><p>Bangunan</p></td>
-<td><p>289/365 = 0,792</p></td>
-<td><p>289/312 = 0,926</p></td>
-<td><p>0,854</p></td>
-</tr>
-<tr class="row-even"><td><p>Mangrove</p></td>
-<td><p>300/308 = 0,974</p></td>
-<td><p>300/312 = 0,962</p></td>
-<td><p>0,968</p></td>
-</tr>
-<tr class="row-odd"><td><p>Lahan Hijau</p></td>
-<td><p>243/281 = 0,865</p></td>
-<td><p>243/312 = 0,779</p></td>
-<td><p>0,820</p></td>
-</tr>
-<tr class="row-even"><td><p>Perairan Laut</p></td>
-<td><p>288/288 = 1,000</p></td>
-<td><p>288/312 = 0,923</p></td>
-<td><p>0,960</p></td>
-</tr>
-<tr class="row-odd"><td><p>Danau (Ranu)</p></td>
-<td><p>230/257 = 0,895</p></td>
-<td><p>230/312 = 0,737</p></td>
-<td><p>0,808</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Contoh F1 Sawah: 2 × 0,772 × 0,923 / (0,772 + 0,923) = 1,425 / 1,695 = <strong>0,841</strong>.</p>
-</section>
-<section id="e-rata-rata-makro">
-<h3>E. Rata-rata makro<a class="headerlink" href="#e-rata-rata-makro" title="Permalink to this heading">#</a></h3>
-<div class="math notranslate nohighlight">
-\[F1_{macro} = \frac{0{,}841 + 0{,}854 + 0{,}968 + 0{,}820 + 0{,}960 + 0{,}808}{6} = \frac{5{,}251}{6} = 0{,}875\]</div>
-<p>Karena jumlah data uji tiap kelas sama (312), rata-rata makro dan rata-rata berbobot memberi hasil yang sama.</p>
-</section>
-<section id="f-luas-hasil-prediksi-per-area">
-<h3>F. Luas hasil prediksi per area<a class="headerlink" href="#f-luas-hasil-prediksi-per-area" title="Permalink to this heading">#</a></h3>
-<p><em>Sumber: tabel luas (sel 6).</em></p>
-<p>Satu piksel Sentinel-2 = 10 m × 10 m = 100 m² = 0,01 ha, sehingga:
-$<span class="math notranslate nohighlight">\(\text{Luas kelas (ha)} = \text{jumlah piksel kelas} \times 0{,}01\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(\text{Proporsi} = \frac{\text{luas kelas}}{\text{total luas area}} \times 100\%\)</span>$</p>
-<p>Contoh Malang: total = 351,2 + 2.751,0 + 3,6 + 532,6 + 0 + 3,8 = 3.642,2 ha, dan Bangunan = 2.751,0 / 3.642,2 = <strong>75,5%</strong>.</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Area</p></th>
-<th class="head"><p>Total luas (ha)</p></th>
-<th class="head"><p>Kelas dominan</p></th>
-<th class="head"><p>Luas (ha)</p></th>
-<th class="head"><p>Proporsi</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Surabaya-Sidoarjo</p></td>
-<td><p>3.636,1</p></td>
-<td><p>Mangrove</p></td>
-<td><p>953,4</p></td>
-<td><p>26,2%</p></td>
-</tr>
-<tr class="row-odd"><td><p>Malang</p></td>
-<td><p>3.642,2</p></td>
-<td><p>Bangunan</p></td>
-<td><p>2.751,0</p></td>
-<td><p>75,5%</p></td>
-</tr>
-<tr class="row-even"><td><p>Nganjuk</p></td>
-<td><p>3.624,1</p></td>
-<td><p>Sawah</p></td>
-<td><p>1.584,6</p></td>
-<td><p>43,7%</p></td>
-</tr>
-<tr class="row-odd"><td><p>Banyuwangi</p></td>
-<td><p>3.684,5</p></td>
-<td><p>Bangunan</p></td>
-<td><p>1.447,0</p></td>
-<td><p>39,3%</p></td>
-</tr>
-<tr class="row-even"><td><p>Danau (Ranu)</p></td>
-<td><p>3.648,1</p></td>
-<td><p>Sawah</p></td>
-<td><p>1.836,5</p></td>
-<td><p>50,3%</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Total tiap area sekitar 3.600 ha, sesuai area 6 km × 6 km = 36 km² = 3.600 ha (selisih kecil karena batas piksel dan konversi koordinat).</p>
-</section>
 </section>
 </section>
 
@@ -2903,15 +2742,6 @@ $<span class="math notranslate nohighlight">\(\text{Luas kelas (ha)} = \text{jum
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplikasi-web-streamlit">Aplikasi Web (Streamlit)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual">Perhitungan Manual</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pembagian-data">A. Pembagian data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-menentukan-tp-fp-dan-fn">B. Menentukan TP, FP, dan FN</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-akurasi">C. Akurasi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-precision-recall-dan-f1-per-kelas">D. Precision, Recall, dan F1 per kelas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-rata-rata-makro">E. Rata-rata makro</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-luas-hasil-prediksi-per-area">F. Luas hasil prediksi per area</a></li>
-</ul>
-</li>
 </ul>
   </nav></div>
 
