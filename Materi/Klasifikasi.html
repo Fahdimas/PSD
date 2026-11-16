@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Tugas Ekstraksi Fitur Citra &amp; Klasifikasi (Rapi vs Berantakan) &#8212; Tugas Pembelajaran Sains Data</title>
+    <title>Klasifikasi Citra Ruangan: Rapi vs. Berantakan Berbasis Ekstraksi Fitur Warna (RGB) dan Tekstur (GLCM) &#8212; Tugas Pembelajaran Sains Data</title>
   
   
   
@@ -62,9 +62,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Materi/Klasifikasi';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Klasifikasi Audio Berisik vs Non-Berisik" href="ekstraksi_audio.html" />
     <link rel="prev" title="UTS Sistem Informasi Geografis" href="UTS_PSD.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -188,7 +191,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="UTS_PSD_KLASIFIKASI.html">UTS Sistem Informasi Geografis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="UTS_PSD_KLASIFIKASI_FIX.html">UTS Sistem Informasi Geografis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="UTS_PSD.html">UTS Sistem Informasi Geografis</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas  Ekstraksi Fitur Citra &amp; Klasifikasi (Rapi vs Berantakan)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Klasifikasi Citra Ruangan: Rapi vs. Berantakan Berbasis Ekstraksi Fitur Warna (RGB) dan Tekstur (GLCM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ekstraksi_audio.html">Klasifikasi Audio Berisik vs Non-Berisik</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Klasifikasi_me.html">Tugas  Ekstraksi Fitur Citra &amp; Klasifikasi (Rapi vs Berantakan)</a></li>
 </ul>
 
     </div>
@@ -374,7 +379,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Tugas  Ekstraksi Fitur Citra & Klasifikasi (Rapi vs Berantakan)</h1>
+    <h1>Klasifikasi Citra Ruangan: Rapi vs. Berantakan Berbasis Ekstraksi Fitur Warna (RGB) dan Tekstur (GLCM)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -384,27 +389,56 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-pengaturan">1. Import library &amp; pengaturan</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cek-foto-duplikat">2. Cek foto duplikat</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daftar-foto-duplikat-per-grup">Daftar foto duplikat (per grup)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penerapan-komprehensif-metodologi-crisp-dm-cross-industry-standard-process-for-data-mining">Penerapan Komprehensif Metodologi CRISP-DM (<em>Cross-Industry Standard Process for Data Mining</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ringkasan-eksekutif-proyek-executive-summary">Ringkasan Eksekutif Proyek (<em>Executive Summary</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-1-business-understanding-pemahaman-bisnis">1. TAHAP 1: BUSINESS UNDERSTANDING (Pemahaman Bisnis)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang-masalah">1.1 Latar Belakang Masalah</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rumusan-masalah">1.2 Rumusan Masalah</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-proyek">1.3 Tujuan Proyek</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kriteria-keberhasilan-success-criteria">1.4 Kriteria Keberhasilan (<em>Success Criteria</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kerangka-kerja-metodologi-crisp-dm">1.5 Kerangka Kerja Metodologi (CRISP-DM)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-fitur">3. Penjelasan fitur</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-fitur-warna-9-fitur">a. Fitur warna (9 fitur)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-fitur-tekstur-glcm-5-fitur">b. Fitur tekstur GLCM (5 fitur)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inisialisasi-environment-konfigurasi-sistem">Inisialisasi Environment &amp; Konfigurasi Sistem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-2-data-understanding-pemahaman-data">2. TAHAP 2: DATA UNDERSTANDING (Pemahaman Data)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#karakteristik-dataset-awal">2.1 Karakteristik Dataset Awal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#audit-kualitas-data-deteksi-data-leakage-via-hashing-md5">2.2 Audit Kualitas Data: Deteksi Data Leakage via Hashing MD5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rincian-audit-kelompok-duplikat">2.3 Rincian Audit Kelompok Duplikat</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verifikasi-visual-kelompok-foto-duplikat">2.4 Verifikasi Visual Kelompok Foto Duplikat</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-seluruh-dataset">4. Ekstraksi fitur seluruh dataset</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-ke-csv">Simpan ke CSV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-3-data-preparation-persiapan-data-rekayasa-fitur">3. TAHAP 3: DATA PREPARATION (Persiapan Data &amp; Rekayasa Fitur)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#landasan-teoretis-rekayasa-fitur-citra-feature-engineering">3.1 Landasan Teoretis Rekayasa Fitur Citra (<em>Feature Engineering</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-warna-color-moments-9-fitur">3.2 Ekstraksi Fitur Warna: Color Moments (9 Fitur)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-tekstur-glcm-gray-level-co-occurrence-matrix-5-fitur">3.3 Ekstraksi Fitur Tekstur: GLCM (<em>Gray-Level Co-occurrence Matrix</em>) (5 Fitur)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-ekstraksi-fitur-skala-penuh-batch-feature-extraction">3.4 Proses Ekstraksi Fitur Skala Penuh (Batch Feature Extraction)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penyimpanan-dataset-fitur-analisis-statistik-deskriptif">3.5 Penyimpanan Dataset Fitur &amp; Analisis Statistik Deskriptif</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi">5. Klasifikasi</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pembagian-data-berapa-untuk-training-berapa-untuk-test">Pembagian data: berapa untuk training, berapa untuk test?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-4-modeling-pemodelan-machine-learning">4. TAHAP 4: MODELING (Pemodelan Machine Learning)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pemilihan-algoritma-klasifikasi">4.1 Pemilihan Algoritma Klasifikasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#skenario-eksperimen-subset-fitur">4.2 Skenario Eksperimen Subset Fitur</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strategi-pengukuran-akurasi">4.3 Strategi Pengukuran Akurasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partisi-dataset-pembagian-data-training-80-dan-data-testing-20">4.4 Partisi Dataset: Pembagian Data Training (80%) dan Data Testing (20%)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">6. Confusion matrix</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#akurasi-training-vs-test-cek-overfitting">7. Akurasi training vs test (cek overfitting)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">8. Kesimpulan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-5-evaluation-evaluasi-model-analisis-hasil">5. TAHAP 5: EVALUATION (Evaluasi Model &amp; Analisis Hasil)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#komparasi-kinerja-12-konfigurasi-eksperimen">5.1 Komparasi Kinerja 12 Konfigurasi Eksperimen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-hasil-penentuan-model-terbaik">5.2 Analisis Hasil &amp; Penentuan Model Terbaik</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-diagnostik-confusion-matrix-model-terbaik-svm-14-fitur">5.3 Evaluasi Diagnostik: Confusion Matrix Model Terbaik (SVM - 14 Fitur)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-metrik-evaluasi-lanjutan-classification-report">5.4 Analisis Metrik Evaluasi Lanjutan (Classification Report)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-overfitting-celah-generalisasi-generalization-gap">5.5 Analisis Overfitting &amp; Celah Generalisasi (<em>Generalization Gap</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-selisih-akurasi-batasan-fisis-fitur">5.6 Evaluasi Selisih Akurasi &amp; Batasan Fisis Fitur</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-6-deployment-penerapan-rencana-implementasi">6. TAHAP 6: DEPLOYMENT (Penerapan &amp; Rencana Implementasi)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rekomendasi-model-produksi">6.1 Rekomendasi Model Produksi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-inferensi-sistem-produksi-inference-pipeline">6.2 Alur Inferensi Sistem Produksi (<em>Inference Pipeline</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desain-arsitektur-penerapan-deployment-architecture">6.3 Desain Arsitektur Penerapan (<em>Deployment Architecture</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pemantauan-kinerja-mitigasi-drift-mlops-maintenance">6.4 Pemantauan Kinerja &amp; Mitigasi Drift (<em>MLOps Maintenance</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lembar-fakta-proyek-project-factsheet-untuk-evaluasi-ujian">6.5 Lembar Fakta Proyek (<em>Project Factsheet</em> untuk Evaluasi &amp; Ujian)</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -416,19 +450,121 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="tugas-ekstraksi-fitur-citra-klasifikasi-rapi-vs-berantakan">
-<h1>Tugas  Ekstraksi Fitur Citra &amp; Klasifikasi (Rapi vs Berantakan)<a class="headerlink" href="#tugas-ekstraksi-fitur-citra-klasifikasi-rapi-vs-berantakan" title="Permalink to this heading">#</a></h1>
-<p>Notebook ini mengerjakan semua poin tugas:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="klasifikasi-citra-ruangan-rapi-vs-berantakan-berbasis-ekstraksi-fitur-warna-rgb-dan-tekstur-glcm">
+<h1>Klasifikasi Citra Ruangan: Rapi vs. Berantakan Berbasis Ekstraksi Fitur Warna (RGB) dan Tekstur (GLCM)<a class="headerlink" href="#klasifikasi-citra-ruangan-rapi-vs-berantakan-berbasis-ekstraksi-fitur-warna-rgb-dan-tekstur-glcm" title="Permalink to this heading">#</a></h1>
+<section id="penerapan-komprehensif-metodologi-crisp-dm-cross-industry-standard-process-for-data-mining">
+<h2>Penerapan Komprehensif Metodologi CRISP-DM (<em>Cross-Industry Standard Process for Data Mining</em>)<a class="headerlink" href="#penerapan-komprehensif-metodologi-crisp-dm-cross-industry-standard-process-for-data-mining" title="Permalink to this heading">#</a></h2>
+</section>
+<hr class="docutils" />
+<section id="ringkasan-eksekutif-proyek-executive-summary">
+<h2>Ringkasan Eksekutif Proyek (<em>Executive Summary</em>)<a class="headerlink" href="#ringkasan-eksekutif-proyek-executive-summary" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Parameter Proyek</p></th>
+<th class="head text-left"><p>Keterangan / Nilai</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>Domain Masalah</strong></p></td>
+<td class="text-left"><p>Pengolahan Citra Digital (<em>Computer Vision</em>) &amp; <em>Machine Learning</em></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Kasus Klasifikasi</strong></p></td>
+<td class="text-left"><p>Biner: <strong>Rapi</strong> (<em>neat/tidy</em>) vs. <strong>Berantakan</strong> (<em>messy/cluttered</em>)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Total Dataset Awal</strong></p></td>
+<td class="text-left"><p><strong>194 citra digital</strong> (97 kelas <em>rapi</em>, 97 kelas <em>berantakan</em>)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Pembersihan Data (Deduplikasi MD5)</strong></p></td>
+<td class="text-left"><p><strong>184 citra bersih</strong> (91 kelas <em>rapi</em>, 93 kelas <em>berantakan</em>) — 10 citra duplikat dibuang</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Pembagian Data (Train-Test Split)</strong></p></td>
+<td class="text-left"><p><strong>80% Data Latih (147 citra)</strong> : <strong>20% Data Uji (37 citra)</strong> dengan <em>stratified sampling</em></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Fitur yang Diekstraksi (14 Fitur)</strong></p></td>
+<td class="text-left"><p><strong>9 Fitur Warna RGB</strong> (Mean, Std, Skewness R/G/B) + <strong>5 Fitur Tekstur GLCM</strong> (Energi, Entropy, Kontras, Korelasi, Homogenitas)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Algoritma yang Diuji (4 Model)</strong></p></td>
+<td class="text-left"><p>K-Nearest Neighbors (KNN), Support Vector Machine (SVM), Random Forest, Decision Tree</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Akurasi Testing Tertinggi</strong></p></td>
+<td class="text-left"><p><strong>Random Forest (Semua 14 Fitur)</strong>: <strong>75.68% (75.7%)</strong> (<em>Train</em>: 100.0%, <em>CV</em>: 60.33%)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Model Terbaik &amp; Paling Stabil (CV 5-Fold)</strong></p></td>
+<td class="text-left"><p><strong>Support Vector Machine (SVM) - Semua 14 Fitur</strong>: <strong>72.84% (72.8%)</strong> (<em>Test</em>: <strong>70.27%</strong>, <em>Train</em>: 93.20%)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Artefak Luaran</strong></p></td>
+<td class="text-left"><p>Dataset fitur CSV (<code class="docutils literal notranslate"><span class="pre">fitur_citra_dedup.csv</span></code>), daftar duplikat, matriks konfusi, dan kurva evaluasi</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="tahap-1-business-understanding-pemahaman-bisnis">
+<h2>1. TAHAP 1: BUSINESS UNDERSTANDING (Pemahaman Bisnis)<a class="headerlink" href="#tahap-1-business-understanding-pemahaman-bisnis" title="Permalink to this heading">#</a></h2>
+<section id="latar-belakang-masalah">
+<h3>1.1 Latar Belakang Masalah<a class="headerlink" href="#latar-belakang-masalah" title="Permalink to this heading">#</a></h3>
+<p>Kondisi keteraturan dan kerapian suatu ruangan (seperti kamar tidur, ruang kerja, dan ruang belajar) memiliki pengaruh signifikan terhadap kesehatan mental, fokus produktivitas, serta higienitas penghuninya. Dalam kehidupan sehari-hari, inspeksi kondisi ruangan umumnya dilakukan secara manual dan konvensional, yang memiliki berbagai keterbatasan:</p>
 <ol class="arabic simple">
-<li><p>Hitung <strong>mean, std, skewness</strong> tiap channel (R, G, B) pada dataset</p></li>
-<li><p>Ubah citra ke <strong>greyscale</strong></p></li>
-<li><p>Hitung fitur tekstur <strong>GLCM</strong>: <strong>energi, entropy, kontras, korelasi, homogenitas</strong></p></li>
-<li><p>Simpan semuanya ke <strong>CSV</strong> (total 14 fitur + label)</p></li>
-<li><p><strong>Klasifikasi</strong> seperti tugas audio kemarin, lalu hitung <strong>accuracy</strong> dan <strong>confusion matrix</strong></p></li>
+<li><p><strong>Subjektif</strong>: Definisi kerapian bervariasi antar individu tanpa acuan matematis yang pasti.</p></li>
+<li><p><strong>Tidak Efisien</strong>: Memerlukan waktu, kehadiran fisik manusia, dan sulit diotomasi dalam skala besar.</p></li>
+<li><p><strong>Kebutuhan Otomasi Cerdas</strong>: Pada ekosistem rumah pintar (<em>smart home</em>), manajemen fasilitas perhotelan, maupun robotika pembersih ruangan (<em>vacuum robots</em>), diperlukan kemampuan komputasional agar perangkat dapat memahami apakah ruangan dalam keadaan rapi atau membutuhkan penataan ulang.</p></li>
 </ol>
-<p>Ditambah: pengecekan <strong>foto duplikat</strong>, akurasi <strong>training vs test</strong>, dan cek <strong>overfitting</strong>. Semua hanya memakai 14 fitur .</p>
-<section id="import-library-pengaturan">
-<h2>1. Import library &amp; pengaturan<a class="headerlink" href="#import-library-pengaturan" title="Permalink to this heading">#</a></h2>
+<p>Dengan memanfaatkan teknik <strong>Pengolahan Citra Digital</strong> dan <strong>Machine Learning</strong>, sistem dapat secara otomatis mengekstraksi pola warna dan struktur tekstur dari foto ruangan untuk melakukan klasifikasi secara objektif dan instan.</p>
+</section>
+<section id="rumusan-masalah">
+<h3>1.2 Rumusan Masalah<a class="headerlink" href="#rumusan-masalah" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Bagaimana mengekstraksi fitur visual representatif dari citra ruangan melalui pendekatan statistik warna (Mean, Standard Deviation, Skewness pada kanal R, G, B) dan tekstur spasial (<em>Gray-Level Co-occurrence Matrix</em> / GLCM)?</p></li>
+<li><p>Bagaimana mendeteksi dan menangani foto duplikat (<em>identical images</em>) agar tidak terjadi kebocoran data (<em>data leakage</em>) yang membiaskan hasil evaluasi model?</p></li>
+<li><p>Manakah kombinasi subset fitur (Warna 9 fitur, Tekstur GLCM 5 fitur, atau Gabungan 14 fitur) yang memberikan akurasi klasifikasi terbaik?</p></li>
+<li><p>Algoritma machine learning manakah di antara KNN, SVM, Random Forest, dan Decision Tree yang menghasilkan performa akurasi tertinggi serta paling tahan terhadap masalah <em>overfitting</em>?</p></li>
+</ol>
+</section>
+<section id="tujuan-proyek">
+<h3>1.3 Tujuan Proyek<a class="headerlink" href="#tujuan-proyek" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Membangun Pipeline Ekstraksi Fitur Citra</strong>: Menghitung 9 fitur statistik warna (R, G, B) dan 5 fitur tekstur GLCM pada citra grayscale terkuantisasi (total 14 fitur prediktor per citra).</p></li>
+<li><p><strong>Audit &amp; Pembersihan Integritas Dataset</strong>: Melakukan deduplikasi citra berbasis <em>cryptographic hash</em> MD5 untuk menjamin data latih dan data uji benar-benar independen.</p></li>
+<li><p><strong>Eksperimen Komparasi Multi-Model &amp; Multi-Feature</strong>: Melatih dan mengevaluasi 4 algoritma klasifikasi pada 3 subset fitur (total 12 kombinasi eksperimen).</p></li>
+<li><p><strong>Evaluasi Menyeluruh</strong>: Mengukur metrik akurasi pengujian (<em>hold-out test accuracy</em>), validasi silang (<em>5-Fold Stratified Cross-Validation</em>), <em>Precision</em>, <em>Recall</em>, <em>F1-Score</em>, dan <em>Confusion Matrix</em>.</p></li>
+<li><p><strong>Perancangan Deployment</strong>: Menyusun rencana arsitektur penerapan sistem klasifikasi citra berbasis inferensi pipeline untuk penggunaan nyata.</p></li>
+</ul>
+</section>
+<section id="kriteria-keberhasilan-success-criteria">
+<h3>1.4 Kriteria Keberhasilan (<em>Success Criteria</em>)<a class="headerlink" href="#kriteria-keberhasilan-success-criteria" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Pipeline mampu memproses citra dan mengekspor dataset fitur tabular berformat CSV yang valid.</p></li>
+<li><p>Tidak ada data kembar (<em>duplicate leak</em>) antara partisi training dan testing.</p></li>
+<li><p>Model terbaik mencapai akurasi pengujian <span class="math notranslate nohighlight">\(\ge 70\%\)</span> dengan metrik presisi dan recall yang seimbang pada kedua kelas.</p></li>
+<li><p>Model memiliki stabilitas generalisasi yang baik berdasarkan skor validasi silang (<em>cross-validation</em>).</p></li>
+</ul>
+</section>
+<section id="kerangka-kerja-metodologi-crisp-dm">
+<h3>1.5 Kerangka Kerja Metodologi (CRISP-DM)<a class="headerlink" href="#kerangka-kerja-metodologi-crisp-dm" title="Permalink to this heading">#</a></h3>
+<p>Proyek ini diorganisasikan secara sistematis mengikuti siklus standar industri <strong>CRISP-DM</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Business Understanding</strong>: Mendefinisikan latar belakang, rumusan masalah, tujuan, dan metrik performa.</p></li>
+<li><p><strong>Data Understanding</strong>: Memahami karakteristik dataset citra, audit distribusi kelas, dan eliminasi duplikasi data via MD5.</p></li>
+<li><p><strong>Data Preparation</strong>: Pra-pemrosesan citra, ekstraksi 14 fitur visual, normalisasi data (<code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code>), dan partisi train-test 80:20.</p></li>
+<li><p><strong>Modeling</strong>: Pelatihan 4 model machine learning pada 3 subset fitur dengan pipeline scikit-learn.</p></li>
+<li><p><strong>Evaluation</strong>: Komparasi kinerja, analisis overfitting, diagnostik confusion matrix, dan classification report.</p></li>
+<li><p><strong>Deployment</strong>: Perancangan alur inferensi, rekomendasi model produksi, dan arsitektur integrasi sistem.</p></li>
+</ol>
+</section>
+</section>
+<section id="inisialisasi-environment-konfigurasi-sistem">
+<h2>Inisialisasi Environment &amp; Konfigurasi Sistem<a class="headerlink" href="#inisialisasi-environment-konfigurasi-sistem" title="Permalink to this heading">#</a></h2>
+<p>Menyiapkan pustaka pengolahan citra, komputasi numerik, pemodelan machine learning, dan visualisasi:</p>
+<ul class="simple">
+<li><p><strong>Pengolahan Citra</strong>: <code class="docutils literal notranslate"><span class="pre">OpenCV</span> <span class="pre">(cv2)</span></code>, <code class="docutils literal notranslate"><span class="pre">skimage.feature</span> <span class="pre">(graycomatrix,</span> <span class="pre">graycoprops)</span></code></p></li>
+<li><p><strong>Komputasi &amp; Analisis Data</strong>: <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, <code class="docutils literal notranslate"><span class="pre">scipy.stats.skew</span></code></p></li>
+<li><p><strong>Machine Learning &amp; Validasi</strong>: <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> (<code class="docutils literal notranslate"><span class="pre">train_test_split</span></code>, <code class="docutils literal notranslate"><span class="pre">StratifiedKFold</span></code>, <code class="docutils literal notranslate"><span class="pre">cross_val_score</span></code>, <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code>, <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code>, <code class="docutils literal notranslate"><span class="pre">KNN</span></code>, <code class="docutils literal notranslate"><span class="pre">SVC</span></code>, <code class="docutils literal notranslate"><span class="pre">RandomForestClassifier</span></code>, <code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code>, <code class="docutils literal notranslate"><span class="pre">confusion_matrix</span></code>, <code class="docutils literal notranslate"><span class="pre">classification_report</span></code>)</p></li>
+<li><p><strong>Visualisasi &amp; Audit</strong>: <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code>, <code class="docutils literal notranslate"><span class="pre">hashlib</span></code></p></li>
+</ul>
+<blockquote>
+<div><p><strong>Parameter Operasional</strong>: Variabel <code class="docutils literal notranslate"><span class="pre">MODE</span> <span class="pre">=</span> <span class="pre">&quot;dedup&quot;</span></code> diaktifkan untuk menyaring seluruh citra duplikat sebelum ekstraksi fitur dan pemodelan dilakukan.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">glob</span><span class="o">,</span><span class="w"> </span><span class="nn">hashlib</span><span class="o">,</span><span class="w"> </span><span class="nn">warnings</span>
@@ -446,14 +582,14 @@ document.write(`
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 
-<span class="n">BASE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>                      
-<span class="n">DATA</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">)</span>        
+<span class="n">BASE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>                       <span class="c1"># folder tempat notebook ini berada</span>
+<span class="n">DATA</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">)</span>        <span class="c1"># isi: data/rapi dan data/berantakan</span>
 <span class="n">OUT</span>  <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE</span><span class="p">,</span> <span class="s2">&quot;hasil&quot;</span><span class="p">)</span>
 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">OUT</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># &quot;dedup&quot; = foto kembar dibuang (184 foto)  |  &quot;semua&quot; = semua foto dipakai (194 foto)</span>
 <span class="n">MODE</span> <span class="o">=</span> <span class="s2">&quot;dedup&quot;</span>
-<span class="n">SIZE</span> <span class="o">=</span> <span class="mi">256</span>                               <span class="c1"># semua citra di-resize ke 256x256</span>
+<span class="n">SIZE</span> <span class="o">=</span> <span class="mi">256</span>                               <span class="c1"># semua citra di-resize ke 256x256 biar seragam &amp; cepat</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mode:&quot;</span><span class="p">,</span> <span class="n">MODE</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -465,12 +601,36 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="cek-foto-duplikat">
-<h2>2. Cek foto duplikat<a class="headerlink" href="#cek-foto-duplikat" title="Permalink to this heading">#</a></h2>
-<p>Di dataset ada foto yang <strong>isinya persis sama (byte per byte)</strong> padahal nama file-nya beda, misalnya
-dikumpulkan oleh dua orang yang berbeda. Kita deteksi pakai <strong>hash MD5</strong>: dua file dengan isi identik pasti punya hash yang sama.</p>
-<p><strong>Kenapa ini penting?</strong> Kalau satu foto masuk data <em>training</em> dan kembarannya masuk data <em>test</em>, model tinggal menghafal.
-Akurasi test jadi kelihatan lebih tinggi dari kenyataan.</p>
+<section id="tahap-2-data-understanding-pemahaman-data">
+<h2>2. TAHAP 2: DATA UNDERSTANDING (Pemahaman Data)<a class="headerlink" href="#tahap-2-data-understanding-pemahaman-data" title="Permalink to this heading">#</a></h2>
+<section id="karakteristik-dataset-awal">
+<h3>2.1 Karakteristik Dataset Awal<a class="headerlink" href="#karakteristik-dataset-awal" title="Permalink to this heading">#</a></h3>
+<p>Dataset terdiri dari citra ruangan nyata yang terbagi ke dalam dua folder kelas:</p>
+<ul class="simple">
+<li><p><strong>Kelas <code class="docutils literal notranslate"><span class="pre">rapi</span></code></strong>: Kondisi ruangan tertata, barang-barang berada pada tempatnya, bidang lantai/meja teratur dan lapang.</p></li>
+<li><p><strong>Kelas <code class="docutils literal notranslate"><span class="pre">berantakan</span></code></strong>: Kondisi ruangan berserakan, barang/pakaian tersebar tidak teratur di lantai, kasur, atau meja.</p></li>
+</ul>
+<p><strong>Statistik Dataset Awal:</strong></p>
+<ul class="simple">
+<li><p><strong>Total Citra</strong>: <strong>194 foto</strong></p></li>
+<li><p><strong>Distribusi Kelas</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">rapi</span></code> = <strong>97 foto</strong> (50.0%)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">berantakan</span></code> = <strong>97 foto</strong> (50.0%)</p></li>
+</ul>
+</li>
+<li><p><strong>Keseimbangan Kelas</strong>: <em>Perfectly balanced</em> (50% : 50%).</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="audit-kualitas-data-deteksi-data-leakage-via-hashing-md5">
+<h3>2.2 Audit Kualitas Data: Deteksi Data Leakage via Hashing MD5<a class="headerlink" href="#audit-kualitas-data-deteksi-data-leakage-via-hashing-md5" title="Permalink to this heading">#</a></h3>
+<p>Dalam machine learning, <strong>kebocoran data (<em>data leakage</em>)</strong> merupakan ancaman serius jika terdapat foto yang identik secara biner (byte-per-byte) tetapi memiliki nama file berbeda (misal dikumpulkan oleh dua mahasiswa berbeda):</p>
+<ul class="simple">
+<li><p><strong>Bahaya</strong>: Jika foto kembar terbagi ke data <em>training</em> dan <em>test</em>, model akan dengan mudah menghafal piksel yang sama persis, menghasilkan akurasi pengujian yang tinggi semu (<em>false high accuracy</em>).</p></li>
+<li><p><strong>Solusi</strong>: Setiap file dibaca secara biner dan dihitung nilai hash <strong>MD5 (<em>Message Digest Algorithm 5</em>)</strong>. Dua file dengan konten piksel identik dipastikan menghasilkan kode hash heksadesimal 32 karakter yang sama.</p></li>
+<li><p><strong>Aturan Deduplikasi</strong>: Dari setiap kelompok foto yang memiliki hash kembar, <strong>hanya 1 file pertama (berdasarkan urutan abjad) yang dipertahankan (<code class="docutils literal notranslate"><span class="pre">dipakai</span></code>)</strong>, sedangkan file duplikat lainnya disingkirkan (<code class="docutils literal notranslate"><span class="pre">DUPLIKAT</span> <span class="pre">(dibuang)</span></code>).</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
@@ -505,8 +665,16 @@ Sisa setelah dedup: 184 foto
 </div>
 </div>
 </div>
-<section id="daftar-foto-duplikat-per-grup">
-<h3>Daftar foto duplikat (per grup)<a class="headerlink" href="#daftar-foto-duplikat-per-grup" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="rincian-audit-kelompok-duplikat">
+<h3>2.3 Rincian Audit Kelompok Duplikat<a class="headerlink" href="#rincian-audit-kelompok-duplikat" title="Permalink to this heading">#</a></h3>
+<p>Hasil audit membuktikan adanya file kembar di dalam dataset:</p>
+<ul class="simple">
+<li><p>Terdeteksi <strong>9 kelompok duplikat</strong> yang melibatkan total <strong>19 foto</strong>.</p></li>
+<li><p>Sebanyak <strong>10 foto redundan disaring dan dibuang</strong> dari dataset.</p></li>
+<li><p>Total citra bersih yang valid digunakan (<em>mode dedup</em>): <strong>184 foto</strong> (91 kelas <em>rapi</em>, 93 kelas <em>berantakan</em>).</p></li>
+<li><p>Seluruh riwayat audit disimpan dalam file <code class="docutils literal notranslate"><span class="pre">hasil/daftar_foto_duplikat.csv</span></code>.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dup</span><span class="p">[</span><span class="s2">&quot;grup&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dup</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;md5&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">ngroup</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
@@ -686,8 +854,14 @@ Sisa setelah dedup: 184 foto
 </table>
 </div></div></div>
 </div>
-<p>Bukti visual: <strong>semua grup duplikat</strong> ditampilkan, satu baris per grup. Isi tiap baris memang foto yang sama.
-Judul hijau = foto yang dipakai, merah = foto duplikat yang dibuang.</p>
+</section>
+<section id="verifikasi-visual-kelompok-foto-duplikat">
+<h3>2.4 Verifikasi Visual Kelompok Foto Duplikat<a class="headerlink" href="#verifikasi-visual-kelompok-foto-duplikat" title="Permalink to this heading">#</a></h3>
+<p>Visualisasi di bawah ini menampilkan bukti visual bahwa foto dalam tiap grup memang identik:</p>
+<ul class="simple">
+<li><p><strong>Kotak/Judul Hijau</strong>: Menandai foto asli yang <strong>dipakai</strong> dalam pemodelan.</p></li>
+<li><p><strong>Kotak/Judul Merah</strong>: Menandai salinan duplikat yang <strong>dibuang</strong> untuk menjaga objektivitas pengujian model.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grup_ids</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dup</span><span class="o">.</span><span class="n">grup</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
@@ -713,67 +887,68 @@ Judul hijau = foto yang dipakai, merah = foto duplikat yang dibuang.</p>
 </div>
 </section>
 </section>
-<section id="penjelasan-fitur">
-<h2>3. Penjelasan fitur<a class="headerlink" href="#penjelasan-fitur" title="Permalink to this heading">#</a></h2>
-<p>Tiap foto diubah jadi <strong>satu baris angka</strong> (fitur). Ada 14 fitur + 1 label.</p>
-<section id="a-fitur-warna-9-fitur">
-<h3>a. Fitur warna (9 fitur)<a class="headerlink" href="#a-fitur-warna-9-fitur" title="Permalink to this heading">#</a></h3>
-<p>Dihitung per channel <strong>R, G, B</strong> dari seluruh piksel:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Fitur</p></th>
-<th class="head"><p>Artinya</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Mean</strong></p></td>
-<td><p>rata-rata nilai piksel → seberapa terang channel itu</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Std</strong> (standar deviasi)</p></td>
-<td><p>sebaran nilai piksel → seberapa beragam/kontras warnanya</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Skewness</strong></p></td>
-<td><p>kemiringan distribusi → lebih banyak piksel gelap (positif) atau terang (negatif)</p></td>
-</tr>
-</tbody>
-</table>
-</div>
+<section id="tahap-3-data-preparation-persiapan-data-rekayasa-fitur">
+<h2>3. TAHAP 3: DATA PREPARATION (Persiapan Data &amp; Rekayasa Fitur)<a class="headerlink" href="#tahap-3-data-preparation-persiapan-data-rekayasa-fitur" title="Permalink to this heading">#</a></h2>
+<section id="landasan-teoretis-rekayasa-fitur-citra-feature-engineering">
+<h3>3.1 Landasan Teoretis Rekayasa Fitur Citra (<em>Feature Engineering</em>)<a class="headerlink" href="#landasan-teoretis-rekayasa-fitur-citra-feature-engineering" title="Permalink to this heading">#</a></h3>
+<p>Agar citra visual dapat diproses oleh algoritma machine learning, setiap citra ditransformasikan menjadi representasi vektor numerik berdimensi 14 (<strong>14 fitur prediktor + 1 kolom label</strong>). Fitur-fitur ini mencakup aspek distribusi warna dan struktur tekstur.</p>
 </section>
-<section id="b-fitur-tekstur-glcm-5-fitur">
-<h3>b. Fitur tekstur GLCM (5 fitur)<a class="headerlink" href="#b-fitur-tekstur-glcm-5-fitur" title="Permalink to this heading">#</a></h3>
-<p>Citra diubah dulu ke <strong>greyscale</strong>, lalu dibuat <strong>GLCM</strong> (<em>Gray Level Co-occurrence Matrix</em>):
-matriks yang menghitung seberapa sering sepasang piksel bertetangga punya tingkat abu-abu tertentu.
-Di sini dipakai jarak 1 piksel dan 4 arah (0°, 45°, 90°, 135°), hasilnya dirata-rata.</p>
+<hr class="docutils" />
+<section id="ekstraksi-fitur-warna-color-moments-9-fitur">
+<h3>3.2 Ekstraksi Fitur Warna: Color Moments (9 Fitur)<a class="headerlink" href="#ekstraksi-fitur-warna-color-moments-9-fitur" title="Permalink to this heading">#</a></h3>
+<p>Dihitung secara independen pada 3 kanal warna (<strong>Red, Green, Blue</strong>) dari citra berwarna:</p>
+<ol class="arabic simple">
+<li><p><strong>Rata-Rata (<em>Mean</em> - <span class="math notranslate nohighlight">\(\mu\)</span>)</strong> [3 Fitur: <code class="docutils literal notranslate"><span class="pre">mean_R</span></code>, <code class="docutils literal notranslate"><span class="pre">mean_G</span></code>, <code class="docutils literal notranslate"><span class="pre">mean_B</span></code>]:
+Mengukur kecerahan rata-rata piksel pada setiap kanal warna.
+$<span class="math notranslate nohighlight">\(\mu = rac{1}{N} \sum_{i=1}^N I(i)\)</span>$</p></li>
+<li><p><strong>Standar Deviasi (<em>Standard Deviation</em> - <span class="math notranslate nohighlight">\(\sigma\)</span>)</strong> [3 Fitur: <code class="docutils literal notranslate"><span class="pre">std_R</span></code>, <code class="docutils literal notranslate"><span class="pre">std_G</span></code>, <code class="docutils literal notranslate"><span class="pre">std_B</span></code>]:
+Mengukur sebaran intensitas piksel di sekitar nilai rata-rata, merepresentasikan kontras dan variasi warna.
+$<span class="math notranslate nohighlight">\(\sigma = \sqrt{rac{1}{N} \sum_{i=1}^N (I(i) - \mu)^2}\)</span>$</p></li>
+<li><p><strong>Kemiringan (<em>Skewness</em> - <span class="math notranslate nohighlight">\(S\)</span>)</strong> [3 Fitur: <code class="docutils literal notranslate"><span class="pre">skew_R</span></code>, <code class="docutils literal notranslate"><span class="pre">skew_G</span></code>, <code class="docutils literal notranslate"><span class="pre">skew_B</span></code>]:
+Mengukur derajat asimetri distribusi warna. Nilai positif menunjukkan ekor distribusi ke arah nilai terang (didominasi area gelap), sedangkan nilai negatif menunjukkan distribusi didominasi area terang.
+$<span class="math notranslate nohighlight">\(S = rac{rac{1}{N} \sum_{i=1}^N (I(i) - \mu)^3}{\sigma^3}\)</span>$</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="ekstraksi-fitur-tekstur-glcm-gray-level-co-occurrence-matrix-5-fitur">
+<h3>3.3 Ekstraksi Fitur Tekstur: GLCM (<em>Gray-Level Co-occurrence Matrix</em>) (5 Fitur)<a class="headerlink" href="#ekstraksi-fitur-tekstur-glcm-gray-level-co-occurrence-matrix-5-fitur" title="Permalink to this heading">#</a></h3>
+<p>Tekstur mencerminkan pola spasial pengulangan intensitas piksel:</p>
+<ul class="simple">
+<li><p><strong>Kuantisasi Greyscale 64 Level</strong>: Citra dikonversi ke skala abu-abu (<em>grayscale</em>), lalu dibagi dengan 4 (<code class="docutils literal notranslate"><span class="pre">gray</span> <span class="pre">//</span> <span class="pre">4</span></code>) sehingga rentang intensitas <span class="math notranslate nohighlight">\(0-255\)</span> direduksi menjadi <strong>64 level</strong> (<span class="math notranslate nohighlight">\(0-63\)</span>). Reduksi ini mempercepat kalkulasi matriks GLCM menjadi <span class="math notranslate nohighlight">\(64 	imes 64\)</span> tanpa mengurangi informasi tekstur penting.</p></li>
+<li><p><strong>Orientasi Spasial</strong>: Matriks GLCM dihitung dengan jarak piksel <span class="math notranslate nohighlight">\(d = 1\)</span> pada 4 orientasi sudut mata angin: <span class="math notranslate nohighlight">\(	heta \in \{0^\circ, 45^\circ, 90^\circ, 135^\circ\}\)</span>. Nilai fitur dirata-ratakan pada keempat arah tersebut untuk menghasilkan representasi yang invarian terhadap rotasi (<em>rotation-invariant</em>).</p></li>
+</ul>
+<p><strong>5 Parameter Statistik GLCM:</strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Fitur</p></th>
-<th class="head"><p>Artinya</p></th>
+<tr class="row-odd"><th class="head text-left"><p>Fitur GLCM</p></th>
+<th class="head text-center"><p>Rumus Matematis</p></th>
+<th class="head text-left"><p>Interpretasi Fisis</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>Energi</strong></p></td>
-<td><p>keseragaman tekstur (nilai tinggi = polos/teratur)</p></td>
+<tr class="row-even"><td class="text-left"><p><strong>Energi (<em>Energy / ASM</em>)</strong></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\sum_{i,j} P(i,j)^2\)</span></p></td>
+<td class="text-left"><p>Mengukur keseragaman tekstur citra. Bernilai tinggi pada citra yang polos, rapi, atau homogen.</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>Entropy</strong></p></td>
-<td><p>tingkat keacakan (nilai tinggi = lebih acak/rumit)</p></td>
+<tr class="row-odd"><td class="text-left"><p><strong>Entropi (<em>Entropy</em>)</strong></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(-\sum_{i,j} P(i,j) \log_2 P(i,j)\)</span></p></td>
+<td class="text-left"><p>Mengukur derajat keacakan dan kompleksitas tekstur. Bernilai tinggi pada citra yang heterogen, berantakan, atau banyak objek berserakan.</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Kontras</strong></p></td>
-<td><p>perbedaan intensitas antar piksel bertetangga</p></td>
+<tr class="row-even"><td class="text-left"><p><strong>Kontras (<em>Contrast</em>)</strong></p></td>
+<td class="text-center"><p>$\sum_{i,j}</p></td>
+<td class="text-left"><p>i - j</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>Korelasi</strong></p></td>
-<td><p>keterkaitan linear antar piksel bertetangga</p></td>
+<tr class="row-odd"><td class="text-left"><p><strong>Korelasi (<em>Correlation</em>)</strong></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\sum_{i,j} rac{(i - \mu_i)(j - \mu_j) P(i,j)}{\sigma_i \sigma_j}\)</span></p></td>
+<td class="text-left"><p>Mengukur ketergantungan linier nilai tingkat abu-abu antar piksel bertetangga.</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Homogenitas</strong></p></td>
-<td><p>kedekatan nilai piksel bertetangga (tinggi = halus)</p></td>
+<tr class="row-even"><td class="text-left"><p><strong>Homogenitas (<em>Homogeneity / IDM</em>)</strong></p></td>
+<td class="text-center"><p>$\sum_{i,j} rac{P(i,j)}{1 +</p></td>
+<td class="text-left"><p>i - j</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Secara teori foto berantakan “seharusnya” lebih acak. Tapi di dataset ini rata-rata kelima fitur GLCM antara rapi dan berantakan
-<strong>hampir sama</strong> (lihat tabel rata-rata per kelas di bagian 4). Itu sebabnya fitur tugas saja akurasinya terbatas.</p>
-<blockquote>
-<div><p>Greyscale diubah ke 64 level (nilai piksel dibagi 4) supaya matriks GLCM lebih kecil dan cepat dihitung.</p>
-</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">glcm_feats</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="n">distances</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,),</span> <span class="n">angles</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)):</span>
@@ -804,10 +979,19 @@ Di sini dipakai jarak 1 piksel dan 4 arah (0°, 45°, 90°, 135°), hasilnya dir
 </div>
 </div>
 </section>
-</section>
-<section id="ekstraksi-fitur-seluruh-dataset">
-<h2>4. Ekstraksi fitur seluruh dataset<a class="headerlink" href="#ekstraksi-fitur-seluruh-dataset" title="Permalink to this heading">#</a></h2>
-<p>Loop semua foto. Di mode <code class="docutils literal notranslate"><span class="pre">dedup</span></code>, foto duplikat dilewati. Proses ini yang paling lama (foto aslinya besar), tunggu sampai selesai.</p>
+<section id="proses-ekstraksi-fitur-skala-penuh-batch-feature-extraction">
+<h3>3.4 Proses Ekstraksi Fitur Skala Penuh (Batch Feature Extraction)<a class="headerlink" href="#proses-ekstraksi-fitur-skala-penuh-batch-feature-extraction" title="Permalink to this heading">#</a></h3>
+<p>Melakukan proses ekstraksi 14 fitur pada seluruh citra bersih yang lolos tahap deduplikasi:</p>
+<ul class="simple">
+<li><p>Total citra yang diproses: <strong>184 foto</strong></p></li>
+<li><p>Distribusi kelas bersih:</p>
+<ul>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">berantakan</span></code></strong>: <strong>93 foto</strong> (50.54%)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">rapi</span></code></strong>: <strong>91 foto</strong> (49.46%)</p></li>
+</ul>
+</li>
+<li><p>Komposisi data tetap seimbang (<em>balanced</em>).</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pakai</span> <span class="o">=</span> <span class="n">files</span> <span class="k">if</span> <span class="n">MODE</span> <span class="o">==</span> <span class="s2">&quot;semua&quot;</span> <span class="k">else</span> <span class="n">files</span><span class="p">[</span><span class="n">files</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;dipakai&quot;</span><span class="p">]</span>
@@ -839,9 +1023,20 @@ rapi          91
 </div>
 </div>
 </div>
-<section id="simpan-ke-csv">
-<h3>Simpan ke CSV<a class="headerlink" href="#simpan-ke-csv" title="Permalink to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">fitur_citra_&lt;mode&gt;.csv</span></code> berisi <strong>14 fitur + label</strong> sesuai tugas. Versi <code class="docutils literal notranslate"><span class="pre">dengan_nama_file</span></code> hanya menambah kolom nama file.</p>
+</section>
+<section id="penyimpanan-dataset-fitur-analisis-statistik-deskriptif">
+<h3>3.5 Penyimpanan Dataset Fitur &amp; Analisis Statistik Deskriptif<a class="headerlink" href="#penyimpanan-dataset-fitur-analisis-statistik-deskriptif" title="Permalink to this heading">#</a></h3>
+<p>Seluruh hasil ekstraksi fitur disimpan ke direktori <code class="docutils literal notranslate"><span class="pre">hasil/</span></code>:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fitur_citra_dedup.csv</span></code>: Dataset utama berisi <strong>14 fitur prediktor + 1 kolom label target</strong>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fitur_citra_dengan_nama_file_dedup.csv</span></code>: Dataset fitur yang menyertakan identitas file untuk audit.</p></li>
+</ol>
+<p>Di bawah ini ditampilkan:</p>
+<ul class="simple">
+<li><p>Sampel 10 baris pertama data fitur numerik.</p></li>
+<li><p>Tabel perbandingan nilai rata-rata tiap fitur untuk kelas <code class="docutils literal notranslate"><span class="pre">rapi</span></code> vs <code class="docutils literal notranslate"><span class="pre">berantakan</span></code>.</p></li>
+<li><p>Peringkat fitur berdasarkan persentase selisih rata-rata relatif antar kelas (daya pembeda fitur).</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">COLOR</span> <span class="o">+</span> <span class="n">TEX</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUT</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;fitur_citra_</span><span class="si">{</span><span class="n">MODE</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1214,26 +1409,71 @@ Makin kecil selisihnya, makin sulit fitur itu membedakan kedua kelas -&gt; batas
 </div>
 </section>
 </section>
-<section id="klasifikasi">
-<h2>5. Klasifikasi<a class="headerlink" href="#klasifikasi" title="Permalink to this heading">#</a></h2>
-<p>Data dibagi <strong>80% training</strong> dan <strong>20% test</strong> (<code class="docutils literal notranslate"><span class="pre">stratify</span></code> supaya proporsi rapi:berantakan sama di kedua bagian).
-Model belajar dari data training, lalu diuji di data test yang belum pernah dilihat.</p>
-<p>Empat model dicoba: <strong>KNN, SVM, Random Forest, Decision Tree</strong>. Untuk KNN dan SVM fitur di-<em>scale</em> dulu (<code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code>)
-karena kedua model ini sensitif terhadap skala angka.</p>
-<p>Tiga jenis akurasi:</p>
+<section id="tahap-4-modeling-pemodelan-machine-learning">
+<h2>4. TAHAP 4: MODELING (Pemodelan Machine Learning)<a class="headerlink" href="#tahap-4-modeling-pemodelan-machine-learning" title="Permalink to this heading">#</a></h2>
+<section id="pemilihan-algoritma-klasifikasi">
+<h3>4.1 Pemilihan Algoritma Klasifikasi<a class="headerlink" href="#pemilihan-algoritma-klasifikasi" title="Permalink to this heading">#</a></h3>
+<p>Empat algoritma machine learning dengan mekanisme penalaran yang bervariasi diuji dalam penelitian ini:</p>
+<ol class="arabic simple">
+<li><p><strong>K-Nearest Neighbors (KNN)</strong>:</p>
 <ul class="simple">
-<li><p><strong>Akurasi train</strong>: skor di data yang dipakai belajar (kalau terlalu tinggi bisa tanda <em>overfitting</em>)</p></li>
-<li><p><strong>Akurasi test</strong>: skor di data baru, ini yang paling jujur</p></li>
-<li><p><strong>Akurasi CV (5-fold)</strong>: data dibagi jadi 5 bagian; tiap bagian bergantian jadi data test (4 bagian lainnya training), lalu 5 hasilnya dirata-rata. Lebih stabil daripada satu kali split</p></li>
+<li><p>Pengklasifikasi berbasis instans (<em>instance-based learning</em>) dengan <span class="math notranslate nohighlight">\(k=5\)</span>. Menentukan kelas berdasarkan mayoritas tetangga terdekat dalam ruang fitur Euclidean.</p></li>
+<li><p>Menggunakan <strong><code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code></strong> dalam pipeline agar fitur berorde besar (seperti kontras GLCM) tidak mendominasi fitur berorde kecil (seperti energi GLCM).</p></li>
 </ul>
-<section id="pembagian-data-berapa-untuk-training-berapa-untuk-test">
-<h3>Pembagian data: berapa untuk training, berapa untuk test?<a class="headerlink" href="#pembagian-data-berapa-untuk-training-berapa-untuk-test" title="Permalink to this heading">#</a></h3>
-<p>Cell di bawah menampilkan jumlahnya. Aturan yang dipakai:</p>
+</li>
+<li><p><strong>Support Vector Machine (SVM)</strong>:</p>
 <ul class="simple">
-<li><p><strong>80% training, 20% test</strong> (<code class="docutils literal notranslate"><span class="pre">test_size=0.2</span></code>). Pembagian ini umum dipakai. Datanya cuma ratusan foto, jadi training tidak boleh terlalu kecil (model kurang belajar), dan test tidak boleh terlalu kecil (angka akurasinya jadi tidak stabil).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">stratify=y</span></code> → proporsi rapi : berantakan di training dan di test dibuat sama.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">random_state=42</span></code> → pembagiannya acak tapi <strong>selalu sama</strong> tiap notebook dijalankan, jadi hasilnya bisa diulang.</p></li>
+<li><p>Mencari bidang pemisah optimal (<em>maximum-margin hyperplane</em>) menggunakan fungsi kernel <strong>RBF (<em>Radial Basis Function</em>)</strong> dengan parameter penalti <span class="math notranslate nohighlight">\(C=1.0\)</span>.</p></li>
+<li><p>Menggunakan <strong><code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code></strong> dalam pipeline scikit-learn karena perhitungan jarak dot-product kernel sangat sensitif terhadap skala data.</p></li>
 </ul>
+</li>
+<li><p><strong>Random Forest Classifier</strong>:</p>
+<ul class="simple">
+<li><p>Metode <em>ensemble learning</em> berbasis <em>bagging</em> yang membangun <strong>100 pohon keputusan (<em>decision trees</em>)</strong> secara acak (<code class="docutils literal notranslate"><span class="pre">n_estimators=100</span></code>, <code class="docutils literal notranslate"><span class="pre">random_state=42</span></code>).</p></li>
+<li><p>Tangguh terhadap multikolinieritas dan interaksi non-linier antar fitur.</p></li>
+</ul>
+</li>
+<li><p><strong>Decision Tree Classifier</strong>:</p>
+<ul class="simple">
+<li><p>Pohon keputusan tunggal berbasis algoritma CART dengan kriteria pemisahan Gini impurity (<code class="docutils literal notranslate"><span class="pre">random_state=42</span></code>).</p></li>
+<li><p>Digunakan sebagai model <em>baseline</em> untuk mengamati interpretabilitas dan risiko pembentukan pohon yang terlalu mendalam (<em>overfitting</em>).</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="skenario-eksperimen-subset-fitur">
+<h3>4.2 Skenario Eksperimen Subset Fitur<a class="headerlink" href="#skenario-eksperimen-subset-fitur" title="Permalink to this heading">#</a></h3>
+<p>Untuk mengkaji kontribusi masing-masing modalitas visual, pemodelan dievaluasi pada 3 skenario subset fitur:</p>
+<ol class="arabic simple">
+<li><p><strong>Warna Saja (9 Fitur)</strong>: <code class="docutils literal notranslate"><span class="pre">mean_R</span></code>, <code class="docutils literal notranslate"><span class="pre">mean_G</span></code>, <code class="docutils literal notranslate"><span class="pre">mean_B</span></code>, <code class="docutils literal notranslate"><span class="pre">std_R</span></code>, <code class="docutils literal notranslate"><span class="pre">std_G</span></code>, <code class="docutils literal notranslate"><span class="pre">std_B</span></code>, <code class="docutils literal notranslate"><span class="pre">skew_R</span></code>, <code class="docutils literal notranslate"><span class="pre">skew_G</span></code>, <code class="docutils literal notranslate"><span class="pre">skew_B</span></code></p></li>
+<li><p><strong>Tekstur GLCM Saja (5 Fitur)</strong>: <code class="docutils literal notranslate"><span class="pre">energi</span></code>, <code class="docutils literal notranslate"><span class="pre">entropy</span></code>, <code class="docutils literal notranslate"><span class="pre">kontras</span></code>, <code class="docutils literal notranslate"><span class="pre">korelasi</span></code>, <code class="docutils literal notranslate"><span class="pre">homogenitas</span></code></p></li>
+<li><p><strong>Semua Fitur (14 Fitur Gabungan)</strong>: 9 Fitur Warna + 5 Fitur Tekstur GLCM</p></li>
+</ol>
+<p>Total konfigurasi yang diuji: <span class="math notranslate nohighlight">\(4 	ext{ algoritma} 	imes 3 	ext{ subset fitur} = \mathbf{12 	ext{ variasi eksperimen}}\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="strategi-pengukuran-akurasi">
+<h3>4.3 Strategi Pengukuran Akurasi<a class="headerlink" href="#strategi-pengukuran-akurasi" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Akurasi Data Latih (<code class="docutils literal notranslate"><span class="pre">acc_train</span></code>)</strong>: Kinerja pada data training untuk mendeteksi kapasitas belajar model.</p></li>
+<li><p><strong>Akurasi Data Uji (<code class="docutils literal notranslate"><span class="pre">acc_test</span></code>)</strong>: Kinerja pada data uji independen yang belum pernah dilihat model sebelumnya.</p></li>
+<li><p><strong>Akurasi 5-Fold Cross-Validation (<code class="docutils literal notranslate"><span class="pre">acc_cv5</span></code>)</strong>: Menggunakan <code class="docutils literal notranslate"><span class="pre">StratifiedKFold(n_splits=5)</span></code> pada data training. Data dibagi menjadi 5 bagian; secara bergiliran 1 bagian menjadi validasi dan 4 bagian menjadi latihan. Nilai rata-rata dari 5 iterasi ini memberikan estimasi performa paling stabil dan tepercaya.</p></li>
+</ul>
+</section>
+<section id="partisi-dataset-pembagian-data-training-80-dan-data-testing-20">
+<h3>4.4 Partisi Dataset: Pembagian Data Training (80%) dan Data Testing (20%)<a class="headerlink" href="#partisi-dataset-pembagian-data-training-80-dan-data-testing-20" title="Permalink to this heading">#</a></h3>
+<p>Protokol pembagian data dirancang secara ketat untuk menjamin validitas evaluasi:</p>
+<ul class="simple">
+<li><p><strong>Total Dataset Bersih</strong>: <strong>184 citra</strong></p></li>
+<li><p><strong>Data TRAINING (80%)</strong>: <strong>147 citra</strong> (73 kelas <em>rapi</em>, 74 kelas <em>berantakan</em>)</p></li>
+<li><p><strong>Data TESTING (20%)</strong>: <strong>37 citra</strong> (18 kelas <em>rapi</em>, 19 kelas <em>berantakan</em>)</p></li>
+<li><p><strong>Stratified Partitioning (<code class="docutils literal notranslate"><span class="pre">stratify=y</span></code>)</strong>: Menjamin proporsi kelas <em>rapi</em> dan <em>berantakan</em> tetap identik dan seimbang antara subset latih dan subset uji.</p></li>
+<li><p><strong>Reproducible Seed (<code class="docutils literal notranslate"><span class="pre">random_state=42</span></code>)</strong>: Menjamin bahwa pembagian data bersifat deterministik dan dapat direplikasi secara persis.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Catatan Skala Data Uji</strong>: Pada data uji berukuran 37 citra, kesalahan prediksi pada 1 citra tunggal akan mengubah akurasi sebesar <span class="math notranslate nohighlight">\(rac{1}{37} pprox 2.70\%\)</span>. Oleh karena itu, metrik <strong>5-Fold Cross-Validation (<code class="docutils literal notranslate"><span class="pre">acc_cv5</span></code>)</strong> menjadi acuan utama dalam menentukan model terbaik.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Xtr</span><span class="p">,</span> <span class="n">Xte</span><span class="p">,</span> <span class="n">ytr</span><span class="p">,</span> <span class="n">yte</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">COLOR</span> <span class="o">+</span> <span class="n">TEX</span><span class="p">],</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
@@ -1439,20 +1679,133 @@ Jadi untuk memilih model terbaik, lebih aman lihat akurasi CV.
 </div>
 </div>
 </div>
-<p><strong>Cara baca tabel:</strong> bandingkan <code class="docutils literal notranslate"><span class="pre">acc_train</span></code> dengan <code class="docutils literal notranslate"><span class="pre">acc_test</span></code>. Kalau train jauh di atas test (misalnya Random Forest &amp; Decision Tree
-yang train-nya bisa 100%), model <strong>menghafal</strong> data training dan kurang bisa menebak data baru → itu yang disebut <em>overfitting</em>.
-Fitur warna saja dan tekstur saja biasanya kalah dari gabungan keduanya.</p>
 </section>
 </section>
-<section id="confusion-matrix">
-<h2>6. Confusion matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this heading">#</a></h2>
-<p>Matriks 2×2 yang menunjukkan hasil tebakan di data test:</p>
+<section id="tahap-5-evaluation-evaluasi-model-analisis-hasil">
+<h2>5. TAHAP 5: EVALUATION (Evaluasi Model &amp; Analisis Hasil)<a class="headerlink" href="#tahap-5-evaluation-evaluasi-model-analisis-hasil" title="Permalink to this heading">#</a></h2>
+<section id="komparasi-kinerja-12-konfigurasi-eksperimen">
+<h3>5.1 Komparasi Kinerja 12 Konfigurasi Eksperimen<a class="headerlink" href="#komparasi-kinerja-12-konfigurasi-eksperimen" title="Permalink to this heading">#</a></h3>
+<p>Tabel hasil di atas menampilkan perbandingan performa 4 model pada 3 subset fitur:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Subset Fitur</p></th>
+<th class="head text-left"><p>Model</p></th>
+<th class="head text-center"><p>Akurasi Train (<code class="docutils literal notranslate"><span class="pre">acc_train</span></code>)</p></th>
+<th class="head text-center"><p>Akurasi Test (<code class="docutils literal notranslate"><span class="pre">acc_test</span></code>)</p></th>
+<th class="head text-center"><p>Akurasi CV 5-Fold (<code class="docutils literal notranslate"><span class="pre">acc_cv5</span></code>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>Warna (9 Fitur)</strong></p></td>
+<td class="text-left"><p>KNN</p></td>
+<td class="text-center"><p>0.7483 (74.8%)</p></td>
+<td class="text-center"><p>0.5676 (56.8%)</p></td>
+<td class="text-center"><p>0.5646 (56.5%)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Warna (9 Fitur)</p></td>
+<td class="text-left"><p>SVM</p></td>
+<td class="text-center"><p>0.9048 (90.5%)</p></td>
+<td class="text-center"><p>0.6757 (67.6%)</p></td>
+<td class="text-center"><p>0.6459 (64.6%)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Warna (9 Fitur)</p></td>
+<td class="text-left"><p>Random Forest</p></td>
+<td class="text-center"><p>1.0000 (100.0%)</p></td>
+<td class="text-center"><p>0.7297 (73.0%)</p></td>
+<td class="text-center"><p>0.6033 (60.3%)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Warna (9 Fitur)</p></td>
+<td class="text-left"><p>Decision Tree</p></td>
+<td class="text-center"><p>1.0000 (100.0%)</p></td>
+<td class="text-center"><p>0.5946 (59.5%)</p></td>
+<td class="text-center"><p>0.5872 (58.7%)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Tekstur GLCM (5 Fitur)</strong></p></td>
+<td class="text-left"><p>KNN</p></td>
+<td class="text-center"><p>0.7959 (79.6%)</p></td>
+<td class="text-center"><p>0.5405 (54.1%)</p></td>
+<td class="text-center"><p>0.6087 (60.9%)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Tekstur GLCM (5 Fitur)</p></td>
+<td class="text-left"><p>SVM</p></td>
+<td class="text-center"><p>0.7823 (78.2%)</p></td>
+<td class="text-center"><p>0.5676 (56.8%)</p></td>
+<td class="text-center"><p>0.5925 (59.3%)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Tekstur GLCM (5 Fitur)</p></td>
+<td class="text-left"><p>Random Forest</p></td>
+<td class="text-center"><p>1.0000 (100.0%)</p></td>
+<td class="text-center"><p>0.5405 (54.1%)</p></td>
+<td class="text-center"><p>0.6033 (60.3%)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Tekstur GLCM (5 Fitur)</p></td>
+<td class="text-left"><p>Decision Tree</p></td>
+<td class="text-center"><p>1.0000 (100.0%)</p></td>
+<td class="text-center"><p>0.5676 (56.8%)</p></td>
+<td class="text-center"><p>0.5917 (59.2%)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Semua (14 Fitur)</strong></p></td>
+<td class="text-left"><p>KNN</p></td>
+<td class="text-center"><p>0.8163 (81.6%)</p></td>
+<td class="text-center"><p>0.6486 (64.9%)</p></td>
+<td class="text-center"><p>0.6086 (60.9%)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Semua (14 Fitur)</strong></p></td>
+<td class="text-left"><p><strong>SVM (Model Terbaik CV)</strong></p></td>
+<td class="text-center"><p><strong>0.9320 (93.2%)</strong></p></td>
+<td class="text-center"><p><strong>0.7027 (70.3%)</strong></p></td>
+<td class="text-center"><p><strong>0.7284 (72.8%)</strong></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Semua (14 Fitur)</strong></p></td>
+<td class="text-left"><p><strong>Random Forest (Akurasi Test Tertinggi)</strong></p></td>
+<td class="text-center"><p><strong>1.0000 (100.0%)</strong></p></td>
+<td class="text-center"><p><strong>0.7568 (75.7%)</strong></p></td>
+<td class="text-center"><p><strong>0.6739 (67.4%)</strong></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Semua (14 Fitur)</strong></p></td>
+<td class="text-left"><p>Decision Tree</p></td>
+<td class="text-center"><p>1.0000 (100.0%)</p></td>
+<td class="text-center"><p>0.5135 (51.4%)</p></td>
+<td class="text-center"><p>0.5818 (58.2%)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="analisis-hasil-penentuan-model-terbaik">
+<h3>5.2 Analisis Hasil &amp; Penentuan Model Terbaik<a class="headerlink" href="#analisis-hasil-penentuan-model-terbaik" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Akurasi Testing Tertinggi</strong>:</p>
 <ul class="simple">
-<li><p>baris = label <strong>aktual</strong>, kolom = label <strong>prediksi</strong></p></li>
-<li><p>diagonal (kiri-atas &amp; kanan-bawah) = tebakan <strong>benar</strong></p></li>
-<li><p>di luar diagonal = tebakan <strong>salah</strong></p></li>
+<li><p>Diraih oleh <strong>Random Forest dengan Semua 14 Fitur</strong> sebesar <strong>75.68% (75.7%)</strong>.</p></li>
+<li><p>Namun, Random Forest mengalami akurasi latih 100% dan skor validasi silang 67.39% (terdapat indikasi <em>overfitting</em> yang perlu diwaspadai).</p></li>
 </ul>
-<p>Dipakai model terbaik (berdasar akurasi CV) dengan 14 fitur.</p>
+</li>
+<li><p><strong>Model Terbaik &amp; Paling Stabil (Rekomendasi Berdasarkan Cross-Validation)</strong>:</p>
+<ul class="simple">
+<li><p>Diraih oleh <strong>Support Vector Machine (SVM) dengan Semua 14 Fitur</strong>.</p></li>
+<li><p>Menghasilkan nilai <strong>5-Fold Cross-Validation tertinggi sebesar 72.84% (72.8%)</strong> dan akurasi testing <strong>70.27% (70.3%)</strong>.</p></li>
+<li><p>Model SVM menunjukkan kurva pembelajaran yang lebih stabil dan tidak menghafal data training secara berlebihan.</p></li>
+</ul>
+</li>
+<li><p><strong>Pengaruh Kombinasi Fitur</strong>:</p>
+<ul class="simple">
+<li><p>Penggabungan <strong>14 Fitur (Warna + GLCM)</strong> menghasilkan performa yang lebih tinggi dan konsisten dibanding hanya mengandalkan fitur tekstur GLCM saja (~54% - 59%) atau warna saja (~56% - 67%).</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="evaluasi-diagnostik-confusion-matrix-model-terbaik-svm-14-fitur">
+<h3>5.3 Evaluasi Diagnostik: Confusion Matrix Model Terbaik (SVM - 14 Fitur)<a class="headerlink" href="#evaluasi-diagnostik-confusion-matrix-model-terbaik-svm-14-fitur" title="Permalink to this heading">#</a></h3>
+<p>Matriks konfusi (<em>Confusion Matrix</em>) 2×2 memetakan tebakan model pada 37 sampel data uji independen:</p>
+<ul class="simple">
+<li><p><strong>Baris</strong>: Label kelas <strong>Aktual</strong> (<em>Ground Truth</em>).</p></li>
+<li><p><strong>Kolom</strong>: Label kelas <strong>Prediksi Model</strong>.</p></li>
+<li><p><strong>Diagonal Utama</strong>: Prediksi yang <strong>Benar</strong> (<em>True Negative</em> &amp; <em>True Positive</em>).</p></li>
+<li><p><strong>Di Luar Diagonal</strong>: Kesalahan klasifikasi (<em>False Positive</em> &amp; <em>False Negative</em>).</p></li>
+</ul>
+<p>Model yang dievaluasi adalah model terbaik berdasarkan kestabilan validasi silang, yaitu <strong>SVM dengan 14 Fitur</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">R</span><span class="o">.</span><span class="n">fitur</span> <span class="o">==</span> <span class="s2">&quot;Semua (14 fitur)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;acc_cv5&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1488,15 +1841,76 @@ weighted avg       0.70      0.70      0.70        37
 <img alt="../_images/8863ebabaded1e4fe847d092a479de3d3a0d9543998ffdd901d9477ff2b99d38.png" src="../_images/8863ebabaded1e4fe847d092a479de3d3a0d9543998ffdd901d9477ff2b99d38.png" />
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">precision</span></code>, <code class="docutils literal notranslate"><span class="pre">recall</span></code>, <code class="docutils literal notranslate"><span class="pre">f1-score</span></code> di atas adalah turunan dari confusion matrix:
-<strong>precision</strong> = dari yang ditebak kelas X, berapa persen yang benar; <strong>recall</strong> = dari yang sebenarnya kelas X, berapa persen yang berhasil ditemukan.</p>
 </section>
-<section id="akurasi-training-vs-test-cek-overfitting">
-<h2>7. Akurasi training vs test (cek overfitting)<a class="headerlink" href="#akurasi-training-vs-test-cek-overfitting" title="Permalink to this heading">#</a></h2>
-<p>Dari tabel di bagian 5 kita bandingkan <strong>akurasi training</strong> dan <strong>akurasi test</strong> untuk tiap model (14 fitur).</p>
+<section id="analisis-metrik-evaluasi-lanjutan-classification-report">
+<h3>5.4 Analisis Metrik Evaluasi Lanjutan (Classification Report)<a class="headerlink" href="#analisis-metrik-evaluasi-lanjutan-classification-report" title="Permalink to this heading">#</a></h3>
+<p>Berdasarkan pengujian model terbaik (<strong>SVM dengan 14 Fitur</strong>) pada 37 data uji:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Kelas Target</p></th>
+<th class="head text-center"><p>Precision</p></th>
+<th class="head text-center"><p>Recall</p></th>
+<th class="head text-center"><p>F1-Score</p></th>
+<th class="head text-center"><p>Support (Jumlah Sampel Uji)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">berantakan</span></code></strong></p></td>
+<td class="text-center"><p><strong>0.72</strong> (72%)</p></td>
+<td class="text-center"><p><strong>0.68</strong> (68%)</p></td>
+<td class="text-center"><p><strong>0.70</strong> (70%)</p></td>
+<td class="text-center"><p>19 foto</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">rapi</span></code></strong></p></td>
+<td class="text-center"><p><strong>0.68</strong> (68%)</p></td>
+<td class="text-center"><p><strong>0.72</strong> (72%)</p></td>
+<td class="text-center"><p><strong>0.70</strong> (70%)</p></td>
+<td class="text-center"><p>18 foto</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Akurasi Keseluruhan</strong></p></td>
+<td class="text-center"><p>—</p></td>
+<td class="text-center"><p>—</p></td>
+<td class="text-center"><p><strong>0.7027 (70.3%)</strong></p></td>
+<td class="text-center"><p><strong>37 foto</strong></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Macro Average</strong></p></td>
+<td class="text-center"><p><strong>0.70</strong></p></td>
+<td class="text-center"><p><strong>0.70</strong></p></td>
+<td class="text-center"><p><strong>0.70</strong></p></td>
+<td class="text-center"><p>37 foto</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Weighted Average</strong></p></td>
+<td class="text-center"><p><strong>0.70</strong></p></td>
+<td class="text-center"><p><strong>0.70</strong></p></td>
+<td class="text-center"><p><strong>0.70</strong></p></td>
+<td class="text-center"><p>37 foto</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Interpretasi Nilai Metrik:</strong></p>
 <ul class="simple">
-<li><p>Kalau training dan test <strong>dekat</strong> → model belajar dengan baik.</p></li>
-<li><p>Kalau training <strong>jauh lebih tinggi</strong> dari test → model <strong>overfitting</strong>: menghafal data training, tapi kurang bisa menebak foto baru.</p></li>
+<li><p><strong>Precision (Ketepatan)</strong>:</p>
+<ul>
+<li><p>Kelas <code class="docutils literal notranslate"><span class="pre">berantakan</span></code> = <strong>72%</strong>: Dari seluruh ruangan yang ditebak berantakan oleh model, 72% di antaranya memang benar-benar berantakan (hanya 28% ruangan rapi yang salah dituduh berantakan).</p></li>
+<li><p>Kelas <code class="docutils literal notranslate"><span class="pre">rapi</span></code> = <strong>68%</strong>: Dari seluruh ruangan yang ditebak rapi oleh model, 68% memang benar rapi.</p></li>
+</ul>
+</li>
+<li><p><strong>Recall (Sensitivitas / Daya Tangkap)</strong>:</p>
+<ul>
+<li><p>Kelas <code class="docutils literal notranslate"><span class="pre">berantakan</span></code> = <strong>68%</strong>: Dari total 19 ruangan berantakan aktual, model berhasil menangkap 68% (13 ruangan).</p></li>
+<li><p>Kelas <code class="docutils literal notranslate"><span class="pre">rapi</span></code> = <strong>72%</strong>: Dari total 18 ruangan rapi aktual, model berhasil mengenali 72% (13 ruangan).</p></li>
+</ul>
+</li>
+<li><p><strong>F1-Score</strong>: Bernilai seimbang <strong>0.70</strong> di kedua kelas, menunjukkan bahwa model tidak condong (<em>unbiased</em>) ke salah satu kelas.</p></li>
+</ul>
+</section>
+<section id="analisis-overfitting-celah-generalisasi-generalization-gap">
+<h3>5.5 Analisis Overfitting &amp; Celah Generalisasi (<em>Generalization Gap</em>)<a class="headerlink" href="#analisis-overfitting-celah-generalisasi-generalization-gap" title="Permalink to this heading">#</a></h3>
+<p>Untuk memastikan model layak digunakan di dunia nyata, kita membandingkan <strong>Akurasi Training (<code class="docutils literal notranslate"><span class="pre">acc_train</span></code>)</strong> dengan <strong>Akurasi Testing (<code class="docutils literal notranslate"><span class="pre">acc_test</span></code>)</strong>:</p>
+<ul class="simple">
+<li><p><strong>Generalisasi Baik</strong>: Nilai <code class="docutils literal notranslate"><span class="pre">acc_train</span></code> dan <code class="docutils literal notranslate"><span class="pre">acc_test</span></code> tidak terpaut jauh (selisih kecil).</p></li>
+<li><p><strong>Overfitting</strong>: Nilai <code class="docutils literal notranslate"><span class="pre">acc_train</span></code> sangat tinggi (bahkan 100%), namun <code class="docutils literal notranslate"><span class="pre">acc_test</span></code> anjlok jauh di bawahnya. Ini menandakan model menghafal sampel latihan alih-alih mempelajari pola umum.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1524,17 +1938,148 @@ weighted avg       0.70      0.70      0.70        37
 </div>
 </div>
 </div>
-<p><strong>Kenapa bisa overfitting?</strong> Datanya cuma ratusan foto dan fiturnya hanya 14 angka, jadi model gampang menghafal. Untuk laporan, <strong>akurasi yang dipakai adalah akurasi test</strong> (atau CV), bukan akurasi training.</p>
 </section>
-<section id="kesimpulan">
-<h2>8. Kesimpulan<a class="headerlink" href="#kesimpulan" title="Permalink to this heading">#</a></h2>
+<section id="evaluasi-selisih-akurasi-batasan-fisis-fitur">
+<h3>5.6 Evaluasi Selisih Akurasi &amp; Batasan Fisis Fitur<a class="headerlink" href="#evaluasi-selisih-akurasi-batasan-fisis-fitur" title="Permalink to this heading">#</a></h3>
+<p><strong>Rincian Selisih Akurasi (<em>Generalization Gap</em>):</strong></p>
 <ul class="simple">
-<li><p><strong>Fitur</strong> sesuai tugas: mean, std, skewness tiap channel (9) + energi, entropy, kontras, korelasi, homogenitas (5) = <strong>14 fitur + label</strong>. Tersimpan di <code class="docutils literal notranslate"><span class="pre">hasil/fitur_citra_&lt;mode&gt;.csv</span></code>.</p></li>
-<li><p><strong>Duplikat:</strong> ada 9 grup foto kembar (10 foto dibuang di mode <code class="docutils literal notranslate"><span class="pre">dedup</span></code>) supaya akurasi test tidak palsu tinggi. Daftarnya ada di <code class="docutils literal notranslate"><span class="pre">hasil/daftar_foto_duplikat.csv</span></code>.</p></li>
-<li><p><strong>Pembagian data:</strong> 80% training, 20% test (<code class="docutils literal notranslate"><span class="pre">random_state=42</span></code>). Akurasi juga dicek dengan cross-validation 5-fold.</p></li>
-<li><p><strong>Training vs test:</strong> training jauh lebih tinggi dari test karena datanya sedikit (overfitting). Angka yang dilaporkan adalah akurasi <strong>test</strong> dan <strong>CV</strong>.</p></li>
-<li><p><strong>Akurasi</strong> dengan 14 fitur ada di kisaran 70%. Fitur warna dan tekstur memang mirip antara foto rapi dan berantakan, jadi akurasinya terbatas.</p></li>
+<li><p><strong>Decision Tree</strong>: Train 100.0% vs Test 51.3% <span class="math notranslate nohighlight">\(
+ightarrow\)</span> Selisih <strong>48.7%</strong> (<em>Sangat Overfitting</em>, performa uji mendekati tebakan acak 50%).</p></li>
+<li><p><strong>Random Forest</strong>: Train 100.0% vs Test 75.7% <span class="math notranslate nohighlight">\(
+ightarrow\)</span> Selisih <strong>24.3%</strong> (<em>Overfitting moderat</em>).</p></li>
+<li><p><strong>SVM</strong>: Train 93.2% vs Test 70.3% <span class="math notranslate nohighlight">\(
+ightarrow\)</span> Selisih <strong>22.9%</strong> (<em>Kinerja paling stabil, CV tertinggi</em>).</p></li>
+<li><p><strong>KNN</strong>: Train 81.6% vs Test 64.9% <span class="math notranslate nohighlight">\(
+ightarrow\)</span> Selisih <strong>16.8%</strong> (<em>Gap terkecil, namun akurasi test rendah</em>).</p></li>
 </ul>
+<p><strong>Mengapa Akurasi Maksimal Berada di Kisaran ~70% - 75%?</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Keterbatasan Statistik Global Citra</strong>: Fitur Color Moments dan GLCM dihitung secara global dari seluruh bidang citra tanpa informasi semantik objek. Ruangan berantakan yang memiliki cat dinding polos dan pencahayaan terang dapat memiliki nilai tekstur dan warna yang mirip dengan ruangan rapi.</p></li>
+<li><p><strong>Karakteristik Ukuran Sampel</strong>: Dataset bersih berisi 184 foto (147 data latih). Jumlah ini cukup memadai untuk baseline machine learning klasik, namun model berbasis pohon yang kompleks cenderung mudah menghafal pola data latih yang terbatas tersebut.</p></li>
+</ol>
+</section>
+</section>
+<section id="tahap-6-deployment-penerapan-rencana-implementasi">
+<h2>6. TAHAP 6: DEPLOYMENT (Penerapan &amp; Rencana Implementasi)<a class="headerlink" href="#tahap-6-deployment-penerapan-rencana-implementasi" title="Permalink to this heading">#</a></h2>
+<section id="rekomendasi-model-produksi">
+<h3>6.1 Rekomendasi Model Produksi<a class="headerlink" href="#rekomendasi-model-produksi" title="Permalink to this heading">#</a></h3>
+<p>Berdasarkan evaluasi seluruh parameter performa dan stabilitas:</p>
+<blockquote>
+<div><p><strong>Model yang Direkomendasikan</strong>: <strong>Support Vector Machine (SVM) Kernel RBF dengan Pipeline <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> menggunakan Semua 14 Fitur (Warna RGB + GLCM)</strong>.</p>
+</div></blockquote>
+<p><strong>Alasan Pemilihan:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Akurasi Validasi Silang Tertinggi</strong>: Mencapai skor <strong>5-Fold Cross-Validation tertinggi sebesar 72.84%</strong>, membuktikan model paling konsisten pada berbagai partisi data.</p></li>
+<li><p><strong>Metrik Seimbang</strong>: F1-Score seimbang di angka <strong>0.70</strong> untuk kedua kelas tanpa ada ketimpangan prediksi.</p></li>
+<li><p><strong>Efisiensi Komputasi Tinggi</strong>: Vektor 14 fitur sangat ringan, memori penyimpanan model sangat kecil (&lt; 100 KB), dan waktu inferensi per citra hanya membutuhkan hitungan milidetik.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="alur-inferensi-sistem-produksi-inference-pipeline">
+<h3>6.2 Alur Inferensi Sistem Produksi (<em>Inference Pipeline</em>)<a class="headerlink" href="#alur-inferensi-sistem-produksi-inference-pipeline" title="Permalink to this heading">#</a></h3>
+<p>Untuk mengklasifikasikan foto ruangan baru yang diunggah oleh pengguna, pipeline inferensi dijalankan melalui tahapan berikut:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[Citra Ruangan Baru (JPG/PNG)]
+               │
+               ▼
+   [Pra-pemrosesan Citra]
+   ├── Baca citra &amp; pastikan format RGB
+   └── Konversi ke Grayscale &amp; Kuantisasi 64 level (gray // 4)
+               │
+               ▼
+   [Ekstraksi 14 Fitur Visual]
+   ├── 9 Fitur Warna: Mean, Std, Skewness (Kanal R, G, B)
+   └── 5 Fitur GLCM: Energy, Entropy, Contrast, Correlation, Homogeneity
+               │
+               ▼
+   [Transformasi StandardScaler]
+   └── Skalakan 14 fitur menggunakan parameter mean &amp; variance dari data training
+               │
+               ▼
+   [Inferensi Model SVM]
+   └── Hitung decision function hyperplane
+               │
+               ▼
+   [Luaran Prediksi]
+   ├── Label Kelas: &quot;Rapi&quot; atau &quot;Berantakan&quot;
+   └── Confidence Score (% Probabilitas Keyakinan)
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="desain-arsitektur-penerapan-deployment-architecture">
+<h3>6.3 Desain Arsitektur Penerapan (<em>Deployment Architecture</em>)<a class="headerlink" href="#desain-arsitektur-penerapan-deployment-architecture" title="Permalink to this heading">#</a></h3>
+<ol class="arabic">
+<li><p><strong>Layanan RESTful API (Backend)</strong>:</p>
+<ul>
+<li><p>Framework: <strong>FastAPI</strong> atau <strong>Flask</strong> dengan endpoint <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/predict</span></code>.</p></li>
+<li><p>Mengunggah berkas citra, menjalankan pipeline ekstraksi fitur dan scaler, lalu mengembalikan respons berformat JSON:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;prediction&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rapi&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.76</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;extracted_features&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;skew_G&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.053</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;glcm_entropy&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8.69</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;glcm_contrast&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">23.53</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p><strong>Antarmuka Interaktif Pengguna (Frontend UI)</strong>:</p>
+<ul class="simple">
+<li><p>Dashboard web berbasis <strong>Streamlit</strong> untuk memfasilitasi pengguna mengunggah foto ruangan, menampilkan visualisasi nilai fitur, dan menyajikan hasil diagnosis kerapian secara interaktif.</p></li>
+</ul>
+</li>
+<li><p><strong>Penyimpanan Artefak Model</strong>:</p>
+<ul class="simple">
+<li><p>Model SVM terlatih dan objek <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> disimpan menggunakan pustaka <code class="docutils literal notranslate"><span class="pre">joblib</span></code> ke dalam file <code class="docutils literal notranslate"><span class="pre">hasil/model_klasifikasi_ruangan.joblib</span></code>.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="pemantauan-kinerja-mitigasi-drift-mlops-maintenance">
+<h3>6.4 Pemantauan Kinerja &amp; Mitigasi Drift (<em>MLOps Maintenance</em>)<a class="headerlink" href="#pemantauan-kinerja-mitigasi-drift-mlops-maintenance" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Pemantauan Data Drift</strong>: Kondisi pencahayaan ekstrim (terlalu gelap/terang) dapat membiaskan fitur warna. Sistem perlu memberikan peringatan jika nilai <em>Mean RGB</em> berada di luar ambang batas distribusi training.</p></li>
+<li><p><strong>Mekanisme Umpan Balik Pengguna</strong>: Menyediakan tombol verifikasi bagi pengguna untuk melaporkan jika prediksi sistem keliru, kemudian menyimpannya ke database untuk <em>retraining</em> berkala.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="lembar-fakta-proyek-project-factsheet-untuk-evaluasi-ujian">
+<h3>6.5 Lembar Fakta Proyek (<em>Project Factsheet</em> untuk Evaluasi &amp; Ujian)<a class="headerlink" href="#lembar-fakta-proyek-project-factsheet-untuk-evaluasi-ujian" title="Permalink to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Pertanyaan Kunci Evaluasi</p></th>
+<th class="head text-left"><p>Jawaban / Fakta Eksperimen</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>Berapa total datasetnya?</strong></p></td>
+<td class="text-left"><p>Dataset awal berjumlah <strong>194 foto</strong> (97 rapi, 97 berantakan). Setelah audit kualitas data via hash MD5, ditemukan 9 kelompok duplikat dan <strong>10 foto kembar dibuang</strong>, menghasilkan <strong>184 foto bersih</strong> (91 rapi, 93 berantakan).</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Berapa pembagian data train dan test?</strong></p></td>
+<td class="text-left"><p>Menggunakan rasio <strong>80% Training : 20% Testing</strong> dengan <em>stratified sampling</em> (<code class="docutils literal notranslate"><span class="pre">random_state=42</span></code>). Data <strong>Training = 147 foto</strong> (73 rapi, 74 berantakan) dan Data <strong>Testing = 37 foto</strong> (18 rapi, 19 berantakan).</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Fitur apa saja yang digunakan?</strong></p></td>
+<td class="text-left"><p>Total <strong>14 fitur visual</strong>: <strong>9 fitur warna RGB</strong> (Mean, Std, Skewness per kanal R, G, B) dan <strong>5 fitur tekstur GLCM</strong> (Energi, Entropy, Kontras, Korelasi, Homogenitas dari greyscale 64 level).</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Model apa yang digunakan?</strong></p></td>
+<td class="text-left"><p>4 Model Machine Learning: <strong>KNN</strong> (<span class="math notranslate nohighlight">\(k=5\)</span>), <strong>SVM</strong> (Kernel RBF), <strong>Random Forest</strong> (100 trees), dan <strong>Decision Tree</strong>. Diuji pada 3 subset fitur (Warna 9 fitur, GLCM 5 fitur, dan Semua 14 fitur).</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Berapa akurasi terbaiknya?</strong></p></td>
+<td class="text-left"><p>- <strong>Akurasi Testing Tertinggi</strong>: <strong>Random Forest (14 Fitur)</strong> sebesar <strong>75.68% (75.7%)</strong>.<br>- <strong>Model Terbaik Berdasarkan CV (Paling Stabil &amp; Tepercaya)</strong>: <strong>SVM (14 Fitur)</strong> dengan rata-rata <strong>5-Fold Cross-Validation 72.84% (72.8%)</strong>, akurasi testing <strong>70.27% (70.3%)</strong>, dan F1-Score <strong>0.70</strong>.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Mengapa terjadi selisih akurasi train vs test?</strong></p></td>
+<td class="text-left"><p>Karena dataset berjumlah 184 foto dan fitur statistik global memiliki ambiguitas visual pada kondisi ruangan tertentu, sehingga model pohon non-linear cenderung menghafal data latih (<em>overfitting</em>).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 </section>
 </section>
 
@@ -1577,6 +2122,15 @@ weighted avg       0.70      0.70      0.70        37
         <p class="prev-next-title">UTS Sistem Informasi Geografis</p>
       </div>
     </a>
+    <a class="right-next"
+       href="ekstraksi_audio.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Klasifikasi Audio Berisik vs Non-Berisik</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1593,27 +2147,56 @@ weighted avg       0.70      0.70      0.70        37
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-pengaturan">1. Import library &amp; pengaturan</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cek-foto-duplikat">2. Cek foto duplikat</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daftar-foto-duplikat-per-grup">Daftar foto duplikat (per grup)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penerapan-komprehensif-metodologi-crisp-dm-cross-industry-standard-process-for-data-mining">Penerapan Komprehensif Metodologi CRISP-DM (<em>Cross-Industry Standard Process for Data Mining</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ringkasan-eksekutif-proyek-executive-summary">Ringkasan Eksekutif Proyek (<em>Executive Summary</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-1-business-understanding-pemahaman-bisnis">1. TAHAP 1: BUSINESS UNDERSTANDING (Pemahaman Bisnis)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang-masalah">1.1 Latar Belakang Masalah</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rumusan-masalah">1.2 Rumusan Masalah</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-proyek">1.3 Tujuan Proyek</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kriteria-keberhasilan-success-criteria">1.4 Kriteria Keberhasilan (<em>Success Criteria</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kerangka-kerja-metodologi-crisp-dm">1.5 Kerangka Kerja Metodologi (CRISP-DM)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-fitur">3. Penjelasan fitur</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-fitur-warna-9-fitur">a. Fitur warna (9 fitur)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-fitur-tekstur-glcm-5-fitur">b. Fitur tekstur GLCM (5 fitur)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inisialisasi-environment-konfigurasi-sistem">Inisialisasi Environment &amp; Konfigurasi Sistem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-2-data-understanding-pemahaman-data">2. TAHAP 2: DATA UNDERSTANDING (Pemahaman Data)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#karakteristik-dataset-awal">2.1 Karakteristik Dataset Awal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#audit-kualitas-data-deteksi-data-leakage-via-hashing-md5">2.2 Audit Kualitas Data: Deteksi Data Leakage via Hashing MD5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rincian-audit-kelompok-duplikat">2.3 Rincian Audit Kelompok Duplikat</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verifikasi-visual-kelompok-foto-duplikat">2.4 Verifikasi Visual Kelompok Foto Duplikat</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-seluruh-dataset">4. Ekstraksi fitur seluruh dataset</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-ke-csv">Simpan ke CSV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-3-data-preparation-persiapan-data-rekayasa-fitur">3. TAHAP 3: DATA PREPARATION (Persiapan Data &amp; Rekayasa Fitur)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#landasan-teoretis-rekayasa-fitur-citra-feature-engineering">3.1 Landasan Teoretis Rekayasa Fitur Citra (<em>Feature Engineering</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-warna-color-moments-9-fitur">3.2 Ekstraksi Fitur Warna: Color Moments (9 Fitur)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-tekstur-glcm-gray-level-co-occurrence-matrix-5-fitur">3.3 Ekstraksi Fitur Tekstur: GLCM (<em>Gray-Level Co-occurrence Matrix</em>) (5 Fitur)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-ekstraksi-fitur-skala-penuh-batch-feature-extraction">3.4 Proses Ekstraksi Fitur Skala Penuh (Batch Feature Extraction)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penyimpanan-dataset-fitur-analisis-statistik-deskriptif">3.5 Penyimpanan Dataset Fitur &amp; Analisis Statistik Deskriptif</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi">5. Klasifikasi</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pembagian-data-berapa-untuk-training-berapa-untuk-test">Pembagian data: berapa untuk training, berapa untuk test?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-4-modeling-pemodelan-machine-learning">4. TAHAP 4: MODELING (Pemodelan Machine Learning)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pemilihan-algoritma-klasifikasi">4.1 Pemilihan Algoritma Klasifikasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#skenario-eksperimen-subset-fitur">4.2 Skenario Eksperimen Subset Fitur</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strategi-pengukuran-akurasi">4.3 Strategi Pengukuran Akurasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partisi-dataset-pembagian-data-training-80-dan-data-testing-20">4.4 Partisi Dataset: Pembagian Data Training (80%) dan Data Testing (20%)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">6. Confusion matrix</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#akurasi-training-vs-test-cek-overfitting">7. Akurasi training vs test (cek overfitting)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">8. Kesimpulan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-5-evaluation-evaluasi-model-analisis-hasil">5. TAHAP 5: EVALUATION (Evaluasi Model &amp; Analisis Hasil)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#komparasi-kinerja-12-konfigurasi-eksperimen">5.1 Komparasi Kinerja 12 Konfigurasi Eksperimen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-hasil-penentuan-model-terbaik">5.2 Analisis Hasil &amp; Penentuan Model Terbaik</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-diagnostik-confusion-matrix-model-terbaik-svm-14-fitur">5.3 Evaluasi Diagnostik: Confusion Matrix Model Terbaik (SVM - 14 Fitur)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-metrik-evaluasi-lanjutan-classification-report">5.4 Analisis Metrik Evaluasi Lanjutan (Classification Report)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-overfitting-celah-generalisasi-generalization-gap">5.5 Analisis Overfitting &amp; Celah Generalisasi (<em>Generalization Gap</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-selisih-akurasi-batasan-fisis-fitur">5.6 Evaluasi Selisih Akurasi &amp; Batasan Fisis Fitur</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-6-deployment-penerapan-rencana-implementasi">6. TAHAP 6: DEPLOYMENT (Penerapan &amp; Rencana Implementasi)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rekomendasi-model-produksi">6.1 Rekomendasi Model Produksi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-inferensi-sistem-produksi-inference-pipeline">6.2 Alur Inferensi Sistem Produksi (<em>Inference Pipeline</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desain-arsitektur-penerapan-deployment-architecture">6.3 Desain Arsitektur Penerapan (<em>Deployment Architecture</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pemantauan-kinerja-mitigasi-drift-mlops-maintenance">6.4 Pemantauan Kinerja &amp; Mitigasi Drift (<em>MLOps Maintenance</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lembar-fakta-proyek-project-factsheet-untuk-evaluasi-ujian">6.5 Lembar Fakta Proyek (<em>Project Factsheet</em> untuk Evaluasi &amp; Ujian)</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

@@ -1,0 +1,2130 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Tugas Ekstraksi Fitur Citra &amp; Klasifikasi (Rapi vs Berantakan) &#8212; Tugas Pembelajaran Sains Data</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Materi/Klasifikasi_me';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Klasifikasi Audio Berisik vs Non-Berisik" href="ekstraksi_audio.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Tugas Pembelajaran Sains Data - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Tugas Pembelajaran Sains Data - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Profil Mahasiswa
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="T1.html">1. Business Understanding</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="T2.html">IMPLEMENTASI KE DALAM AIVEN POSTGRE PG ADMIN DAN KNIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T3.html">Analisis dan Ekstraksi Fitur Time Series Kualitas Udara (NO2, CO, SO2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T4.html">Analisis Klaster Kualitas Udara (CO, NO2, SO2) - Wilayah Kwanyar, Bangkalan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="T4Fix.html">Laporan Analisis K-Means Clustering Polutan (CO, NO2, SO2)</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="PSD_Pemetaan.html">Segmentasi Wilayah Multi-Polutan (NO₂, SO₂, CO) — PCA + k-Means + Silhouette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSD_Sawah.html">Klasifikasi Lahan Sawah dan Non-Sawah Menggunakan Citra Sentinel-2A dan Random Forest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UTS_PSD_KLASIFIKASI.html">UTS Sistem Informasi Geografis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UTS_PSD_KLASIFIKASI_FIX.html">UTS Sistem Informasi Geografis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UTS_PSD.html">UTS Sistem Informasi Geografis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Klasifikasi.html">Klasifikasi Citra Ruangan: Rapi vs. Berantakan Berbasis Ekstraksi Fitur Warna (RGB) dan Tekstur (GLCM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ekstraksi_audio.html">Klasifikasi Audio Berisik vs Non-Berisik</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas  Ekstraksi Fitur Citra &amp; Klasifikasi (Rapi vs Berantakan)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FMateri/Klasifikasi_me.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Materi/Klasifikasi_me.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Tugas  Ekstraksi Fitur Citra & Klasifikasi (Rapi vs Berantakan)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-pengaturan">1. Import library &amp; pengaturan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cek-foto-duplikat">2. Cek foto duplikat</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daftar-foto-duplikat-per-grup">Daftar foto duplikat (per grup)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-fitur">3. Penjelasan fitur</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-fitur-warna-9-fitur">a. Fitur warna (9 fitur)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-fitur-tekstur-glcm-5-fitur">b. Fitur tekstur GLCM (5 fitur)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-seluruh-dataset">4. Ekstraksi fitur seluruh dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-ke-csv">Simpan ke CSV</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi">5. Klasifikasi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pembagian-data-berapa-untuk-training-berapa-untuk-test">Pembagian data: berapa untuk training, berapa untuk test?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">6. Confusion matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#akurasi-training-vs-test-cek-overfitting">7. Akurasi training vs test (cek overfitting)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">8. Kesimpulan</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="tugas-ekstraksi-fitur-citra-klasifikasi-rapi-vs-berantakan">
+<h1>Tugas  Ekstraksi Fitur Citra &amp; Klasifikasi (Rapi vs Berantakan)<a class="headerlink" href="#tugas-ekstraksi-fitur-citra-klasifikasi-rapi-vs-berantakan" title="Permalink to this heading">#</a></h1>
+<p>Notebook ini mengerjakan semua poin tugas:</p>
+<ol class="arabic simple">
+<li><p>Hitung <strong>mean, std, skewness</strong> tiap channel (R, G, B) pada dataset</p></li>
+<li><p>Ubah citra ke <strong>greyscale</strong></p></li>
+<li><p>Hitung fitur tekstur <strong>GLCM</strong>: <strong>energi, entropy, kontras, korelasi, homogenitas</strong></p></li>
+<li><p>Simpan semuanya ke <strong>CSV</strong> (total 14 fitur + label)</p></li>
+<li><p><strong>Klasifikasi</strong> seperti tugas audio kemarin, lalu hitung <strong>accuracy</strong> dan <strong>confusion matrix</strong></p></li>
+</ol>
+<p>Ditambah: pengecekan <strong>foto duplikat</strong>, akurasi <strong>training vs test</strong>, dan cek <strong>overfitting</strong>. Semua hanya memakai 14 fitur .</p>
+<section id="import-library-pengaturan">
+<h2>1. Import library &amp; pengaturan<a class="headerlink" href="#import-library-pengaturan" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">glob</span><span class="o">,</span><span class="w"> </span><span class="nn">hashlib</span><span class="o">,</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="o">,</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span><span class="o">,</span><span class="w"> </span><span class="nn">cv2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">skew</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.feature</span><span class="w"> </span><span class="kn">import</span> <span class="n">graycomatrix</span><span class="p">,</span> <span class="n">graycoprops</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">cross_val_score</span><span class="p">,</span> <span class="n">StratifiedKFold</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="n">BASE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>                      
+<span class="n">DATA</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">)</span>        
+<span class="n">OUT</span>  <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE</span><span class="p">,</span> <span class="s2">&quot;hasil&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">OUT</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># &quot;dedup&quot; = foto kembar dibuang (184 foto)  |  &quot;semua&quot; = semua foto dipakai (194 foto)</span>
+<span class="n">MODE</span> <span class="o">=</span> <span class="s2">&quot;dedup&quot;</span>
+<span class="n">SIZE</span> <span class="o">=</span> <span class="mi">256</span>                               <span class="c1"># semua citra di-resize ke 256x256</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mode:&quot;</span><span class="p">,</span> <span class="n">MODE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mode: dedup
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="cek-foto-duplikat">
+<h2>2. Cek foto duplikat<a class="headerlink" href="#cek-foto-duplikat" title="Permalink to this heading">#</a></h2>
+<p>Di dataset ada foto yang <strong>isinya persis sama (byte per byte)</strong> padahal nama file-nya beda, misalnya
+dikumpulkan oleh dua orang yang berbeda. Kita deteksi pakai <strong>hash MD5</strong>: dua file dengan isi identik pasti punya hash yang sama.</p>
+<p><strong>Kenapa ini penting?</strong> Kalau satu foto masuk data <em>training</em> dan kembarannya masuk data <em>test</em>, model tinggal menghafal.
+Akurasi test jadi kelihatan lebih tinggi dari kenyataan.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;rapi&quot;</span><span class="p">,</span> <span class="s2">&quot;berantakan&quot;</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">))):</span>
+        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">path</span><span class="o">=</span><span class="n">f</span><span class="p">,</span>
+                         <span class="n">md5</span><span class="o">=</span><span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()))</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+<span class="n">files</span><span class="p">[</span><span class="s2">&quot;urutan_di_grup&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">files</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;md5&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cumcount</span><span class="p">()</span>
+<span class="n">files</span><span class="p">[</span><span class="s2">&quot;jml_di_grup&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">files</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;md5&quot;</span><span class="p">)[</span><span class="s2">&quot;md5&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span>
+<span class="n">files</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">files</span><span class="o">.</span><span class="n">urutan_di_grup</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;dipakai&quot;</span><span class="p">,</span> <span class="s2">&quot;DUPLIKAT (dibuang)&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah foto asli  :&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">files</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+<span class="n">dup</span> <span class="o">=</span> <span class="n">files</span><span class="p">[</span><span class="n">files</span><span class="o">.</span><span class="n">jml_di_grup</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Grup foto kembar  :&quot;</span><span class="p">,</span> <span class="n">dup</span><span class="o">.</span><span class="n">md5</span><span class="o">.</span><span class="n">nunique</span><span class="p">(),</span> <span class="s2">&quot;grup&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Foto yang dibuang :&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">files</span><span class="o">.</span><span class="n">status</span> <span class="o">!=</span> <span class="s2">&quot;dipakai&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="s2">&quot;foto&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sisa setelah dedup:&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">files</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;dipakai&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="s2">&quot;foto&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah foto asli  : 194
+label
+rapi          97
+berantakan    97
+
+Grup foto kembar  : 9 grup
+Foto yang dibuang : 10 foto
+Sisa setelah dedup: 184 foto
+</pre></div>
+</div>
+</div>
+</div>
+<section id="daftar-foto-duplikat-per-grup">
+<h3>Daftar foto duplikat (per grup)<a class="headerlink" href="#daftar-foto-duplikat-per-grup" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dup</span><span class="p">[</span><span class="s2">&quot;grup&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dup</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;md5&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">ngroup</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">tabel_dup</span> <span class="o">=</span> <span class="n">dup</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">&quot;grup&quot;</span><span class="p">,</span> <span class="s2">&quot;urutan_di_grup&quot;</span><span class="p">])[[</span><span class="s2">&quot;grup&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">,</span> <span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">]]</span>
+<span class="n">tabel_dup</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUT</span><span class="p">,</span> <span class="s2">&quot;daftar_foto_duplikat.csv&quot;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># tampilkan SEMUA baris (jangan dipotong pandas)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.max_rows&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total: </span><span class="si">{</span><span class="n">dup</span><span class="o">.</span><span class="n">md5</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2"> grup, </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dup</span><span class="p">)</span><span class="si">}</span><span class="s2"> foto (yang dibuang: </span><span class="si">{</span><span class="p">(</span><span class="n">dup</span><span class="o">.</span><span class="n">status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">&#39;dipakai&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2"> foto)&quot;</span><span class="p">)</span>
+<span class="n">tabel_dup</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total: 9 grup, 19 foto (yang dibuang: 10 foto)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>grup</th>
+      <th>label</th>
+      <th>file</th>
+      <th>status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>berantakan</td>
+      <td>24-115 berantakan 1.jpg</td>
+      <td>dipakai</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>berantakan</td>
+      <td>24-131 berantakan 3.jpg</td>
+      <td>DUPLIKAT (dibuang)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>rapi</td>
+      <td>24-081 Rapi 3.jpg</td>
+      <td>dipakai</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>rapi</td>
+      <td>24-115 Rapi 2.jpg</td>
+      <td>DUPLIKAT (dibuang)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>rapi</td>
+      <td>24-145 Rapi 3.jpg</td>
+      <td>DUPLIKAT (dibuang)</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>3</td>
+      <td>berantakan</td>
+      <td>24-026 Berantakan 2.jpeg</td>
+      <td>dipakai</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>3</td>
+      <td>berantakan</td>
+      <td>24-115 Berantakan 3.jpeg</td>
+      <td>DUPLIKAT (dibuang)</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>4</td>
+      <td>rapi</td>
+      <td>24-169 Rapi 2.jpg</td>
+      <td>dipakai</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>4</td>
+      <td>rapi</td>
+      <td>24-228 Rapi 2.jpeg</td>
+      <td>DUPLIKAT (dibuang)</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>5</td>
+      <td>berantakan</td>
+      <td>24-003 Berantakan 2.jpg</td>
+      <td>dipakai</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>5</td>
+      <td>berantakan</td>
+      <td>24-034 Berantakan 3.jpg</td>
+      <td>DUPLIKAT (dibuang)</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>6</td>
+      <td>rapi</td>
+      <td>24-031 Rapi1.jpg</td>
+      <td>dipakai</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>6</td>
+      <td>rapi</td>
+      <td>24-034 Rapi 2.jpg</td>
+      <td>DUPLIKAT (dibuang)</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>7</td>
+      <td>berantakan</td>
+      <td>24-079 Berantakan 2.jpeg</td>
+      <td>dipakai</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>7</td>
+      <td>berantakan</td>
+      <td>24-115 Berantakan 2.jpeg</td>
+      <td>DUPLIKAT (dibuang)</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>8</td>
+      <td>rapi</td>
+      <td>24-034 Rapi 3.jpeg</td>
+      <td>dipakai</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>8</td>
+      <td>rapi</td>
+      <td>24-068 Rapi 2.jpeg</td>
+      <td>DUPLIKAT (dibuang)</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>9</td>
+      <td>rapi</td>
+      <td>24-007 Rapi 3.jpg</td>
+      <td>dipakai</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>9</td>
+      <td>rapi</td>
+      <td>24-115 Rapi 3.jpg</td>
+      <td>DUPLIKAT (dibuang)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Bukti visual: <strong>semua grup duplikat</strong> ditampilkan, satu baris per grup. Isi tiap baris memang foto yang sama.
+Judul hijau = foto yang dipakai, merah = foto duplikat yang dibuang.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grup_ids</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dup</span><span class="o">.</span><span class="n">grup</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="n">maks</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dup</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;grup&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>          <span class="c1"># jumlah foto terbanyak dalam satu grup</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">grup_ids</span><span class="p">),</span> <span class="n">maks</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">3.2</span> <span class="o">*</span> <span class="n">maks</span><span class="p">,</span> <span class="mf">3.2</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">grup_ids</span><span class="p">)))</span>
+<span class="n">axs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">axs</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">grup_ids</span><span class="p">),</span> <span class="n">maks</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axs</span><span class="o">.</span><span class="n">ravel</span><span class="p">():</span> <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>                <span class="c1"># kosongkan dulu, yang ada isinya dinyalakan lagi</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">gid</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">grup_ids</span><span class="p">):</span>
+    <span class="n">anggota</span> <span class="o">=</span> <span class="n">dup</span><span class="p">[</span><span class="n">dup</span><span class="o">.</span><span class="n">grup</span> <span class="o">==</span> <span class="n">gid</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;urutan_di_grup&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">anggota</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()):</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">path</span><span class="p">),</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">)),</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+        <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">warna</span> <span class="o">=</span> <span class="s2">&quot;green&quot;</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;dipakai&quot;</span> <span class="k">else</span> <span class="s2">&quot;red&quot;</span>
+        <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Grup </span><span class="si">{</span><span class="n">gid</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">file</span><span class="si">}</span><span class="se">\n</span><span class="s2">(</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">status</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">warna</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/bb846d0547b1acb731dde1abc7a499f7abf50f29b6b1e28ba8ac108e4b3212a4.png" src="../_images/bb846d0547b1acb731dde1abc7a499f7abf50f29b6b1e28ba8ac108e4b3212a4.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="penjelasan-fitur">
+<h2>3. Penjelasan fitur<a class="headerlink" href="#penjelasan-fitur" title="Permalink to this heading">#</a></h2>
+<p>Tiap foto diubah jadi <strong>satu baris angka</strong> (fitur). Ada 14 fitur + 1 label.</p>
+<section id="a-fitur-warna-9-fitur">
+<h3>a. Fitur warna (9 fitur)<a class="headerlink" href="#a-fitur-warna-9-fitur" title="Permalink to this heading">#</a></h3>
+<p>Dihitung per channel <strong>R, G, B</strong> dari seluruh piksel:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Fitur</p></th>
+<th class="head"><p>Artinya</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Mean</strong></p></td>
+<td><p>rata-rata nilai piksel → seberapa terang channel itu</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Std</strong> (standar deviasi)</p></td>
+<td><p>sebaran nilai piksel → seberapa beragam/kontras warnanya</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Skewness</strong></p></td>
+<td><p>kemiringan distribusi → lebih banyak piksel gelap (positif) atau terang (negatif)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="b-fitur-tekstur-glcm-5-fitur">
+<h3>b. Fitur tekstur GLCM (5 fitur)<a class="headerlink" href="#b-fitur-tekstur-glcm-5-fitur" title="Permalink to this heading">#</a></h3>
+<p>Citra diubah dulu ke <strong>greyscale</strong>, lalu dibuat <strong>GLCM</strong> (<em>Gray Level Co-occurrence Matrix</em>):
+matriks yang menghitung seberapa sering sepasang piksel bertetangga punya tingkat abu-abu tertentu.
+Di sini dipakai jarak 1 piksel dan 4 arah (0°, 45°, 90°, 135°), hasilnya dirata-rata.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Fitur</p></th>
+<th class="head"><p>Artinya</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Energi</strong></p></td>
+<td><p>keseragaman tekstur (nilai tinggi = polos/teratur)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Entropy</strong></p></td>
+<td><p>tingkat keacakan (nilai tinggi = lebih acak/rumit)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Kontras</strong></p></td>
+<td><p>perbedaan intensitas antar piksel bertetangga</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Korelasi</strong></p></td>
+<td><p>keterkaitan linear antar piksel bertetangga</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Homogenitas</strong></p></td>
+<td><p>kedekatan nilai piksel bertetangga (tinggi = halus)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Secara teori foto berantakan “seharusnya” lebih acak. Tapi di dataset ini rata-rata kelima fitur GLCM antara rapi dan berantakan
+<strong>hampir sama</strong> (lihat tabel rata-rata per kelas di bagian 4). Itu sebabnya fitur tugas saja akurasinya terbatas.</p>
+<blockquote>
+<div><p>Greyscale diubah ke 64 level (nilai piksel dibagi 4) supaya matriks GLCM lebih kecil dan cepat dihitung.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">glcm_feats</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="n">distances</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,),</span> <span class="n">angles</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)):</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">gray</span> <span class="o">//</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>                       <span class="c1"># 256 level -&gt; 64 level</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">graycomatrix</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">distances</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">angles</span><span class="p">),</span> <span class="n">levels</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">energy</span>   <span class="o">=</span> <span class="n">graycoprops</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="s2">&quot;energy&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">contrast</span> <span class="o">=</span> <span class="n">graycoprops</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="s2">&quot;contrast&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">corr</span>     <span class="o">=</span> <span class="n">graycoprops</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="s2">&quot;correlation&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">homog</span>    <span class="o">=</span> <span class="n">graycoprops</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="s2">&quot;homogeneity&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">p</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>                  <span class="c1"># entropy dihitung manual dari GLCM</span>
+    <span class="n">entropy</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">p</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">p</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">energy</span><span class="p">,</span> <span class="n">entropy</span><span class="p">,</span> <span class="n">contrast</span><span class="p">,</span> <span class="n">corr</span><span class="p">,</span> <span class="n">homog</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ekstrak</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">bgr</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">bgr</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">bgr</span><span class="p">,</span> <span class="p">(</span><span class="n">SIZE</span><span class="p">,</span> <span class="n">SIZE</span><span class="p">),</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_AREA</span><span class="p">)</span>
+    <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="n">bgr</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>   <span class="c1"># OpenCV = BGR</span>
+    <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">bgr</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>                         <span class="c1"># greyscale</span>
+    <span class="n">en</span><span class="p">,</span> <span class="n">ent</span><span class="p">,</span> <span class="n">con</span><span class="p">,</span> <span class="n">cor</span><span class="p">,</span> <span class="n">hom</span> <span class="o">=</span> <span class="n">glcm_feats</span><span class="p">(</span><span class="n">gray</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">mean_R</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">mean_G</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">mean_B</span><span class="o">=</span><span class="n">b</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+        <span class="n">std_R</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span>  <span class="n">std_G</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span>  <span class="n">std_B</span><span class="o">=</span><span class="n">b</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span>
+        <span class="n">skew_R</span><span class="o">=</span><span class="n">skew</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">skew_G</span><span class="o">=</span><span class="n">skew</span><span class="p">(</span><span class="n">g</span><span class="p">),</span> <span class="n">skew_B</span><span class="o">=</span><span class="n">skew</span><span class="p">(</span><span class="n">b</span><span class="p">),</span>
+        <span class="n">energi</span><span class="o">=</span><span class="n">en</span><span class="p">,</span> <span class="n">entropy</span><span class="o">=</span><span class="n">ent</span><span class="p">,</span> <span class="n">kontras</span><span class="o">=</span><span class="n">con</span><span class="p">,</span> <span class="n">korelasi</span><span class="o">=</span><span class="n">cor</span><span class="p">,</span> <span class="n">homogenitas</span><span class="o">=</span><span class="n">hom</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="ekstraksi-fitur-seluruh-dataset">
+<h2>4. Ekstraksi fitur seluruh dataset<a class="headerlink" href="#ekstraksi-fitur-seluruh-dataset" title="Permalink to this heading">#</a></h2>
+<p>Loop semua foto. Di mode <code class="docutils literal notranslate"><span class="pre">dedup</span></code>, foto duplikat dilewati. Proses ini yang paling lama (foto aslinya besar), tunggu sampai selesai.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pakai</span> <span class="o">=</span> <span class="n">files</span> <span class="k">if</span> <span class="n">MODE</span> <span class="o">==</span> <span class="s2">&quot;semua&quot;</span> <span class="k">else</span> <span class="n">files</span><span class="p">[</span><span class="n">files</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;dipakai&quot;</span><span class="p">]</span>
+<span class="n">data_rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pakai</span><span class="o">.</span><span class="n">iterrows</span><span class="p">(),</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">ekstrak</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">path</span><span class="p">);</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">file</span><span class="p">;</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">label</span>
+    <span class="n">data_rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">40</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pakai</span><span class="p">)</span><span class="si">}</span><span class="s2"> foto selesai&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_rows</span><span class="p">)</span>
+
+<span class="n">COLOR</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;skew&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s2">&quot;RGB&quot;</span><span class="p">]</span>
+<span class="n">TEX</span>   <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;energi&quot;</span><span class="p">,</span> <span class="s2">&quot;entropy&quot;</span><span class="p">,</span> <span class="s2">&quot;kontras&quot;</span><span class="p">,</span> <span class="s2">&quot;korelasi&quot;</span><span class="p">,</span> <span class="s2">&quot;homogenitas&quot;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">label</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total foto dipakai:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">));</span> <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40/184 foto selesai
+80/184 foto selesai
+120/184 foto selesai
+160/184 foto selesai
+
+Total foto dipakai: 184
+label
+berantakan    93
+rapi          91
+</pre></div>
+</div>
+</div>
+</div>
+<section id="simpan-ke-csv">
+<h3>Simpan ke CSV<a class="headerlink" href="#simpan-ke-csv" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">fitur_citra_&lt;mode&gt;.csv</span></code> berisi <strong>14 fitur + label</strong> sesuai tugas. Versi <code class="docutils literal notranslate"><span class="pre">dengan_nama_file</span></code> hanya menambah kolom nama file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">COLOR</span> <span class="o">+</span> <span class="n">TEX</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUT</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;fitur_citra_</span><span class="si">{</span><span class="n">MODE</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUT</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;fitur_citra_dengan_nama_file_</span><span class="si">{</span><span class="n">MODE</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="n">COLOR</span> <span class="o">+</span> <span class="n">TEX</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_R</th>
+      <th>mean_G</th>
+      <th>mean_B</th>
+      <th>std_R</th>
+      <th>std_G</th>
+      <th>std_B</th>
+      <th>skew_R</th>
+      <th>skew_G</th>
+      <th>skew_B</th>
+      <th>energi</th>
+      <th>entropy</th>
+      <th>kontras</th>
+      <th>korelasi</th>
+      <th>homogenitas</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>167.527710</td>
+      <td>145.621918</td>
+      <td>129.198227</td>
+      <td>58.759761</td>
+      <td>58.723771</td>
+      <td>59.402692</td>
+      <td>-0.742271</td>
+      <td>-0.338399</td>
+      <td>-0.141661</td>
+      <td>0.081965</td>
+      <td>8.930482</td>
+      <td>29.372886</td>
+      <td>0.928256</td>
+      <td>0.542961</td>
+      <td>rapi</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>151.797928</td>
+      <td>144.180862</td>
+      <td>136.961426</td>
+      <td>54.870804</td>
+      <td>62.468708</td>
+      <td>69.736436</td>
+      <td>-0.612653</td>
+      <td>-0.299693</td>
+      <td>-0.249689</td>
+      <td>0.078877</td>
+      <td>8.897429</td>
+      <td>26.930838</td>
+      <td>0.938299</td>
+      <td>0.575219</td>
+      <td>rapi</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>112.611130</td>
+      <td>105.589966</td>
+      <td>102.377884</td>
+      <td>50.950499</td>
+      <td>56.403850</td>
+      <td>62.854712</td>
+      <td>0.046902</td>
+      <td>0.190023</td>
+      <td>0.264805</td>
+      <td>0.069508</td>
+      <td>9.007948</td>
+      <td>19.514739</td>
+      <td>0.947553</td>
+      <td>0.521048</td>
+      <td>rapi</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>99.661835</td>
+      <td>84.968781</td>
+      <td>82.130844</td>
+      <td>61.311796</td>
+      <td>59.815117</td>
+      <td>61.163300</td>
+      <td>0.308220</td>
+      <td>0.823607</td>
+      <td>0.878849</td>
+      <td>0.068474</td>
+      <td>9.127576</td>
+      <td>27.601893</td>
+      <td>0.936564</td>
+      <td>0.497549</td>
+      <td>rapi</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>111.911102</td>
+      <td>102.241302</td>
+      <td>99.273773</td>
+      <td>63.384317</td>
+      <td>66.315790</td>
+      <td>67.540660</td>
+      <td>-0.022268</td>
+      <td>0.230848</td>
+      <td>0.278645</td>
+      <td>0.082985</td>
+      <td>8.653239</td>
+      <td>23.077182</td>
+      <td>0.956290</td>
+      <td>0.594810</td>
+      <td>rapi</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>83.156616</td>
+      <td>86.395935</td>
+      <td>97.536102</td>
+      <td>59.386339</td>
+      <td>62.649155</td>
+      <td>70.798386</td>
+      <td>0.516414</td>
+      <td>0.560819</td>
+      <td>0.639056</td>
+      <td>0.080370</td>
+      <td>8.873627</td>
+      <td>30.587462</td>
+      <td>0.936026</td>
+      <td>0.554133</td>
+      <td>rapi</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>153.097626</td>
+      <td>133.747711</td>
+      <td>112.319489</td>
+      <td>67.755890</td>
+      <td>66.660873</td>
+      <td>63.509302</td>
+      <td>-0.351188</td>
+      <td>-0.233948</td>
+      <td>-0.237864</td>
+      <td>0.060631</td>
+      <td>9.495790</td>
+      <td>40.935196</td>
+      <td>0.923220</td>
+      <td>0.492938</td>
+      <td>rapi</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>172.868546</td>
+      <td>157.958740</td>
+      <td>137.373306</td>
+      <td>67.699553</td>
+      <td>64.292289</td>
+      <td>60.101725</td>
+      <td>-0.953738</td>
+      <td>-0.805531</td>
+      <td>-0.312212</td>
+      <td>0.079435</td>
+      <td>8.991852</td>
+      <td>32.476400</td>
+      <td>0.936636</td>
+      <td>0.511225</td>
+      <td>rapi</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>150.989746</td>
+      <td>138.309067</td>
+      <td>122.635818</td>
+      <td>65.807404</td>
+      <td>62.763579</td>
+      <td>57.105131</td>
+      <td>-0.286242</td>
+      <td>-0.359762</td>
+      <td>-0.536140</td>
+      <td>0.063678</td>
+      <td>9.440899</td>
+      <td>45.050406</td>
+      <td>0.906064</td>
+      <td>0.500512</td>
+      <td>rapi</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>115.351059</td>
+      <td>110.388214</td>
+      <td>103.125198</td>
+      <td>45.866114</td>
+      <td>50.458444</td>
+      <td>52.849711</td>
+      <td>-0.368309</td>
+      <td>0.092003</td>
+      <td>0.355759</td>
+      <td>0.136022</td>
+      <td>7.574669</td>
+      <td>17.351225</td>
+      <td>0.939653</td>
+      <td>0.660744</td>
+      <td>rapi</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;label&quot;</span><span class="p">)[</span><span class="n">COLOR</span> <span class="o">+</span> <span class="n">TEX</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>label</th>
+      <th>berantakan</th>
+      <th>rapi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>mean_R</th>
+      <td>137.1440</td>
+      <td>136.6142</td>
+    </tr>
+    <tr>
+      <th>mean_G</th>
+      <td>127.0779</td>
+      <td>126.4741</td>
+    </tr>
+    <tr>
+      <th>mean_B</th>
+      <td>118.1160</td>
+      <td>119.6997</td>
+    </tr>
+    <tr>
+      <th>std_R</th>
+      <td>58.8889</td>
+      <td>56.3629</td>
+    </tr>
+    <tr>
+      <th>std_G</th>
+      <td>59.3518</td>
+      <td>59.6198</td>
+    </tr>
+    <tr>
+      <th>std_B</th>
+      <td>59.2663</td>
+      <td>61.9671</td>
+    </tr>
+    <tr>
+      <th>skew_R</th>
+      <td>-0.3204</td>
+      <td>-0.2637</td>
+    </tr>
+    <tr>
+      <th>skew_G</th>
+      <td>-0.1371</td>
+      <td>-0.0532</td>
+    </tr>
+    <tr>
+      <th>skew_B</th>
+      <td>-0.0425</td>
+      <td>-0.0263</td>
+    </tr>
+    <tr>
+      <th>energi</th>
+      <td>0.0930</td>
+      <td>0.0850</td>
+    </tr>
+    <tr>
+      <th>entropy</th>
+      <td>8.6094</td>
+      <td>8.6913</td>
+    </tr>
+    <tr>
+      <th>kontras</th>
+      <td>23.4644</td>
+      <td>23.5335</td>
+    </tr>
+    <tr>
+      <th>korelasi</th>
+      <td>0.9447</td>
+      <td>0.9436</td>
+    </tr>
+    <tr>
+      <th>homogenitas</th>
+      <td>0.5716</td>
+      <td>0.5655</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rata</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;label&quot;</span><span class="p">)[</span><span class="n">COLOR</span> <span class="o">+</span> <span class="n">TEX</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">beda</span> <span class="o">=</span> <span class="p">((</span><span class="n">rata</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;berantakan&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">rata</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;rapi&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">/</span> <span class="n">rata</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fitur diurutkan dari yang PALING BEDA antara foto rapi vs berantakan (selisih rata-rata, relatif):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">beda</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">lebih</span> <span class="o">=</span> <span class="s2">&quot;berantakan&quot;</span> <span class="k">if</span> <span class="n">rata</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;berantakan&quot;</span><span class="p">,</span> <span class="n">f</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">rata</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;rapi&quot;</span><span class="p">,</span> <span class="n">f</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;rapi&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">f</span><span class="si">:</span><span class="s2">12s</span><span class="si">}</span><span class="s2"> selisih </span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">6.1%</span><span class="si">}</span><span class="s2">  (nilai lebih besar di kelas </span><span class="si">{</span><span class="n">lebih</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Paling beda : </span><span class="si">{</span><span class="n">beda</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">beda</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">).  Paling mirip: </span><span class="si">{</span><span class="n">beda</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">beda</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Makin kecil selisihnya, makin sulit fitur itu membedakan kedua kelas -&gt; batas akurasi ~70%.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitur diurutkan dari yang PALING BEDA antara foto rapi vs berantakan (selisih rata-rata, relatif):
+  skew_G       selisih  88.2%  (nilai lebih besar di kelas rapi)
+  skew_B       selisih  47.1%  (nilai lebih besar di kelas rapi)
+  skew_R       selisih  19.4%  (nilai lebih besar di kelas rapi)
+  energi       selisih   9.0%  (nilai lebih besar di kelas berantakan)
+  std_B        selisih   4.5%  (nilai lebih besar di kelas rapi)
+  std_R        selisih   4.4%  (nilai lebih besar di kelas berantakan)
+  mean_B       selisih   1.3%  (nilai lebih besar di kelas rapi)
+  homogenitas  selisih   1.1%  (nilai lebih besar di kelas berantakan)
+  entropy      selisih   0.9%  (nilai lebih besar di kelas rapi)
+  mean_G       selisih   0.5%  (nilai lebih besar di kelas berantakan)
+  std_G        selisih   0.5%  (nilai lebih besar di kelas rapi)
+  mean_R       selisih   0.4%  (nilai lebih besar di kelas berantakan)
+  kontras      selisih   0.3%  (nilai lebih besar di kelas rapi)
+  korelasi     selisih   0.1%  (nilai lebih besar di kelas berantakan)
+
+Paling beda : skew_G (88.2%).  Paling mirip: korelasi (0.1%).
+Makin kecil selisihnya, makin sulit fitur itu membedakan kedua kelas -&gt; batas akurasi ~70%.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="klasifikasi">
+<h2>5. Klasifikasi<a class="headerlink" href="#klasifikasi" title="Permalink to this heading">#</a></h2>
+<p>Data dibagi <strong>80% training</strong> dan <strong>20% test</strong> (<code class="docutils literal notranslate"><span class="pre">stratify</span></code> supaya proporsi rapi:berantakan sama di kedua bagian).
+Model belajar dari data training, lalu diuji di data test yang belum pernah dilihat.</p>
+<p>Empat model dicoba: <strong>KNN, SVM, Random Forest, Decision Tree</strong>. Untuk KNN dan SVM fitur di-<em>scale</em> dulu (<code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code>)
+karena kedua model ini sensitif terhadap skala angka.</p>
+<p>Tiga jenis akurasi:</p>
+<ul class="simple">
+<li><p><strong>Akurasi train</strong>: skor di data yang dipakai belajar (kalau terlalu tinggi bisa tanda <em>overfitting</em>)</p></li>
+<li><p><strong>Akurasi test</strong>: skor di data baru, ini yang paling jujur</p></li>
+<li><p><strong>Akurasi CV (5-fold)</strong>: data dibagi jadi 5 bagian; tiap bagian bergantian jadi data test (4 bagian lainnya training), lalu 5 hasilnya dirata-rata. Lebih stabil daripada satu kali split</p></li>
+</ul>
+<section id="pembagian-data-berapa-untuk-training-berapa-untuk-test">
+<h3>Pembagian data: berapa untuk training, berapa untuk test?<a class="headerlink" href="#pembagian-data-berapa-untuk-training-berapa-untuk-test" title="Permalink to this heading">#</a></h3>
+<p>Cell di bawah menampilkan jumlahnya. Aturan yang dipakai:</p>
+<ul class="simple">
+<li><p><strong>80% training, 20% test</strong> (<code class="docutils literal notranslate"><span class="pre">test_size=0.2</span></code>). Pembagian ini umum dipakai. Datanya cuma ratusan foto, jadi training tidak boleh terlalu kecil (model kurang belajar), dan test tidak boleh terlalu kecil (angka akurasinya jadi tidak stabil).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stratify=y</span></code> → proporsi rapi : berantakan di training dan di test dibuat sama.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">random_state=42</span></code> → pembagiannya acak tapi <strong>selalu sama</strong> tiap notebook dijalankan, jadi hasilnya bisa diulang.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Xtr</span><span class="p">,</span> <span class="n">Xte</span><span class="p">,</span> <span class="n">ytr</span><span class="p">,</span> <span class="n">yte</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">COLOR</span> <span class="o">+</span> <span class="n">TEX</span><span class="p">],</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total foto dipakai     : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data TRAINING (80%)    : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">Xtr</span><span class="p">)</span><span class="si">}</span><span class="s2"> foto  -&gt; rapi=</span><span class="si">{</span><span class="nb">int</span><span class="p">((</span><span class="n">ytr</span><span class="o">==</span><span class="s1">&#39;rapi&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="si">}</span><span class="s2">, berantakan=</span><span class="si">{</span><span class="nb">int</span><span class="p">((</span><span class="n">ytr</span><span class="o">==</span><span class="s1">&#39;berantakan&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data TEST     (20%)    : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">Xte</span><span class="p">)</span><span class="si">}</span><span class="s2"> foto  -&gt; rapi=</span><span class="si">{</span><span class="nb">int</span><span class="p">((</span><span class="n">yte</span><span class="o">==</span><span class="s1">&#39;rapi&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="si">}</span><span class="s2">, berantakan=</span><span class="si">{</span><span class="nb">int</span><span class="p">((</span><span class="n">yte</span><span class="o">==</span><span class="s1">&#39;berantakan&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jumlah fitur per foto  : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">COLOR</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">TEX</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training = data yang dipakai model untuk BELAJAR.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test     = data yang disimpan dulu, baru dipakai di akhir untuk menguji model (belum pernah dilihat model).&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;1 foto test salah tebak = akurasi turun sekitar </span><span class="si">{</span><span class="mi">1</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">Xte</span><span class="p">)</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">, jadi angkanya gampang naik-turun.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total foto dipakai     : 184
+Data TRAINING (80%)    : 147 foto  -&gt; rapi=73, berantakan=74
+Data TEST     (20%)    : 37 foto  -&gt; rapi=18, berantakan=19
+Jumlah fitur per foto  : 14
+
+Training = data yang dipakai model untuk BELAJAR.
+Test     = data yang disimpan dulu, baru dipakai di akhir untuk menguji model (belum pernah dilihat model).
+1 foto test salah tebak = akurasi turun sekitar 2.7%, jadi angkanya gampang naik-turun.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">Xtr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         mean_R      mean_G      mean_B      std_R      std_G      std_B  \
+83   158.146790  145.632294  137.805038  33.495676  45.580252  51.209819   
+159  146.319687  134.452042  121.695419  62.371134  63.472165  62.696475   
+103  151.936356  154.938034  152.818008  58.253830  59.287870  61.040038   
+168  147.380249  143.858582  137.348618  61.878619  59.857474  54.938811   
+135  149.158661  130.895035  116.510773  67.572339  64.879585  62.952886   
+182  131.958862  133.629868  134.079544  52.465338  55.402136  59.914734   
+157  150.182968  139.521286  126.165009  56.618355  62.509430  66.982998   
+59   150.915085  143.060944  151.578644  70.292003  64.795157  72.855782   
+167  132.167053  129.717575  127.067780  57.443388  58.967643  58.378107   
+91   108.554916  101.409775   96.539642  54.966903  53.628491  52.729167   
+41    73.968109   65.100739   64.383499  47.034037  49.806108  51.431368   
+12   139.274323  131.049774  125.384567  59.916277  63.793210  66.668303   
+70   121.746719  109.123016  100.123810  48.486503  54.008836  56.676734   
+160  148.357376  136.880630  116.976837  60.246857  61.266594  59.893432   
+118  123.839584  114.067520   97.658936  51.292203  49.335865  45.464353   
+102  119.147034  111.836853  108.918518  48.009175  49.960758  50.990008   
+181  141.338760  135.531723  132.263519  55.429246  60.712699  67.045587   
+58   167.845901  154.837997  156.385910  68.381537  62.311181  74.442801   
+117  132.004150  122.135025  107.253799  51.393993  49.087103  46.586784   
+133  134.608536  119.611618  109.609512  57.905666  65.236261  68.910791   
+152  138.563385  131.363846  125.726868  55.981208  56.616156  58.349553   
+68   130.366180  113.421722  102.522690  53.184026  61.611699  64.960641   
+55   127.994064  128.290604  127.962692  50.835069  52.399956  56.171494   
+30   116.002518  124.085312  131.802933  57.672903  52.963204  55.572317   
+49   124.620773  109.006653   84.012817  48.479938  52.069789  52.198910   
+61   145.026520  126.003433  118.044769  45.988514  46.927667  51.838149   
+69   131.685699  122.097214  114.883499  56.254084  62.290578  64.518114   
+86   176.565521  151.040176  139.156769  34.580452  50.216532  58.221231   
+183  136.812881  126.382721  120.961792  48.143598  59.139005  67.757336   
+155  135.515991  124.808060  118.317276  58.010285  59.666230  66.488186   
+57   133.859161  131.998245  127.290115  72.121426  67.926493  61.078461   
+106  145.823502  133.212219  122.601746  57.829514  62.334740  67.474068   
+153  119.459457  112.040176  108.873383  60.867538  63.947277  63.752384   
+29   136.404388  132.319916  128.142792  54.718410  57.817151  61.140999   
+163  147.595322  132.844482  126.492477  52.514075  64.892225  74.339957   
+24   146.690369  149.349380  143.924271  42.769792  46.999392  48.575956   
+99   161.630783  142.650635  117.528320  70.487536  68.010237  60.406269   
+137  141.652756  120.103058  103.353836  72.045422  66.703664  63.113709   
+144  143.994888  136.053833  127.862900  56.577226  63.481216  70.028218   
+148  133.841339  128.669342  123.632523  85.429333  82.394071  78.497232   
+78   119.083618  118.392426  115.647354  59.210348  60.763427  60.179182   
+119  124.995636  121.758987  110.362579  53.805498  53.188856  50.244185   
+122  123.106934  120.242813  115.574875  47.054393  50.097521  53.900033   
+104  128.727325  133.625778  132.168869  60.738791  60.824969  62.834059   
+115  171.505432  168.226501  156.897217  39.433355  42.790011  42.910513   
+124  135.991837  134.333633  130.664978  50.932595  52.422707  54.274507   
+138  147.804703  148.028305  143.975464  56.471830  54.867895  52.561746   
+141  135.372787  120.160828  108.503967  61.679502  58.584336  55.484541   
+48   108.464798  101.678696  102.477753  64.816248  69.244119  71.704098   
+28   140.242279  138.193481  134.837708  45.387617  51.551688  56.589542   
+19   130.510101  133.038284  130.777847  48.353788  53.646811  57.178674   
+158  115.583038  106.107422   99.367767  67.399910  70.620430  69.777908   
+108  133.099731  119.119232  103.858307  60.985925  63.541273  61.582017   
+2    112.611130  105.589966  102.377884  50.950499  56.403850  62.854712   
+60   153.604584  145.583893  147.478485  64.447010  61.143608  70.488564   
+1    151.797928  144.180862  136.961426  54.870804  62.468708  69.736436   
+52   115.662491  114.399338  112.991562  73.929187  74.324671  72.958182   
+89   155.572906  141.061142  132.518112  37.996381  51.504320  58.782654   
+65   108.581329  105.261093  102.132019  88.449594  84.287569  79.400224   
+35   142.464920  125.351059  112.958328  72.968624  68.249692  63.231030   
+51   125.242737  119.172089  114.546631  65.855652  68.223205  67.580077   
+77   146.630707  131.260010  117.470108  64.460583  61.628571  59.477895   
+179  162.514709  155.952728  151.194138  48.948205  49.631889  49.025962   
+63   176.138397  163.331772  158.386581  56.832009  65.592734  70.281877   
+74   118.200638  109.986496  105.379181  61.594183  65.448155  67.293849   
+101  116.793610   98.307053   90.773117  50.583489  55.413122  57.298935   
+3     99.661835   84.968781   82.130844  61.311796  59.815117  61.163300   
+136  148.452469  135.643158  123.438736  70.990889  67.124339  61.794016   
+43   104.955078  101.222794  102.651962  67.916576  72.184834  74.438133   
+94   120.539078  112.679504  109.409760  52.913291  50.932539  50.602079   
+17   147.604248  138.043015  128.564651  54.425713  59.823167  66.066541   
+56   150.284622  149.868286  141.720734  63.256529  62.429011  60.121691   
+134  137.087997  117.092163   97.185181  71.528671  65.414893  61.546170   
+21   142.448990  123.591095  108.887192  64.638592  60.614554  61.760023   
+130  130.843613  115.292496  106.841324  57.769771  64.976855  65.605656   
+110  122.976608  110.953110  106.254395  58.149500  64.806693  68.440294   
+100  127.053482  112.223419  106.737595  44.361053  49.548637  50.780690   
+169  132.468460  130.262939  128.335190  56.140418  55.972592  55.764030   
+129  130.240738  122.125259  116.206573  62.887821  58.275278  53.127397   
+147  148.397202  137.032227  124.127243  66.545403  60.735386  56.337669   
+18   153.413269  151.782181  149.124741  60.866526  57.812712  58.398331   
+14   136.659119  137.288559  137.424179  52.037235  56.534260  61.491307   
+39   140.773529  125.408279  114.053009  59.885392  56.037878  50.712731   
+81   163.484955  142.714432  133.359665  36.657917  50.651635  57.062785   
+171  143.155075  137.178879  124.537567  67.366094  65.834399  61.999287   
+96   116.907501  115.928513  111.752167  40.543843  33.040788  30.522836   
+36   157.789017  146.786575  135.606247  67.169645  67.053379  65.181057   
+172  174.909988  165.690491  162.621292  55.802762  56.408071  67.455105   
+26   121.352737  130.290695  136.633636  59.798046  58.177167  65.120290   
+66   131.721054  124.603500  117.552994  65.716249  67.202575  68.086850   
+175  117.676529  105.290573   93.475220  47.844695  47.722507  50.312844   
+31   149.197266  138.303070  127.822281  51.769781  55.822029  61.242774   
+50   123.668854  119.431503  116.380234  70.652078  69.194197  68.292527   
+107  141.204971  125.602112  105.870819  67.076454  66.630621  64.319221   
+38   144.390701  136.959854  130.072708  62.937608  59.733475  56.779809   
+156  124.985565  114.303375  107.071899  58.514049  59.526802  59.733344   
+146  153.628510  134.505768  117.283737  69.267997  64.394351  63.288713   
+85   168.700882  143.382233  132.322296  34.127716  49.790076  57.104922   
+15   141.669052  132.763611  120.566437  70.011742  65.735274  61.035702   
+76   144.399857  114.250931   96.203934  65.803895  64.450190  59.968320   
+33   153.017670  146.351761  138.605072  50.733077  59.919557  68.803713   
+123  125.828613  126.989151  129.081345  54.845695  52.306498  50.927751   
+8    150.989746  138.309067  122.635818  65.807404  62.763579  57.105131   
+95   126.628433  119.913071  116.686813  54.058341  50.053687  48.694425   
+174  173.167557  164.822754  164.543854  57.571411  57.785929  68.269623   
+42    82.508881   74.605087   73.305405  56.079723  59.728284  61.063553   
+84   153.230606  131.506149  118.920639  34.288195  51.797028  61.882221   
+20   139.349564  108.370972   84.112793  68.872839  55.860824  53.672067   
+149   92.951645   86.653442   82.125015  72.927500  72.188650  71.063103   
+121  115.543243  111.848114  107.272781  46.869338  46.119441  46.591018   
+125  140.447083  134.723465  134.854630  47.323451  47.106150  51.973114   
+109  128.023804  110.687683  104.121964  61.626662  62.816349  63.619820   
+178  114.331390  106.092819  103.468094  43.968755  48.137455  48.893157   
+23   124.460907  125.318222  120.716476  47.610434  53.344207  54.882231   
+127  147.818985  142.471603  141.124557  70.581240  69.040849  66.656559   
+132  147.447235  118.462540   96.543045  70.503820  68.434527  66.298172   
+53   156.283081  135.528061  115.471848  35.899124  48.474112  50.697942   
+139  141.516739  128.774368  114.801682  47.661795  46.444361  44.777763   
+161  133.181519  119.863113  103.157166  57.326364  66.346325  65.296508   
+16   143.894638  131.701721  116.948700  68.336977  66.057296  63.122123   
+116  167.452682  166.526733  153.862778  55.839153  56.635090  54.110069   
+97   161.522827  139.184875  116.175629  66.441568  67.193158  64.653559   
+79   159.946747  131.951859  120.170990  35.340175  53.546974  61.781752   
+140  143.407974  125.519516  106.945663  54.989204  51.568374  47.135370   
+131  145.456421  122.245926  102.974167  72.342052  67.752474  65.182084   
+5     83.156616   86.395935   97.536102  59.386339  62.649155  70.798386   
+47   148.490707  141.128860  138.629593  64.121351  67.939215  69.962597   
+46   138.041183  129.431396  122.006866  56.505872  59.101649  64.123972   
+37   132.163254  121.623169  114.743057  67.181099  62.808403  56.672551   
+180  151.280991  140.900726  137.290863  40.413896  52.531770  57.255509   
+64    99.825211   98.338760   95.953690  80.301913  78.974285  76.406902   
+113  143.676437  116.869461   93.002747  69.473015  60.138845  54.312604   
+13   140.234604  134.615662  133.882950  62.565813  63.795893  68.095941   
+75   125.993332  120.286636  116.608261  66.771882  69.693866  71.206034   
+67   139.515579  123.161224  112.865021  49.658283  58.606737  62.887443   
+9    115.351059  110.388214  103.125198  45.866114  50.458444  52.849711   
+22   144.466904  115.336411   92.626938  72.717585  63.076975  60.082923   
+25   138.312973  128.463928  122.320267  49.165649  51.118356  60.201691   
+54   140.711304  148.751923  149.644592  52.897682  52.862242  54.378291   
+98   155.383774  135.233124  114.162155  62.662829  64.726850  61.712916   
+126  155.848282  147.463852  137.083237  58.081318  61.407919  63.612858   
+164  121.837311  116.019745  114.827087  60.955462  68.398033  72.885946   
+166  145.188660  142.119080  140.085907  58.862283  60.918255  59.193762   
+44    99.368393   92.400681   95.588959  64.707103  68.612234  71.783958   
+73   117.824692  105.734482   97.481567  60.385076  65.340712  67.522472   
+45   108.464798  101.678696  102.477753  64.816248  69.244119  71.704098   
+145   95.271851   81.695969   78.401123  45.490820  53.046302  56.037573   
+
+       skew_R    skew_G    skew_B    energi   entropy    kontras  korelasi  \
+83  -1.185811 -0.502667 -0.512591  0.099905  7.862916  10.430634  0.951583   
+159 -0.568818 -0.285072 -0.181766  0.065763  9.144470  26.247662  0.945743   
+103 -1.169499 -0.933175 -0.782061  0.105256  8.113836  10.804395  0.974763   
+168 -0.657093 -0.552575 -0.389440  0.077845  8.775495  24.134684  0.946000   
+135 -0.094332 -0.003424 -0.058430  0.081994  8.863540  28.531769  0.944747   
+182 -0.667352 -0.435758 -0.106417  0.096092  8.431140  18.638277  0.948589   
+157 -0.979084 -0.654277 -0.168961  0.087499  8.483296  21.409744  0.953127   
+59  -0.611450 -0.474938 -0.521949  0.063778  9.583066  50.782790  0.900996   
+167 -0.269372 -0.165621 -0.121883  0.071626  8.931860  19.134263  0.954283   
+91   0.813404  0.826897  0.796576  0.098032  8.397014  18.441397  0.947341   
+41   0.472102  0.723595  0.810133  0.096841  8.289452  19.978024  0.932555   
+12  -0.228773  0.015411  0.109803  0.073197  8.639020  15.006171  0.969174   
+70   0.096966  0.477546  0.578857  0.087660  8.342154  12.222992  0.963990   
+160 -0.837054 -0.709352 -0.265201  0.106685  8.474429  18.197522  0.959463   
+118 -0.300876  0.025280  0.201625  0.107903  8.100982  11.783389  0.960659   
+102 -0.520941 -0.230881 -0.114061  0.095461  8.512646  21.277157  0.928966   
+181 -0.454129 -0.324987 -0.279406  0.150259  7.596373  15.479913  0.964058   
+58  -0.857784 -0.459844 -0.338230  0.065457  9.411110  41.748033  0.906692   
+117 -0.667091 -0.369010 -0.087754  0.130020  7.657549   9.111880  0.969870   
+133 -0.332180  0.113084  0.103875  0.061471  9.183188  25.338691  0.946703   
+152 -1.076019 -0.772014 -0.601350  0.093120  8.438308  20.645704  0.947208   
+68  -0.176552  0.227503  0.273470  0.090631  8.361375  15.724569  0.963439   
+55   0.118479 -0.041712 -0.253322  0.079399  8.959520  30.431058  0.908593   
+30  -0.433601 -0.431730 -0.536388  0.074318  8.972208  28.259221  0.919729   
+49  -0.164803 -0.041536  0.032052  0.077234  8.779058  17.735215  0.942106   
+61  -0.263764 -0.359961 -0.209724  0.113862  8.087748  12.850094  0.947977   
+69  -0.238511  0.003857  0.045690  0.078173  8.581776  12.662864  0.972067   
+86  -1.270936 -0.237028 -0.197269  0.086967  8.173518  14.489291  0.942536   
+183 -0.713064 -0.179789 -0.049749  0.121325  7.802474  14.800709  0.961625   
+155 -0.681814 -0.257816 -0.268174  0.076497  9.179850  35.097043  0.915627   
+57   0.206027  0.250586  0.247676  0.063063  9.577025  32.592891  0.943971   
+106 -0.680194 -0.348117  0.025491  0.081532  8.671993  22.627700  0.949446   
+153  0.304381  0.215861  0.082909  0.100397  8.343526  23.089337  0.952529   
+29  -0.194670 -0.270241 -0.317904  0.081775  8.903632  26.167221  0.935024   
+163 -0.819601  0.150366  0.269835  0.070341  8.898725  25.179291  0.944601   
+24  -0.558471 -0.585634 -0.584696  0.098672  8.531930  23.633220  0.906294   
+99  -0.401502 -0.348311 -0.350593  0.080000  9.261707  40.146174  0.928982   
+137 -0.086739  0.252027  0.435420  0.065363  9.239926  35.657601  0.936455   
+144 -0.575265 -0.370183 -0.110050  0.102134  8.202340  15.784452  0.966658   
+148 -0.552085 -0.491861 -0.471145  0.213636  7.235289  17.156619  0.979563   
+78  -0.529605 -0.472323 -0.400762  0.125341  8.272903  32.238535  0.928735   
+119 -0.053099 -0.006432  0.011895  0.107203  8.323686  17.862721  0.948442   
+122 -0.729620 -0.398294 -0.383277  0.127225  8.019211  16.119103  0.944188   
+104 -0.282227 -0.137218 -0.054411  0.145748  7.475879   6.358040  0.986277   
+115 -1.473461 -1.247239 -1.115931  0.110782  7.879687  18.066408  0.915025   
+124 -0.344529 -0.179692 -0.417804  0.093303  8.602946  22.847793  0.928616   
+138 -0.834444 -0.713904 -0.555652  0.078670  8.898256  21.417920  0.943042   
+141  0.104026  0.176153  0.123906  0.076955  9.011885  26.222001  0.937237   
+48   0.161333  0.350404  0.416883  0.070592  8.931177  20.982340  0.963439   
+28  -0.494682 -0.328246 -0.861280  0.103215  8.098473  15.459347  0.945201   
+19   0.051239 -0.334451 -0.529104  0.099952  8.661089  23.057799  0.929872   
+158  0.922212  0.887213  0.750758  0.085845  8.758588  36.594557  0.938622   
+108  0.137564  0.222496  0.168390  0.077454  9.187668  40.404960  0.914678   
+2    0.046902  0.190023  0.264805  0.069508  9.007948  19.514739  0.947553   
+60  -0.671436 -0.347949 -0.334569  0.067949  9.402425  39.082246  0.912504   
+1   -0.612653 -0.299693 -0.249689  0.078877  8.897429  26.930838  0.938299   
+52   0.536464  0.542384  0.560072  0.120643  8.360340  20.925656  0.969269   
+89  -0.607336 -0.220024 -0.211904  0.066577  8.880717  22.944567  0.918405   
+65   0.519246  0.519128  0.466925  0.128658  8.376693  27.036048  0.969930   
+35  -0.055708 -0.035857 -0.156946  0.068217  9.302565  45.717204  0.920918   
+51   0.414728  0.478459  0.464092  0.080943  8.944992  28.774238  0.948584   
+77  -0.574225 -0.335736 -0.190065  0.088347  8.896571  24.197443  0.949571   
+179 -0.954435 -0.708138 -0.595375  0.111630  8.262495  17.587347  0.941146   
+63  -0.788051 -0.184600 -0.148076  0.088002  8.600164  16.594363  0.965599   
+74  -0.034071  0.173908  0.186411  0.068476  8.868875  17.652316  0.965537   
+101 -0.272490  0.283886  0.268820  0.115065  7.953440  16.248550  0.953592   
+3    0.308220  0.823607  0.878849  0.068474  9.127576  27.601893  0.936564   
+136 -0.139100 -0.040505 -0.010136  0.077538  9.054890  34.192084  0.939965   
+43   0.269394  0.428350  0.492570  0.065730  9.120920  20.803937  0.966863   
+94  -0.500472 -0.265268 -0.184045  0.091005  8.577368  23.349948  0.928281   
+17  -0.672897 -0.416599 -0.119239  0.084326  8.478432  19.464096  0.953344   
+56  -0.383790 -0.302408 -0.197772  0.066885  9.265444  29.284145  0.939564   
+134  0.261409  0.453687  0.430099  0.065122  9.367315  36.529413  0.930089   
+21  -0.027398 -0.207454 -0.075855  0.101343  8.416178  19.893907  0.955594   
+130  0.296437 -0.057785 -0.285042  0.077590  8.872902  24.485171  0.948944   
+110  0.251401  0.379496  0.280893  0.064267  9.254230  25.075096  0.947835   
+100 -0.789244 -0.171079 -0.188801  0.116337  7.937830  18.074033  0.933682   
+169  0.390849  0.528790  0.629776  0.112791  8.228232  16.481621  0.957296   
+129  0.218448  0.110063 -0.061337  0.064219  9.218727  30.152134  0.928902   
+147 -0.306165 -0.137205 -0.030499  0.081196  9.306717  35.480444  0.924919   
+18  -0.608998 -0.784560 -0.832370  0.089848  8.527896  25.081004  0.941203   
+14  -0.353574 -0.280859 -0.386868  0.073430  8.886997  17.587972  0.953351   
+39  -0.242821 -0.136815 -0.163355  0.111296  8.391212  23.141076  0.940383   
+81  -0.974696 -0.282098 -0.277014  0.092242  8.159168  15.417130  0.941774   
+171  0.220892  0.267184  0.331259  0.070968  9.093562  30.156086  0.943714   
+96  -1.073807 -0.780009 -0.284141  0.124908  7.182882   8.062017  0.944728   
+36  -0.446404 -0.331637 -0.236908  0.061828  9.550504  46.782151  0.916200   
+172 -1.148693 -0.678763 -0.609388  0.082165  8.964954  30.623084  0.914670   
+26  -0.290006 -0.238302 -0.246195  0.072445  9.211830  34.203939  0.916300   
+66  -0.103577  0.126614  0.271725  0.061183  9.297377  32.806788  0.938996   
+175  0.215639  0.347813  0.333675  0.089800  8.532659  19.472277  0.924966   
+31  -0.680308 -0.349469 -0.403885  0.071523  8.872940  22.342262  0.936294   
+50   0.217841  0.385649  0.499103  0.110439  8.837038  25.202899  0.958354   
+107 -0.060506  0.102945  0.093902  0.058644  9.603923  44.658314  0.915173   
+38  -0.639471 -0.544467 -0.327599  0.091909  8.610096  25.088519  0.944206   
+156 -0.207314 -0.034976 -0.035313  0.072461  9.251902  35.672168  0.915679   
+146 -0.371244 -0.081389  0.179639  0.059256  9.586702  39.141747  0.924704   
+85  -1.147134 -0.190903 -0.159462  0.092830  8.059929  13.244036  0.946516   
+15  -0.014558 -0.023828 -0.170823  0.058916  9.665592  51.901860  0.904140   
+76   0.181642  0.426401  0.558728  0.086536  8.596191  21.847180  0.956291   
+33  -0.392104 -0.227269 -0.271625  0.077131  8.849238  24.604957  0.937427   
+123  0.184901  0.214918  0.162699  0.082290  8.859899  24.894926  0.927364   
+8   -0.286242 -0.359762 -0.536140  0.063678  9.440899  45.050406  0.906064   
+95  -0.771085 -0.576203 -0.425297  0.114133  7.745431  12.061968  0.962873   
+174 -1.146821 -0.701715 -0.619043  0.085735  8.935564  31.265807  0.917975   
+42   0.477944  0.607757  0.625458  0.091065  8.517427  18.709272  0.956305   
+84  -0.450210  0.241559  0.272005  0.070805  8.637446  17.952685  0.933281   
+20  -0.052273  0.274125  0.737261  0.070855  8.918462  25.407282  0.935768   
+149  0.305197  0.467864  0.611568  0.211623  6.987992   9.909714  0.984577   
+121 -0.527303 -0.368625 -0.507438  0.097765  8.219458  17.107847  0.931484   
+125 -0.970025 -0.873114 -0.275847  0.144430  7.784315  18.161754  0.932054   
+109 -0.006614  0.120732  0.151478  0.073836  8.826843  17.272061  0.963226   
+178 -0.620308 -0.235653 -0.147566  0.104166  7.837990   7.449233  0.972161   
+23  -0.125767 -0.419577 -0.465248  0.102797  8.537762  24.094015  0.926094   
+127 -0.492253 -0.474590 -0.487293  0.137587  8.299726  23.186201  0.961190   
+132  0.005654  0.344394  0.395256  0.064864  9.512989  44.188250  0.920814   
+53   0.872236  0.263297  0.012953  0.134783  7.111423   5.382846  0.978048   
+139 -0.056045  0.097419  0.199548  0.087324  8.436479  15.628646  0.942103   
+161 -0.124496 -0.014836  0.180952  0.087870  8.627152  20.250040  0.958463   
+16  -0.007905  0.021702 -0.164194  0.070239  9.298898  40.964782  0.922861   
+116 -1.488860 -1.129102 -0.742492  0.136021  7.526790  14.716216  0.962354   
+97  -0.304631 -0.043084  0.080722  0.073249  9.213285  33.398912  0.937308   
+79   0.008151  0.377688  0.337519  0.089341  8.074310  12.033463  0.958034   
+140  0.034219  0.165405  0.272632  0.082323  8.854479  27.075617  0.919618   
+131 -0.190388  0.067411  0.193108  0.071668  9.461858  45.312912  0.920196   
+5    0.516414  0.560819  0.639056  0.080370  8.873627  30.587462  0.936026   
+47  -0.342768 -0.086330 -0.064146  0.077892  8.759192  14.039849  0.974489   
+46  -0.729388 -0.363159 -0.331250  0.077426  9.166214  37.048741  0.909950   
+37  -0.115913 -0.051653 -0.047526  0.096028  8.643476  29.760256  0.939650   
+180 -0.820609 -0.481701 -0.371133  0.132603  7.707898  15.021135  0.948256   
+64   0.713678  0.782424  0.795048  0.101004  8.734668  29.254933  0.962385   
+113 -0.171261  0.094708  0.477782  0.062658  9.282966  31.929593  0.929890   
+13  -0.494059 -0.343206 -0.276575  0.074718  8.894437  16.576206  0.967070   
+75  -0.191824 -0.034634  0.027097  0.078111  8.673237  19.676948  0.966725   
+67  -0.310559 -0.000798 -0.018721  0.089992  8.299149  16.191084  0.958159   
+9   -0.368309  0.092003  0.355759  0.136022  7.574669  17.351225  0.939653   
+22  -0.018891  0.062573  0.556639  0.083162  8.570254  19.251577  0.961572   
+25  -1.067787 -0.447701 -0.379667  0.094987  8.427776  18.167043  0.938952   
+54  -0.721835 -0.758060 -0.904540  0.099889  8.460909  20.857714  0.936797   
+98  -0.073046  0.063705  0.049248  0.067227  9.191033  32.339793  0.934229   
+126 -1.036031 -0.765907 -0.403571  0.114376  7.969362  11.747007  0.973961   
+164 -0.035271  0.135688  0.183425  0.075981  8.741839  20.275142  0.962811   
+166 -0.582454 -0.403558 -0.316648  0.078776  8.911562  23.992389  0.945919   
+44   0.457883  0.636857  0.673473  0.069528  9.052695  24.287008  0.956694   
+73   0.473254  0.727337  0.809741  0.084252  8.541525  15.964926  0.968422   
+45   0.161333  0.350404  0.416883  0.070592  8.931177  20.982340  0.963439   
+145  0.192218  0.440950  0.480435  0.115500  7.854645  12.570822  0.960598   
+
+     homogenitas  
+83      0.607642  
+159     0.523176  
+103     0.637754  
+168     0.557936  
+135     0.549332  
+182     0.612028  
+157     0.601220  
+59      0.448066  
+167     0.559842  
+91      0.604969  
+41      0.573723  
+12      0.618574  
+70      0.618912  
+160     0.575762  
+118     0.611257  
+102     0.572501  
+181     0.656323  
+58      0.467826  
+117     0.649682  
+133     0.529093  
+152     0.583378  
+68      0.625056  
+55      0.537782  
+30      0.520075  
+49      0.546708  
+61      0.637834  
+69      0.608981  
+86      0.588286  
+183     0.656329  
+155     0.519407  
+57      0.438606  
+106     0.577824  
+153     0.616484  
+29      0.576226  
+163     0.537768  
+24      0.578058  
+99      0.497620  
+137     0.509588  
+144     0.626849  
+148     0.721099  
+78      0.594793  
+119     0.575202  
+122     0.608089  
+104     0.698579  
+115     0.632177  
+124     0.587321  
+138     0.517706  
+141     0.523810  
+48      0.557298  
+28      0.655496  
+19      0.582879  
+158     0.559325  
+108     0.518258  
+2       0.521048  
+60      0.467618  
+1       0.575219  
+52      0.627211  
+89      0.489281  
+65      0.575381  
+35      0.516291  
+51      0.539677  
+77      0.534096  
+179     0.592041  
+63      0.581045  
+74      0.571347  
+101     0.653400  
+3       0.497549  
+136     0.514550  
+43      0.515178  
+94      0.556082  
+17      0.606384  
+56      0.486752  
+134     0.482540  
+21      0.618540  
+130     0.562777  
+110     0.517619  
+100     0.650412  
+169     0.599505  
+129     0.509357  
+147     0.473407  
+18      0.599358  
+14      0.575033  
+39      0.593625  
+81      0.595403  
+171     0.512029  
+96      0.646475  
+36      0.423030  
+172     0.507769  
+26      0.490825  
+66      0.525507  
+175     0.568274  
+31      0.561502  
+50      0.541004  
+107     0.465059  
+38      0.519934  
+156     0.504503  
+146     0.458281  
+85      0.604785  
+15      0.459704  
+76      0.597262  
+33      0.566036  
+123     0.567109  
+8       0.500512  
+95      0.671393  
+174     0.506024  
+42      0.574464  
+84      0.527379  
+20      0.548729  
+149     0.762026  
+121     0.604800  
+125     0.605394  
+109     0.584535  
+178     0.647288  
+23      0.598375  
+127     0.571338  
+132     0.467807  
+53      0.710699  
+139     0.588753  
+161     0.603241  
+16      0.513224  
+116     0.675737  
+97      0.510132  
+79      0.630703  
+140     0.525686  
+131     0.454504  
+5       0.554133  
+47      0.565892  
+46      0.519519  
+37      0.569563  
+180     0.653061  
+64      0.538815  
+113     0.494490  
+13      0.575772  
+75      0.604782  
+67      0.637279  
+9       0.660744  
+22      0.595781  
+25      0.594174  
+54      0.604139  
+98      0.525710  
+126     0.658378  
+164     0.598984  
+166     0.539850  
+44      0.505684  
+73      0.588209  
+45      0.557298  
+145     0.649588  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sets</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Warna (9 fitur)&quot;</span><span class="p">:</span> <span class="n">COLOR</span><span class="p">,</span> <span class="s2">&quot;Tekstur GLCM (5 fitur)&quot;</span><span class="p">:</span> <span class="n">TEX</span><span class="p">,</span> <span class="s2">&quot;Semua (14 fitur)&quot;</span><span class="p">:</span> <span class="n">COLOR</span> <span class="o">+</span> <span class="n">TEX</span><span class="p">}</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;KNN&quot;</span><span class="p">:</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="mi">5</span><span class="p">)),</span>
+    <span class="s2">&quot;SVM&quot;</span><span class="p">:</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;rbf&quot;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">10</span><span class="p">)),</span>
+    <span class="s2">&quot;Random Forest&quot;</span><span class="p">:</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+    <span class="s2">&quot;Decision Tree&quot;</span><span class="p">:</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="n">skf</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">sn</span><span class="p">,</span> <span class="n">cols</span> <span class="ow">in</span> <span class="n">sets</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">Xtr</span><span class="p">,</span> <span class="n">Xte</span><span class="p">,</span> <span class="n">ytr</span><span class="p">,</span> <span class="n">yte</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">cols</span><span class="p">],</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">mn</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtr</span><span class="p">,</span> <span class="n">ytr</span><span class="p">)</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">fitur</span><span class="o">=</span><span class="n">sn</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">mn</span><span class="p">,</span>
+                        <span class="n">acc_train</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">ytr</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xtr</span><span class="p">)),</span> <span class="mi">4</span><span class="p">),</span>
+                        <span class="n">acc_test</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">yte</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xte</span><span class="p">)),</span> <span class="mi">4</span><span class="p">),</span>
+                        <span class="n">acc_cv5</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">cols</span><span class="p">],</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">skf</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">4</span><span class="p">)))</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">R</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUT</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;hasil_akurasi_</span><span class="si">{</span><span class="n">MODE</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">R</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fitur</th>
+      <th>model</th>
+      <th>acc_train</th>
+      <th>acc_test</th>
+      <th>acc_cv5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Warna (9 fitur)</td>
+      <td>KNN</td>
+      <td>0.7483</td>
+      <td>0.5676</td>
+      <td>0.5646</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Warna (9 fitur)</td>
+      <td>SVM</td>
+      <td>0.9048</td>
+      <td>0.6757</td>
+      <td>0.6459</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Warna (9 fitur)</td>
+      <td>Random Forest</td>
+      <td>1.0000</td>
+      <td>0.7297</td>
+      <td>0.6033</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Warna (9 fitur)</td>
+      <td>Decision Tree</td>
+      <td>1.0000</td>
+      <td>0.5946</td>
+      <td>0.5872</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Tekstur GLCM (5 fitur)</td>
+      <td>KNN</td>
+      <td>0.7959</td>
+      <td>0.5405</td>
+      <td>0.6087</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Tekstur GLCM (5 fitur)</td>
+      <td>SVM</td>
+      <td>0.7823</td>
+      <td>0.5676</td>
+      <td>0.5925</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Tekstur GLCM (5 fitur)</td>
+      <td>Random Forest</td>
+      <td>1.0000</td>
+      <td>0.5405</td>
+      <td>0.6033</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Tekstur GLCM (5 fitur)</td>
+      <td>Decision Tree</td>
+      <td>1.0000</td>
+      <td>0.5676</td>
+      <td>0.5917</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Semua (14 fitur)</td>
+      <td>KNN</td>
+      <td>0.8163</td>
+      <td>0.6486</td>
+      <td>0.6086</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Semua (14 fitur)</td>
+      <td>SVM</td>
+      <td>0.9320</td>
+      <td>0.7027</td>
+      <td>0.7284</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Semua (14 fitur)</td>
+      <td>Random Forest</td>
+      <td>1.0000</td>
+      <td>0.7568</td>
+      <td>0.6739</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Semua (14 fitur)</td>
+      <td>Decision Tree</td>
+      <td>1.0000</td>
+      <td>0.5135</td>
+      <td>0.5818</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== RINGKASAN: MANA YANG PALING BESAR? ===&quot;</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">R</span><span class="o">.</span><span class="n">acc_test</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()];</span>  <span class="n">c</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">R</span><span class="o">.</span><span class="n">acc_cv5</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()]</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">selisih</span><span class="o">=</span><span class="n">R</span><span class="o">.</span><span class="n">acc_train</span> <span class="o">-</span> <span class="n">R</span><span class="o">.</span><span class="n">acc_test</span><span class="p">);</span> <span class="n">o</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">selisih</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi TEST tertinggi : </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">fitur</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">acc_test</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi CV tertinggi   : </span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">fitur</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">acc_cv5</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">   &lt;- paling bisa dipercaya&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Paling overfitting     : </span><span class="si">{</span><span class="n">o</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">o</span><span class="o">.</span><span class="n">fitur</span><span class="si">}</span><span class="s2">) -&gt; train </span><span class="si">{</span><span class="n">o</span><span class="o">.</span><span class="n">acc_train</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2"> vs test </span><span class="si">{</span><span class="n">o</span><span class="o">.</span><span class="n">acc_test</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2"> (selisih </span><span class="si">{</span><span class="n">o</span><span class="o">.</span><span class="n">selisih</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Akurasi test dari 1 kali split bisa kebetulan tinggi/rendah (testnya cuma puluhan foto).&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jadi untuk memilih model terbaik, lebih aman lihat akurasi CV.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== RINGKASAN: MANA YANG PALING BESAR? ===
+Akurasi TEST tertinggi : Random Forest (Semua (14 fitur)) = 75.7%
+Akurasi CV tertinggi   : SVM (Semua (14 fitur)) = 72.8%   &lt;- paling bisa dipercaya
+Paling overfitting     : Decision Tree (Semua (14 fitur)) -&gt; train 100.0% vs test 51.3% (selisih 48.7%)
+
+Akurasi test dari 1 kali split bisa kebetulan tinggi/rendah (testnya cuma puluhan foto).
+Jadi untuk memilih model terbaik, lebih aman lihat akurasi CV.
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Cara baca tabel:</strong> bandingkan <code class="docutils literal notranslate"><span class="pre">acc_train</span></code> dengan <code class="docutils literal notranslate"><span class="pre">acc_test</span></code>. Kalau train jauh di atas test (misalnya Random Forest &amp; Decision Tree
+yang train-nya bisa 100%), model <strong>menghafal</strong> data training dan kurang bisa menebak data baru → itu yang disebut <em>overfitting</em>.
+Fitur warna saja dan tekstur saja biasanya kalah dari gabungan keduanya.</p>
+</section>
+</section>
+<section id="confusion-matrix">
+<h2>6. Confusion matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this heading">#</a></h2>
+<p>Matriks 2×2 yang menunjukkan hasil tebakan di data test:</p>
+<ul class="simple">
+<li><p>baris = label <strong>aktual</strong>, kolom = label <strong>prediksi</strong></p></li>
+<li><p>diagonal (kiri-atas &amp; kanan-bawah) = tebakan <strong>benar</strong></p></li>
+<li><p>di luar diagonal = tebakan <strong>salah</strong></p></li>
+</ul>
+<p>Dipakai model terbaik (berdasar akurasi CV) dengan 14 fitur.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">R</span><span class="o">.</span><span class="n">fitur</span> <span class="o">==</span> <span class="s2">&quot;Semua (14 fitur)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;acc_cv5&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="n">sets</span><span class="p">[</span><span class="s2">&quot;Semua (14 fitur)&quot;</span><span class="p">];</span> <span class="n">m</span> <span class="o">=</span> <span class="n">models</span><span class="p">[</span><span class="n">best</span><span class="o">.</span><span class="n">model</span><span class="p">]</span>
+<span class="n">Xtr</span><span class="p">,</span> <span class="n">Xte</span><span class="p">,</span> <span class="n">ytr</span><span class="p">,</span> <span class="n">yte</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">cols</span><span class="p">],</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtr</span><span class="p">,</span> <span class="n">ytr</span><span class="p">);</span> <span class="n">pred</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xte</span><span class="p">)</span>
+<span class="n">labs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;rapi&quot;</span><span class="p">,</span> <span class="s2">&quot;berantakan&quot;</span><span class="p">]</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">yte</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model terbaik:&quot;</span><span class="p">,</span> <span class="n">best</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;| akurasi test =&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">yte</span><span class="p">,</span> <span class="n">pred</span><span class="p">),</span> <span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">yte</span><span class="p">,</span> <span class="n">pred</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">4.5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">labs</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">labs</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">cm</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">],</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Prediksi&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Aktual&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Confusion Matrix - </span><span class="si">{</span><span class="n">best</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUT</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;confusion_matrix_</span><span class="si">{</span><span class="n">MODE</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model terbaik: SVM | akurasi test = 0.7027
+              precision    recall  f1-score   support
+
+  berantakan       0.72      0.68      0.70        19
+        rapi       0.68      0.72      0.70        18
+
+    accuracy                           0.70        37
+   macro avg       0.70      0.70      0.70        37
+weighted avg       0.70      0.70      0.70        37
+</pre></div>
+</div>
+<img alt="../_images/8863ebabaded1e4fe847d092a479de3d3a0d9543998ffdd901d9477ff2b99d38.png" src="../_images/8863ebabaded1e4fe847d092a479de3d3a0d9543998ffdd901d9477ff2b99d38.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">precision</span></code>, <code class="docutils literal notranslate"><span class="pre">recall</span></code>, <code class="docutils literal notranslate"><span class="pre">f1-score</span></code> di atas adalah turunan dari confusion matrix:
+<strong>precision</strong> = dari yang ditebak kelas X, berapa persen yang benar; <strong>recall</strong> = dari yang sebenarnya kelas X, berapa persen yang berhasil ditemukan.</p>
+</section>
+<section id="akurasi-training-vs-test-cek-overfitting">
+<h2>7. Akurasi training vs test (cek overfitting)<a class="headerlink" href="#akurasi-training-vs-test-cek-overfitting" title="Permalink to this heading">#</a></h2>
+<p>Dari tabel di bagian 5 kita bandingkan <strong>akurasi training</strong> dan <strong>akurasi test</strong> untuk tiap model (14 fitur).</p>
+<ul class="simple">
+<li><p>Kalau training dan test <strong>dekat</strong> → model belajar dengan baik.</p></li>
+<li><p>Kalau training <strong>jauh lebih tinggi</strong> dari test → model <strong>overfitting</strong>: menghafal data training, tapi kurang bisa menebak foto baru.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r14</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">R</span><span class="o">.</span><span class="n">fitur</span> <span class="o">==</span> <span class="s2">&quot;Semua (14 fitur)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">r14</span><span class="p">[[</span><span class="s2">&quot;acc_train&quot;</span><span class="p">,</span> <span class="s2">&quot;acc_test&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Akurasi&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Akurasi training vs test (14 fitur)&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">patches</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">()),</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selisih training - test tiap model (makin besar = makin overfitting):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">m_</span><span class="p">,</span> <span class="n">r_</span> <span class="ow">in</span> <span class="n">r14</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">m_</span><span class="si">:</span><span class="s2">14s</span><span class="si">}</span><span class="s2"> train </span><span class="si">{</span><span class="n">r_</span><span class="o">.</span><span class="n">acc_train</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">  test </span><span class="si">{</span><span class="n">r_</span><span class="o">.</span><span class="n">acc_test</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">  selisih </span><span class="si">{</span><span class="n">r_</span><span class="o">.</span><span class="n">acc_train</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">r_</span><span class="o">.</span><span class="n">acc_test</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5019ea0a827c943cf347f2d212fa9023bc697c6f6c38eeffd0a8fdec84842b84.png" src="../_images/5019ea0a827c943cf347f2d212fa9023bc697c6f6c38eeffd0a8fdec84842b84.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Selisih training - test tiap model (makin besar = makin overfitting):
+  KNN            train 81.6%  test 64.9%  selisih 16.8%
+  SVM            train 93.2%  test 70.3%  selisih 22.9%
+  Random Forest  train 100.0%  test 75.7%  selisih 24.3%
+  Decision Tree  train 100.0%  test 51.3%  selisih 48.7%
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Kenapa bisa overfitting?</strong> Datanya cuma ratusan foto dan fiturnya hanya 14 angka, jadi model gampang menghafal. Untuk laporan, <strong>akurasi yang dipakai adalah akurasi test</strong> (atau CV), bukan akurasi training.</p>
+</section>
+<section id="kesimpulan">
+<h2>8. Kesimpulan<a class="headerlink" href="#kesimpulan" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Fitur</strong> sesuai tugas: mean, std, skewness tiap channel (9) + energi, entropy, kontras, korelasi, homogenitas (5) = <strong>14 fitur + label</strong>. Tersimpan di <code class="docutils literal notranslate"><span class="pre">hasil/fitur_citra_&lt;mode&gt;.csv</span></code>.</p></li>
+<li><p><strong>Duplikat:</strong> ada 9 grup foto kembar (10 foto dibuang di mode <code class="docutils literal notranslate"><span class="pre">dedup</span></code>) supaya akurasi test tidak palsu tinggi. Daftarnya ada di <code class="docutils literal notranslate"><span class="pre">hasil/daftar_foto_duplikat.csv</span></code>.</p></li>
+<li><p><strong>Pembagian data:</strong> 80% training, 20% test (<code class="docutils literal notranslate"><span class="pre">random_state=42</span></code>). Akurasi juga dicek dengan cross-validation 5-fold.</p></li>
+<li><p><strong>Training vs test:</strong> training jauh lebih tinggi dari test karena datanya sedikit (overfitting). Angka yang dilaporkan adalah akurasi <strong>test</strong> dan <strong>CV</strong>.</p></li>
+<li><p><strong>Akurasi</strong> dengan 14 fitur ada di kisaran 70%. Fitur warna dan tekstur memang mirip antara foto rapi dan berantakan, jadi akurasinya terbatas.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Materi"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ekstraksi_audio.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Klasifikasi Audio Berisik vs Non-Berisik</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-pengaturan">1. Import library &amp; pengaturan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cek-foto-duplikat">2. Cek foto duplikat</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daftar-foto-duplikat-per-grup">Daftar foto duplikat (per grup)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-fitur">3. Penjelasan fitur</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-fitur-warna-9-fitur">a. Fitur warna (9 fitur)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-fitur-tekstur-glcm-5-fitur">b. Fitur tekstur GLCM (5 fitur)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-seluruh-dataset">4. Ekstraksi fitur seluruh dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-ke-csv">Simpan ke CSV</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi">5. Klasifikasi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pembagian-data-berapa-untuk-training-berapa-untuk-test">Pembagian data: berapa untuk training, berapa untuk test?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">6. Confusion matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#akurasi-training-vs-test-cek-overfitting">7. Akurasi training vs test (cek overfitting)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">8. Kesimpulan</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Fahdimas Akmal
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Fahdimas Akmal.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
